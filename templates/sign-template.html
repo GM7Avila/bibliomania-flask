@@ -3,72 +3,7 @@
 <head>
     <meta charset="UTF-8">
     {% block title %} <title>Login</title> {% endblock %}
-    <style>
-        /* CSS para centralizar o formulário */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #2E454B; /* Cor de fundo */
-            color: #FFF; /* Cor da fonte padrão */
-            font-family: Verdana, sans-serif; /* Definição da fonte */
-        }
-
-        h1 {
-            color: #C0E0E1; /* Cor da fonte de h1 */
-            font-size: 50px
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column; /* Alterado para colocar os elementos em coluna */
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .form-container {
-            width: 300px; /* Largura do formulário */
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px; /* Adicionado espaçamento entre os formulários */
-            background-color: #1B2C31; /* Cor de fundo da caixa do formulário */
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-            background-color: #37474F; /* Cor de fundo do input */
-            color: #c7f8ff; /* Cor da fonte do input */
-        }
-
-        /* Botão de Sign In */
-        input[type="submit"][value="Log In"] {
-            background: linear-gradient(to bottom, #95C9CB, #6FA8AA);
-            color: #FFF;
-            cursor: pointer;
-            font-family: Botthanie, sans-serif;
-            font-size: 115%
-        }
-
-        /* Botão de Sign Up */
-        input[type="submit"][value="Sign Up"] {
-            background: linear-gradient(to bottom, #8DD06F, #6E8E6C);
-            color: #FFF;
-            cursor: pointer;
-            font-family: Botthanie, sans-serif;
-            font-size: 115%
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/sign-style.css') }}">
 </head>
 <body>
     {% block content %}
