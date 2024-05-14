@@ -32,4 +32,4 @@ Trelo: https://trello.com/invite/bibliomania1/ATTIaa37f9029d579fec72e4cd3bf7d3e1
 
 Documentação: https://docs.google.com/document/d/1O-_NaXsjdBIN5bU7lRw01AhAQej6jXBxpJK5ApQOTog/edit
 
-Figma: https://trello.com/b/2zwSLB1O/
+Figma: https://www.figma.com/design/d2rW9m4SFSrSLOD9uTdcSg/App?node-id=0%3A1&t=cuxeP5uYkFe6pVZ3-1
