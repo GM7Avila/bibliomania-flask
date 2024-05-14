@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, session
 
 app = Flask(__name__)
 app.secret_key = "sua_chave_secreta_aqui"  # Defina sua chave secreta aqui
-
+#test
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
