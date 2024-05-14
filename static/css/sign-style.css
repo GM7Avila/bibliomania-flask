@@ -85,5 +85,5 @@ input[type="submit"]:hover {
     cursor: default; /* Define o cursor do mouse como o cursor padrão */
 
     /* Efeito de brilho gradual */
-    transition: filter 0.3s ease; /* Transição suave */
+    transition: filter 0.3s ease;
 }
