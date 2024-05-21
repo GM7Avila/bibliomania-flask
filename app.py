@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
+from utils.validations import validate_email, validate_cpf
 
 app = Flask(__name__)
 app.secret_key = "sua_chave_secreta_aqui"  # Defina sua chave secreta aqui
@@ -55,6 +56,14 @@ def signup():
 
         if not nome or not cpf or not email or not password or not phonenumber:
             flash("Por favor, preencha todos os campos.", "error")
+            return redirect(url_for("signup"))
+
+        if not validate_email(email):
+            flash("E-mail inválido.", "error")
+            return redirect(url_for("signup"))
+
+        if not validate_cpf(cpf):
+            flash("CPF inválido.", "error")
             return redirect(url_for("signup"))
 
         found_user_email = User.query.filter_by(email=email).first()
