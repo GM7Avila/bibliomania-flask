@@ -1,7 +1,34 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, flash
+from datetime import timedelta
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "sua_chave_secreta_aqui"  # Defina sua chave secreta aqui
+
+app.permanent_session_lifetime = timedelta(minutes=5)
+
+# SQL ALCHEMY COINFIG
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/bibliomania'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+
+class users(db.Model):
+    _id = db.Column("id", db.Integer, primary_key = True)
+    name = db.Column("name", db.String(100))
+    email = db.Column("email", db.String(100))
+    cpf = db.Column("cpf", db.String(12))
+    password = db.Column("password", db.String(100))
+    user_type = db.Column("user_type", db.String(100))
+
+    def __init__(self, name, email, cpf, password):
+        default_role = "leitor"
+
+        self.name = name
+        self.email = email
+        self.cpf = cpf
+        self.password = password
+        self.user_type = default_role
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -51,6 +78,9 @@ def user():
 def logout():
     session.clear()
     return redirect(url_for("login"))
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)
