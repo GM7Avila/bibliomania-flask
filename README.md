@@ -16,16 +16,21 @@
 ### 4. IDE
 - PyCharm com venv configurada
 
+### 5 Bibliotecas/pacotes
+- Flask
+- SQLAlchemy
+- flask-sqlalchemy
+- mysql-connector-python
+- mysqlclient
+
 ## Time
 ### Frontend
-- Eduardo
+- Eric
 - Matheus
-- 
 
 ### Backend
 - Avila
-- 
-- 
+- Machado
 
 ## Links Uteis do Projeto
 Trelo: https://trello.com/invite/bibliomania1/ATTIaa37f9029d579fec72e4cd3bf7d3e1bc57CA3F86 
