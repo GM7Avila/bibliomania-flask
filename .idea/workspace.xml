@@ -7,12 +7,7 @@
     <list default="true" id="423eb273-9449-47d3-95e3-e56398a6f80d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/sign-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign-in-template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign-template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/sign-up-template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/validations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
