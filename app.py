@@ -4,7 +4,6 @@ from app.utils.validations import validate_email, validate_cpf
 from app.models.User import User
 from app import app, db
 
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -12,7 +11,6 @@ def login_required(f):
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
-
 
 def already_logged_in(f):
     @wraps(f)
@@ -22,12 +20,10 @@ def already_logged_in(f):
         return f(*args, **kwargs)
     return decorated_function
 
-
 @app.route('/')
 @login_required
 def home():
     return redirect(url_for("user"))
-
 
 @app.route("/login", methods=["POST", "GET"])
 @already_logged_in
