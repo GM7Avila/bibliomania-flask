@@ -3,6 +3,8 @@ from functools import wraps
 from app.utils.validations import validate_email, validate_cpf
 from app.models.User import User
 from app import app, db
+from scripts.populate_book_table import populate_book_table
+
 
 def login_required(f):
     @wraps(f)
@@ -112,6 +114,7 @@ CONFIG
 """
 with app.app_context():
     db.create_all()
+    populate_book_table()
 
 if __name__ == "__main__":
     app.run(debug=True)
