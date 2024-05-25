@@ -93,8 +93,7 @@ def signup():
 @login_required
 def user():
     email = session["email"]
-    return f"<h1>Session log</h1><p>User: {email}</p>"
-
+    return render_template("base.html")
 
 @app.route("/logout")
 def logout():
