@@ -102,6 +102,8 @@ def logout():
     return redirect(url_for("login"))
 
 
+
+
 """
 ROTAS BOOK
 """
@@ -114,3 +116,6 @@ with app.app_context():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+

@@ -3,34 +3,81 @@
 <head>
     <!-- Bootstrap CSS Setup -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="\bibliomania-flask\app\static\css\page-style.css">
     <meta charset="UTF-8">
     <title>{% block title%}{% endblock %} </title>
+
 </head>
 <body>
-
+<header>
     <!-- Navbar - bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#"><img src="\bibliomania-flask\app\static\img\b.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#">Disabled</a>
+        <div class="navbar-nav  ">
+          <a class="nav-item nav-link active  " href="#">Acervo <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="#">Perfil</a>
+          <a class="nav-item nav-link" href="#">Reservas</a>
         </div>
       </div>
+        <a class="izinho" href="#"><img src="\bibliomania-flask\app\static\img\ii.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
     </nav>
+</header>
 
-    {% block content %}
-    {% endblock %}
+<!--
+    <div class="container mt-5">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="your-image.jpg" class="card-img" alt="Image">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <input class="form-control b" type="text" placeholder="Default input" aria-label="default input example">
+                        <br>
+                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        <br>
+                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        <br>
+                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        <br>
+                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        <br>
+                        <div class="botao">
+                       <button type="button" class="btn btn-success">Success</button>
+                        <button type="button" class="btn btn-primary">Primary</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+
+<footer class="bg-info text-center text-lg-start fixed-bottom">
+  <div class="text-center p-3" style="background-color:#73818F; color:white;">
+ <div class="row">
+    <div class="col coll">
+       Contato: (21) 9 9999-9999
+    </div>
+    <div class="col-6 coll" style="color:#BFBFBF;">
+        Copyright © Bibliomania
+    </div>
+    <div class="col coll" >
+       Endereço: Rua Amaral Peixoto, Centro
+    </div>
+</div>
+  </div>
+</footer>
 
     <!-- Boostrap JS Setup -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </body>
 </html>
