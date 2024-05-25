@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="423eb273-9449-47d3-95e3-e56398a6f80d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/bibliomania.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/bibliomania.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="423eb273-9449-47d3-95e3-e56398a6f80d" name="Changes" comment="nav bar &amp; footer bar &amp; css basico">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
@@ -19,15 +17,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="biblio" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +47,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Python.app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feat/page-style",
     "last_opened_file_path": "C:/Users/Silvana/Desktop/bibliomania-flask/app/static/img",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
@@ -106,6 +104,15 @@
       <option name="presentableId" value="Default" />
       <updated>1715469037424</updated>
     </task>
+    <task id="LOCAL-00001" summary="nav bar &amp; footer bar &amp; css basico">
+      <option name="closed" value="true" />
+      <created>1716655210155</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716655210155</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,5 +125,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="nav bar &amp; footer bar &amp; css basico" />
+    <option name="LAST_COMMIT_MESSAGE" value="nav bar &amp; footer bar &amp; css basico" />
   </component>
 </project>

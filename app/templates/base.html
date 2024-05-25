@@ -3,7 +3,7 @@
 <head>
     <!-- Bootstrap CSS Setup -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="\bibliomania-flask\app\static\css\page-style.css">
+    <link rel="stylesheet" href=".\static\css\page-style.css">
     <meta charset="UTF-8">
     <title>{% block title%}{% endblock %} </title>
 
@@ -12,7 +12,7 @@
 <header>
     <!-- Navbar - bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><img src="\bibliomania-flask\app\static\img\b.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
+      <a class="navbar-brand" href="#"><img src=".\static\img\b.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,40 +23,13 @@
           <a class="nav-item nav-link" href="#">Reservas</a>
         </div>
       </div>
-        <a class="izinho" href="#"><img src="\bibliomania-flask\app\static\img\ii.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
+        <a class="izinho" href="#"><img src=".\static\img\ii.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
     </nav>
 </header>
+{% block content %}
 
-<!--
-    <div class="container mt-5">
-        <div class="card mb-3">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="your-image.jpg" class="card-img" alt="Image">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <input class="form-control b" type="text" placeholder="Default input" aria-label="default input example">
-                        <br>
-                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-                        <br>
-                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-                        <br>
-                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-                        <br>
-                        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
-                        <br>
-                        <div class="botao">
-                       <button type="button" class="btn btn-success">Success</button>
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
+    {% endblock %}
 
 <footer class="bg-info text-center text-lg-start fixed-bottom">
   <div class="text-center p-3" style="background-color:#73818F; color:white;">
