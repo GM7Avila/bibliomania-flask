@@ -1,8 +1,11 @@
 from app import db
 from sqlalchemy.orm import relationship
-from Reservation import Reservation
+from app.models import Reservation
 
 class Book(db.Model):
+
+    __tablename__ = "book"
+
     _id = db.Column("id", db.Integer, primary_key=True)
     isbn = db.Column("isbn", db.String(13), nullable=False, unique=True)
     title = db.Column("title", db.String(45), nullable=False)
@@ -13,7 +16,7 @@ class Book(db.Model):
     availableStock = db.Column(db.Integer, nullable=False)
 
     # reservation relation
-    reservation = relationship("Reservation", back_populates="Book")
+    reservations = relationship("Reservation", back_populates="book")
 
     def __init__(self, isbn, title, author, publisher, year, totalStock, availableStock):
         self.isbn = isbn

@@ -4,7 +4,8 @@ from app.utils.validations import validate_email, validate_cpf
 from app.models.User import User
 from app import app, db
 from scripts.populate_book_table import populate_book_table
-
+from app.models.Reservation import Reservation
+from datetime import datetime
 
 def login_required(f):
     @wraps(f)
@@ -102,8 +103,25 @@ def logout():
     session.clear()
     return redirect(url_for("login"))
 
+@app.route("/create-reservation")
+def create_reservation():
+    # Data atual
+    current_date = datetime.now().date()
 
+    # Criando uma reserva com valores fictícios
+    reservation = Reservation(
+        reservationDate=current_date,
+        expirationDate=current_date,
+        status="Ativa",
+        user_id=1,  # Substitua pelo ID do usuário correto
+        book_id=1   # Substitua pelo ID do livro correto
+    )
 
+    # Adicione a reserva ao banco de dados
+    db.session.add(reservation)
+    db.session.commit()
+
+    return redirect(url_for("login"))
 
 """
 ROTAS BOOK

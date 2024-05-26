@@ -1,8 +1,10 @@
 from app import db
 from sqlalchemy.orm import relationship
-from Book import Book
 
 class Reservation(db.Model):
+
+    __tablename__ = "reservation"
+
     _id = db.Column("id", db.Integer, primary_key=True)
     reservationDate = db.Column(db.Date, nullable=False)
     expirationDate = db.Column(db.Date, nullable=False)

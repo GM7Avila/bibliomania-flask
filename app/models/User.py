@@ -3,6 +3,9 @@ from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
+
+    __tablename__ = "user"
+
     _id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(120), nullable=False)
     email = db.Column("email", db.String(120), nullable=False, unique=True)
@@ -12,7 +15,7 @@ class User(db.Model):
     phonenumber = db.Column("phonenumber", db.String(100))
 
     # reservation relation
-    reservations = relationship("Reservation", back_populates="User")
+    reservations = relationship("Reservation", back_populates="user")
 
     def __init__(self, name, email, cpf, password, default_role, phonenumber):
         self.name = name

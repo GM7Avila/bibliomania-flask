@@ -2,8 +2,8 @@ from app import app, db
 from app.models.Book import Book
 from sqlalchemy.exc import IntegrityError
 
-def populate_book_table():
 
+def populate_book_table():
     books_data = [
         {"isbn": "1780439362139", "title": "Harry Potter and the Philosopher's Stone", "author": "J. K. Rowling",
          "publisher": "Scholastic", "year": "2001", "totalStock": 12, "availableStock": 12},
@@ -28,6 +28,7 @@ def populate_book_table():
             db.session.rollback()  # Reverte a transação para que possamos continuar
 
     db.session.commit()
+
 
 if __name__ == "__main__":
     with app.app_context():
