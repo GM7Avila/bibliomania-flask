@@ -24,6 +24,9 @@
         </div>
       </div>
         <a class="izinho" href="#"><img src=".\static\img\ii.png" width="35" height="35" class="d-inline-block align-top" alt=""></a>
+        {% if "email" in session %}
+        <a class="izinho" href="/logout"><img src=".\static\img\logout.png" width="40" height="45" class="d-inline-block align-top" alt=""></a>
+      {% endif %}
     </nav>
 </header>
 {% block content %}
