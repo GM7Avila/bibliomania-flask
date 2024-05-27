@@ -1,4 +1,4 @@
-from flask import redirect, url_for, render_template, request, session, flash
+from flask import redirect, url_for, render_template, request, flash
 from functools import wraps
 from app.utils.validations import validate_email, validate_cpf
 from app.models.User import User
@@ -6,43 +6,32 @@ from app import app, db
 from scripts.populate_book_table import populate_book_table
 from app.models.Reservation import Reservation
 from datetime import datetime
+from flask_login import login_user, logout_user, login_required, current_user
 
-def login_required(f):
+def redirect_if_logged_in(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if "email" not in session:
-            return redirect(url_for("login"))
-        return f(*args, **kwargs)
-    return decorated_function
-
-def already_logged_in(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if "email" in session:
-            return redirect(url_for("home"))
+        if current_user.is_authenticated:
+            return redirect(url_for('user'))
         return f(*args, **kwargs)
     return decorated_function
 
 @app.route('/')
-@login_required
-def home():
-    return redirect(url_for("user"))
+def index():
+    return redirect(url_for("login"))
 
 @app.route("/login", methods=["POST", "GET"])
-@already_logged_in
+@redirect_if_logged_in
 def login():
+    flash("")
+
     if request.method == "POST":
         email = request.form["input_email"]
         password = request.form["input_password"]
 
-        # limpando os dados da sessão antiga
-        session.pop("email", None)
-        session.pop("password", None)
-
         found_user = User.query.filter_by(email=email).first()
         if found_user and found_user.check_password(password):
-            session["email"] = email
-            flash("Login realizado com sucesso!", "success")
+            login_user(found_user)
             return redirect(url_for("user"))
         else:
             flash("Email ou senha inválidos!", "error")
@@ -52,8 +41,9 @@ def login():
 
 
 @app.route("/signup", methods=["POST", "GET"])
-@already_logged_in
+@redirect_if_logged_in
 def signup():
+
     if request.method == "POST":
         nome = request.form["input_nome"]
         cpf = request.form["input_cpf"]
@@ -81,7 +71,6 @@ def signup():
             new_user = User(nome, email, cpf, password, "user", phonenumber)
             db.session.add(new_user)
             db.session.commit()
-            session["email"] = email
             flash("Usuário cadastrado com sucesso!", "success")
             return redirect(url_for("login"))
         except Exception as e:
@@ -95,15 +84,16 @@ def signup():
 @app.route("/user")
 @login_required
 def user():
-    email = session["email"]
     return render_template("base.html")
 
 @app.route("/logout")
+@login_required
 def logout():
-    session.clear()
+    logout_user()
     return redirect(url_for("login"))
 
 @app.route("/create-reservation")
+@login_required
 def create_reservation():
     # Data atual
     current_date = datetime.now().date()
