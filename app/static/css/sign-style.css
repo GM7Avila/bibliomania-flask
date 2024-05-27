@@ -1,0 +1,89 @@
+/* CSS para centralizar o formulário */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto; /* Habilita o scroll quando necessário */
+    background-color: #2E454B; /* Cor de fundo */
+    color: #FFF; /* Cor da fonte padrão */
+    font-family: Verdana, sans-serif; /* Definição da fonte */
+    background: linear-gradient(to top, #2E454B, #4F6870); /* Gradiente suave no fundo do body */
+}
+
+h1 {
+    color: #C0E0E1; /* Cor da fonte de h1 */
+    font-size: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container {
+    width: 300px; /* Largura do formulário */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Adicionado espaçamento entre os formulários */
+    background-color: #1B2C31; /* Cor de fundo da caixa do formulário */
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background-color: #37474F; /* Cor de fundo do input */
+    color: #c7f8ff; /* Cor da fonte do input */
+    transition: box-shadow 0.3s ease; /* Transição suave */
+}
+
+/* Adicionando efeito de contorno ao focar no input */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="submit"]:focus {
+    box-shadow: 0 0 8px rgba(149, 201, 203, 0.8); /* Reduzindo o tamanho e o desfoque do brilho */
+}
+
+/* Botão de Sign In */
+input[type="submit"][value="Log In"] {
+    background: linear-gradient(to bottom, #6FA8AA, #407D7F);
+    color: #FFF;
+    cursor: pointer;
+    font-family: Botthanie, sans-serif;
+    font-size: 115%;
+}
+
+/* Botão de Sign Up */
+input[type="submit"][value="Sign Up"] {
+    background: linear-gradient(to bottom, #6E8E6C, #3E5F4E);
+    color: #FFF;
+    cursor: pointer;
+    font-family: Botthanie, sans-serif;
+    font-size: 115%;
+}
+
+/* Efeito de hover nos botões */
+input[type="submit"]:hover {
+    filter: brightness(1.2); /* Aumenta o brilho em 20% */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra mais pronunciada */
+}
+
+/* Estilo para o logotipo */
+.logotipo {
+    font-size: 50px;
+    color: #C0E0E1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra suave */
+    cursor: default; /* Define o cursor do mouse como o cursor padrão */
+
+    /* Efeito de brilho gradual */
+    transition: filter 0.3s ease;
+}

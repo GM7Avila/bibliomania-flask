@@ -1,0 +1,35 @@
+{% extends "sign-template.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="logotipo">Bibliomania</h1>
+    <div class="form-container">
+        <!-- Adicione uma seção para exibir as mensagens de erro -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="#" method="post">
+            <p>Email: </p>
+            <p><input type="text" name="input_email"/></p>
+
+            <p>Password: </p>
+            <p><input type="password" name="input_password"></p>
+            <p><input type="submit" value="Log In"/></p>
+        </form>
+    </div>
+
+    <div class="form-container" style="text-align: center;"> <!-- Centralizando o parágrafo -->
+        <form action="/signup" method="get"> <!-- Redireciona para a página de sign up -->
+            <p style="margin-bottom: 0;">Não possui cadastro no sistema?</p>
+            <p><input type="submit" value="Sign Up"/></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
