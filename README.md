@@ -1,40 +1,36 @@
-# BIBLIOMANIA PROJECT
- 
-## Tecnologias utilizadas
-### 1. Backend
-- Flask: https://flask.palletsprojects.com/en/3.0.x/
+# Bibliomania Project
+- Sistema Web de apoio à biblioteca desenvolvido em Flask
 
-### 2. Frontend (escolher)
-- TailwindCSS - https://tailwindcss.com/
-- VueJS - https://vuejs.org/
-- Bootstrap - https://getbootstrap.com/
-- React - https://react.dev/
-
-### 3. Banco de Dados Estruturado
-- MySQL 
-
-### 4. IDE
-- PyCharm com venv configurada
-
-### 5 Bibliotecas/pacotes
+## 🛠️ Tecnologias utilizadas
 - Flask
 - SQLAlchemy
-- flask-sqlalchemy
-- mysql-connector-python
-- mysqlclient
+- Bootstrap
 
-## Time
-### Frontend
-- Eric
-- Matheus
+### Banco de Dados Estruturado
+- MySQL
 
-### Backend
-- Avila
-- Machado
+### Requisitos (pacotes)
+- Instale os pacotes listados em `requirements.txt`
 
-## Links Uteis do Projeto
-Trelo: https://trello.com/invite/bibliomania1/ATTIaa37f9029d579fec72e4cd3bf7d3e1bc57CA3F86 
+```
+blinker==1.8.2
+click==8.1.7
+colorama==0.4.6
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+greenlet==3.0.3
+importlib_metadata==7.1.0
+itsdangerous==2.2.0
+Jinja2==3.1.4
+MarkupSafe==2.1.5
+mysql-connector-python==8.4.0
+mysqlclient==2.2.4
+SQLAlchemy==2.0.30
+typing_extensions==4.11.0
+Werkzeug==3.0.3
+zipp==3.18.1
+Flask-login==0.6.3
+```
 
-Documentação: https://docs.google.com/document/d/1O-_NaXsjdBIN5bU7lRw01AhAQej6jXBxpJK5ApQOTog/edit
 
-Figma: https://www.figma.com/design/d2rW9m4SFSrSLOD9uTdcSg/App?node-id=0%3A1&t=cuxeP5uYkFe6pVZ3-1
+
