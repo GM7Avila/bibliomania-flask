@@ -10,6 +10,9 @@ body {
 .izinho > img {
     border-radius: 100%;
 }
+.custom-background {
+    background-color: #D7DDE2;
+}
 
 .navbar {
   position: fixed;
