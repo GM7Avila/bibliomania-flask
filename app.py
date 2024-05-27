@@ -8,29 +8,22 @@ from app.models.Reservation import Reservation
 from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
 
-# def login_required(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if "email" not in session:
-#             return redirect(url_for("login"))
-#         return f(*args, **kwargs)
-#     return decorated_function
-
-# def already_logged_in(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if "email" in session:
-#             return redirect(url_for("home"))
-#         return f(*args, **kwargs)
-#     return decorated_function
+def redirect_if_logged_in(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if current_user.is_authenticated:
+            return redirect(url_for('user'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
-@login_required
 def index():
-    return redirect(url_for("user"))
+    return redirect(url_for("login"))
 
 @app.route("/login", methods=["POST", "GET"])
+@redirect_if_logged_in
 def login():
+    flash("")
 
     if request.method == "POST":
         email = request.form["input_email"]
@@ -48,6 +41,7 @@ def login():
 
 
 @app.route("/signup", methods=["POST", "GET"])
+@redirect_if_logged_in
 def signup():
 
     if request.method == "POST":
