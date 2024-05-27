@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="423eb273-9449-47d3-95e3-e56398a6f80d" name="Changes" comment="nav bar &amp; footer bar &amp; css basico">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Book.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Book.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Reservation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Reservation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/populate_book_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/populate_book_table.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +48,7 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.app.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/reservation-model&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/flask-login-library&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Silvana/Desktop/bibliomania-flask/app/static/img&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }

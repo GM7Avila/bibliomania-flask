@@ -1,8 +1,25 @@
-from app import db
+from app import db, login_manager
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
+@login_manager.user_loader
+def load_user(usuario_id):
+    return User.query.get(int(usuario_id))
 
-class User(db.Model):
+# @login_manager.request_loader
+# def load_user_from_request(request):
+#     auth_header = request.headers.get('Authorization')
+#
+#     if auth_header:
+#         token = auth_header.replace('Bearer ', '')
+#         user = User.query.filter_by(token=token).first()
+#
+#         if user:
+#             return user
+#
+#     return None
+
+class User(UserMixin, db.Model):
 
     __tablename__ = "user"
 
@@ -30,3 +47,15 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return True
+
+    def get_id(self):
+        return(self._id)
