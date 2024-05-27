@@ -1,4 +1,4 @@
-    .navbar-brand > img {
+.navbar-brand > img {
     border-radius: 30%;
 }
 
@@ -11,9 +11,32 @@ body {
     border-radius: 100%;
 }
 
-.navbar-nav {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-nav .nav-item {
+    margin-right: 1rem;
+  }
+
+  .navbar-nav .nav-item:last-child {
+    margin-right: 0;
+  }
+
+  .dropdown-menu {
+    position: static;
+    float: none;
+  }
 }
