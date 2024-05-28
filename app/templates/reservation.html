@@ -1,44 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="filter-box">
-        <input type="text" class="form-control" placeholder="Digite sua pesquisa...">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="filter-box">
-        <select class="form-select">
-          <option selected>Selecione uma opção...</option>
-          <option value="1">Opção 1</option>
-          <option value="2">Opção 2</option>
-          <option value="3">Opção 3</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="filter-box">
-        <select class="form-select">
-          <option selected>Selecione outra opção...</option>
-          <option value="1">Opção A</option>
-          <option value="2">Opção B</option>
-          <option value="3">Opção C</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="filter-box">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="check1">
-          <label class="form-check-label" for="check1">
-            Opção de Checkbox
-          </label>
+    <!-- Barra de Pesquisa com Filtro -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="filter-box">
+                <input type="text" class="form-control" placeholder="Digite sua pesquisa...">
+            </div>
         </div>
-      </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-primary btn-sm">Small button</button>
+            <button type="button" class="btn btn-secondary btn-sm">Small button</button>
+        </div>
     </div>
-  </div>
+
+    <!-- Tabela com Lista de Itens -->
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Item 1</td>
+                    <td>Descrição do Item 1</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Item 2</td>
+                    <td>Descrição do Item 2</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Item 3</td>
+                    <td>Descrição do Item 3</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
