@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="filter-box">
+        <input type="text" class="form-control" placeholder="Digite sua pesquisa...">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="filter-box">
+        <select class="form-select">
+          <option selected>Selecione uma opção...</option>
+          <option value="1">Opção 1</option>
+          <option value="2">Opção 2</option>
+          <option value="3">Opção 3</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="filter-box">
+        <select class="form-select">
+          <option selected>Selecione outra opção...</option>
+          <option value="1">Opção A</option>
+          <option value="2">Opção B</option>
+          <option value="3">Opção C</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="filter-box">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="check1">
+          <label class="form-check-label" for="check1">
+            Opção de Checkbox
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

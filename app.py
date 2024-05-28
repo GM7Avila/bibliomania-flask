@@ -80,6 +80,10 @@ def signup():
 
     return render_template("sign-up-template.html")
 
+@app.route("/reservation")
+@login_required
+def reservation():
+    return render_template("reservation.html")
 
 @app.route("/user")
 @login_required
