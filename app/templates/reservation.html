@@ -1,50 +1,84 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mt-5">
-    <!-- Barra de Pesquisa com Filtro -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="filter-box">
-                <input type="text" class="form-control" placeholder="Digite sua pesquisa...">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <button type="button" class="btn btn-primary btn-sm">Small button</button>
-            <button type="button" class="btn btn-secondary btn-sm">Small button</button>
+<head><link rel="stylesheet" href=".\static\css\reservation.css"></head>
+<div class="container mt-8">
+    <!-- Tabela com Barra de Pesquisa -->
+    <div class="row linha-cinza">
+        <div class="col-md-12">
+            <table class="table table mb-3">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="input-group rounded">
+                                <input type="text" class="form-control rounded" placeholder="Digite sua pesquisa...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary rounded" type="button">
+                                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                                        <span class="ml-2">Pesquisar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="filtro-buttons d-flex">
+                                <span class="filtro-label">Filtro:</span>
+                                <div class="btn-group ml-4 d-flex gap-3"  role="group" aria-label="Botões de Filtro">
+                                    <button class="btn btn-secondary">Status</button>
+                                    <button class="btn btn-secondary">ISBN</button>
+                                    <button class="btn btn-secondary">Título</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
     <!-- Tabela com Lista de Itens -->
-    <div class="row">
+    <div class="row linha-branca">
         <div class="col">
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                </tr>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Status</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Item 1</td>
-                    <td>Descrição do Item 1</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Item 2</td>
-                    <td>Descrição do Item 2</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Item 3</td>
-                    <td>Descrição do Item 3</td>
-                </tr>
-                <!-- Adicione mais linhas conforme necessário -->
+                    <tr>
+                        <td>1</td>
+                        <td>Livro</td>
+                        <td>Descrição</td>
+                        <td>Status</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                    <tr>
+                        <td>2</td>
+                        <td>Livro 2</td>
+                        <td>Descrição 2</td>
+                        <td>Status 2</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                    <tr>
+                        <td>3</td>
+                        <td>Livro 3</td>
+                        <td>
+                            <div class="box">
+                                Conteúdo da caixa da tabela
+                            </div>
+                        </td>
+                        <td>Status 3</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 {% endblock %}
