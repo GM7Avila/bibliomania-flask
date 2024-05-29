@@ -1,80 +1,73 @@
 {% extends "base.html" %}
 {% block content %}
-<head><link rel="stylesheet" href=".\static\css\reservation.css"></head>
+<head>
+    <link rel="stylesheet" href=".\static\css\reservation.css">
+</head>
 <div class="container mt-8">
     <!-- Tabela com Barra de Pesquisa -->
-    <div class="row linha-cinza">
+    <div class="row linha-cinza mt-5">
         <div class="col-md-12">
             <table class="table table mb-3">
                 <tbody>
-                    <tr>
-                        <td>
-                            <div class="input-group rounded">
-                                <input type="text" class="form-control rounded" placeholder="Digite sua pesquisa...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary rounded" type="button">
-                                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
-                                        <span class="ml-2">Pesquisar</span>
-                                    </button>
-                                </div>
+                <tr>
+                    <td>
+                        <div class="input-group rounded">
+                            <input type="text" class="form-control rounded" placeholder="Digite sua pesquisa...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary rounded" type="button">
+                                    <img src=".\static\img\Vector.png" alt="Pesquisar"
+                                         style="width: 20px; height: 20px;">
+                                    <span class="ml-2">Pesquisar</span>
+                                </button>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="filtro-buttons d-flex">
-                                <span class="filtro-label">Filtro:</span>
-                                <div class="btn-group ml-4 d-flex gap-3"  role="group" aria-label="Botões de Filtro">
-                                    <button class="btn btn-secondary">Status</button>
-                                    <button class="btn btn-secondary">ISBN</button>
-                                    <button class="btn btn-secondary">Título</button>
-                                </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
+                            <span class="filtro-label pt-4 w-100">Filtrar:</span>
+                            <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
+                                <button class="btn btn-secondary rounded m-3 w-100">Status</button>
+                                <button class="btn btn-secondary rounded m-3 w-100">ISBN</button>
+                                <button class="btn btn-secondary rounded m-3 w-100">Título</button>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
 
     <!-- Tabela com Lista de Itens -->
-    <div class="row linha-branca">
+    <div class="row linha-branca mt-3">
         <div class="col">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Status</th>
-                    </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Status</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Livro</td>
-                        <td>Descrição</td>
-                        <td>Status</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
-                    <tr>
-                        <td>2</td>
-                        <td>Livro 2</td>
-                        <td>Descrição 2</td>
-                        <td>Status 2</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
-                    <tr>
-                        <td>3</td>
-                        <td>Livro 3</td>
-                        <td>
-                            <div class="box">
-                                Conteúdo da caixa da tabela
-                            </div>
-                        </td>
-                        <td>Status 3</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
+                <tr>
+                    <td>1</td>
+                    <td>Livro</td>
+                    <td>Descrição</td>
+                    <td>Status</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
+                <tr>
+                    <td>2</td>
+                    <td>Livro 2</td>
+                    <td>Descrição 2</td>
+                    <td>Status 2</td>
+                </tr>
+                <!-- Adicione mais linhas conforme necessário -->
                 </tbody>
             </table>
         </div>

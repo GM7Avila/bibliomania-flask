@@ -13,6 +13,11 @@
     border-top: 10px solid #fff;
     border-bottom: 1px solid #ccc;
 }
+
 .filtro-buttons {
-    margin-top: 5px;
+    margin-top: 10px;
+}
+.btn-secondary{
+    width: 10rem !important;
+
 }
