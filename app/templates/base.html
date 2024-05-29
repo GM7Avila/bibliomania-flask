@@ -21,19 +21,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mx-auto">
-                <a class="nav-item nav-link" href="#">Perfil</a>
-                <a class="nav-item nav-link active" href="#">Acervo <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="/reservation">Reservas</a>
-                <a class="nav-item nav-link d-lg-none" href="#">
+                <a class="nav-item nav-link m-2" href="#">Perfil</a>
+                <a class="nav-item nav-link active m-2" href="#">Acervo <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link m-2" href="/reservation">Reservas</a>
+                <a class="nav-item nav-link d-lg-none m-2" href="#">
                     FAQ
                 </a>
-                <a class="nav-item nav-link d-lg-none" href="/logout">
+                <a class="nav-item nav-link d-lg-none m-2" href="/logout">
                     Sair
                 </a>
             </div>
         </div>
         <div class="dropdown ml-auto d-none d-lg-block">
-            <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="navbarDropdown"
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Bem-vindo, {{ current_user.name }}
             </button>
