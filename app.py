@@ -50,7 +50,6 @@ def login():
 
     return render_template("sign-in-template.html")
 
-
 @app.route("/signup", methods=["POST", "GET"])
 @redirect_if_logged_in
 def signup():
@@ -91,6 +90,34 @@ def signup():
 
     return render_template("sign-up-template.html")
 
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template("pageuser.html", active_page='profile')
+
+@app.route("/profile/att/change-password", methods=["POST"])
+@login_required
+def change_password():
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    if not current_user.check_password(current_password):
+        flash("Senha atual incorreta.", "error")
+        return redirect(url_for("update_profile"))
+
+    if new_password != confirm_password:
+        flash("A nova senha e a confirmação da senha não coincidem.", "erro")
+        return redirect(url_for("change_password"))
+
+    success = UserController.changePassword(user_id=current_user.id, password=new_password)
+
+    if success:
+        flash("Senha alterada com sucesso!", "success")
+    else:
+        flash("Erro ao alterar a senha.", "error")
+
+    return redirect(url_for("profile"))
 
 @app.route("/profile/att", methods=["POST", "GET"])
 @login_required
@@ -127,12 +154,6 @@ def update_profile():
                 return redirect(url_for("profile"))
 
     return render_template("page-user-att.html", active_page='profile')
-
-
-@app.route('/profile')
-@login_required
-def profile():
-    return render_template("pageuser.html", active_page='profile')
 
 
 @app.route("/reservation")

@@ -43,6 +43,21 @@ class UserController():
             return False
 
     @staticmethod
+    def changePassword(user_id, password):
+        try:
+            user = User.query.get(user_id)
+            if user:
+                if password:
+                    user.set_password(password)
+                db.session.commit()
+                return True
+            else:
+                return False
+        except Exception as e:
+            db.session.rollback()
+            return False
+
+    @staticmethod
     def deleteUser(user_id):
         try:
             user = db.session.query(User).get(user_id)
