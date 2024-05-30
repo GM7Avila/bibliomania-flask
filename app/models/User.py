@@ -2,44 +2,31 @@ from app import db, login_manager
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
 @login_manager.user_loader
 def load_user(usuario_id):
-    return User.query.get(int(usuario_id))
+    return db.session.query(User).get(int(usuario_id))
 
-# @login_manager.request_loader
-# def load_user_from_request(request):
-#     auth_header = request.headers.get('Authorization')
-#
-#     if auth_header:
-#         token = auth_header.replace('Bearer ', '')
-#         user = User.query.filter_by(token=token).first()
-#
-#         if user:
-#             return user
-#
-#     return None
-
-class User(UserMixin, db.Model):
-
+class User(db.Model, UserMixin):
     __tablename__ = "user"
 
-    _id = db.Column("id", db.Integer, primary_key=True)
-    name = db.Column("name", db.String(120), nullable=False)
-    email = db.Column("email", db.String(120), nullable=False, unique=True)
-    cpf = db.Column("cpf", db.String(12), nullable=False, unique=True)
-    password_hash = db.Column("password_hash", db.Text, nullable=False)
-    user_type = db.Column("user_type", db.String(100), nullable=False)
-    phonenumber = db.Column("phonenumber", db.String(100))
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    cpf = db.Column(db.String(12), nullable=False, unique=True)
+    password_hash = db.Column(db.Text, nullable=False)
+    user_type = db.Column(db.String(100), nullable=False)
+    phonenumber = db.Column(db.String(100))
 
     # reservation relation
     reservations = relationship("Reservation", back_populates="user")
 
-    def __init__(self, name, email, cpf, password, default_role, phonenumber):
+    def __init__(self, name, email, cpf, password, user_type, phonenumber):
         self.name = name
         self.email = email
         self.cpf = cpf
         self.set_password(password)
-        self.user_type = default_role
+        self.user_type = user_type
         self.phonenumber = phonenumber
 
     def set_password(self, password):
@@ -58,4 +45,7 @@ class User(UserMixin, db.Model):
         return True
 
     def get_id(self):
-        return(self._id)
+        return str(self.id)
+
+    def __repr__(self):
+        return f"User('{self.name}', '{self.email}', '{self.cpf}')"
