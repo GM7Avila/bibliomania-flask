@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 ">
+    <div class="barra">
+
+        <a href="http:/user" class="btn btn-primary botao">Voltar</a>
+        <h1 class="titulo">Perfil de Usuário</h1>
+
+    </div>
+    <div class="card ">
+        <div class="card-body border border-light">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img id="userPhoto" src=".\static\img\17004.png" class="img-fluid rounded-circle"
+                         alt="Foto do Usuário">
+                </div>
+                <div class="col-md-9">
+                    <table class="table table-striped ">
+                        <tbody>
+                        <tr>
+                            <th scope="row " class="list-group-item">Nome:</th>
+                            <td id="userName" class="border">{{ current_user.name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="list-group-item">Email:</th>
+                            <td id="userEmail" class="border">{{ current_user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="list-group-item">Telefone:</th>
+                            <td id="userPhone" class="border">{{ current_user.phonenumber }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="list-group-item">CPF:</th>
+                            <td id="userAddress" class="border">{{ current_user.cpf }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="text-center mt-4">
+                <a href="/profile/att" class="btn btn-success">Atualizar Informações</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
