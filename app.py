@@ -6,7 +6,6 @@ from app import app, db
 from scripts.populate_book_table import populate_book_table
 from app.models.Reservation import Reservation
 from datetime import datetime
-from app.models.Book import Book
 from flask_login import login_user, logout_user, login_required, current_user
 
 def redirect_if_logged_in(f):
@@ -155,7 +154,6 @@ def profile():
 @login_required
 def reservation():
     return render_template("reservation.html",active_page='reservation')
-
 
 @app.route("/user")
 @login_required

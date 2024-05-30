@@ -42,6 +42,26 @@ body {
   }
 }
 
+.linha-cinza {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.linha-branca {
+    background-color: #fff;
+    padding: 20px;
+    border-top: 10px solid #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.filtro-buttons {
+    margin-top: 10px;
+}
+.btn-secondary{
+    width: 10rem !important;
 
 }
 .barra {
