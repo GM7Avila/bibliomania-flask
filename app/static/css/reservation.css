@@ -43,5 +43,7 @@ td.td-detalhes {
 
 }
 .custom-btn-detalhes {
-    margin-left:5rem;
+    margin-left:4rem;
+    padding-right:30px;
+    padding-left:30px
 }
