@@ -5,14 +5,14 @@
     <!-- Tabela com Barra de Pesquisa -->
     <div class="row linha-cinza mt-5">
         <div class="col-md-12">
-            <table class="table table mb-3">
+            <table class="table table mt-3">
                 <tbody>
                 <tr>
                     <td>
-                        <div class="input-group rounded">
-                            <input type="text" class="form-control rounded" placeholder="Digite sua pesquisa...">
+                        <div class="input-group rounded mt-3">
+                            <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa...">
                             <div class="input-group-append">
-                                <button class="btn btn-primary rounded" type="button">
+                                <button class="btn btn-primary rounded-end-circle" type="button">
                                     <img src=".\static\img\Vector.png" alt="Pesquisar"
                                          style="width: 20px; height: 20px;">
                                     <span class="ml-2">Pesquisar</span>
@@ -21,55 +21,58 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                            <span class="filtro-label pt-4 w-100">Filtrar:</span>
-                            <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                                <button class="btn btn-secondary rounded m-3 w-100">Status</button>
-                                <button class="btn btn-secondary rounded m-3 w-100">ISBN</button>
-                                <button class="btn btn-secondary rounded m-3 w-100">Título</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
+                    <span class="filtro-label pt-4 w-100">Buscar por:</span>
+                    <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroStatus" autocomplete="off" checked> Status
+                        </label>
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroISBN" autocomplete="off"> ISBN
+                        </label>
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroTitulo" autocomplete="off"> Título
+                        </label>
+                    </div>
+                </div>
+
 
                 </tbody>
             </table>
         </div>
     </div>
 
+
     <!-- Tabela com Lista de Itens -->
-    <div class="row linha-branca mt-3">
-        <div class="col">
-            <table class="table">
-                <thead>
+<div class="row linha-branca mt-4">
+    <div class="col">
+        <table class="table">
+            <h2 class="text-center mb-4">Reservas Realizadas</h2>
+            <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Status</th>
+                    <th scope="col" class="text-center">Reserva</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Livro</td>
-                    <td>Descrição</td>
-                    <td>Status</td>
+                    <td>titulo</td>
+                    <td>isbn</td>
+                    <td>status</td>
+                    <td class="pl-3 td-detalhes d-flex align-items-center">
+                        <a class="btn btn-secondary rounded custom-btn-detalhes">Detalhes</a>
+                    </td>
                 </tr>
-                <!-- Adicione mais linhas conforme necessário -->
-                <tr>
-                    <td>2</td>
-                    <td>Livro 2</td>
-                    <td>Descrição 2</td>
-                    <td>Status 2</td>
-                </tr>
-                <!-- Adicione mais linhas conforme necessário -->
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}
