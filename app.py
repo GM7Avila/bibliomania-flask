@@ -1,4 +1,4 @@
-from flask import redirect, url_for, render_template, request, flash
+from flask import redirect, url_for, render_template, request, flash, make_response
 from functools import wraps
 from app.utils.validations import validate_email, validate_cpf
 from app.models.User import User
@@ -13,7 +13,11 @@ def redirect_if_logged_in(f):
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated:
             return redirect(url_for('user'))
-        return f(*args, **kwargs)
+        response = make_response(f(*args, **kwargs))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
     return decorated_function
 
 @app.route('/')
