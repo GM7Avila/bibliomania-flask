@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+   <style>
+        .barra {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #343a40;
+            padding: 10px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .titulo {
+            color: white;
+            margin: 0 auto;
+
+        }
+
+        .botao {
+            position: absolute;
+            left: 10px;
+        }
+    </style>
+
+
+
+<div class="container mt-5 ">
+    <div class="barra">
+
+            <a href="http:/profile" class="btn btn-primary botao">Voltar</a>
+        <h1 class="titulo">Atualizar Perfil</h1>
+    </div>
+  <div class="card ">
+        <div class="card-body border border-light">
+            <form action="{{ url_for('profile') }}" method="post">
+                <p>Nome: </p>
+                <p><input type="text" class="form-control"name="input_nome"value="{{current_user.name}}"/></p>
+
+                <p>CPF: </p>
+                <p><input type="text"class="form-control"  name="input_cpf"value="{{current_user.cpf}}" pattern="[0-9]*" maxlength="11" title="Informe apenas números (11 dígitos)" required readonly=“true” /></p>
+
+                <p>Email: </p>
+                <p><input type="text"class="form-control"value="{{current_user.email}}" name="input_email"/></p>
+
+                <p>Telefone (com DDD): </p>
+                <p><input type="text" class="form-control"name="input_telefone" value="{{current_user.phonenumber}}" pattern="[0-9]{11}"  title="Informe um telefone válido (11 dígitos)"/></p>
+
+                <input type="submit" class="btn btn-success" value="Atualizar" name="action" />
+                <input type="submit" class="btn btn-danger" value="Excluir Conta" name="action" />
+
+            </form>
+        </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -64,3 +64,23 @@ body {
     width: 10rem !important;
 
 }
+.barra {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #343a40;
+            padding: 10px;
+            ding: 10px;
+            margin-top: 10px;
+            position: relative;
+            margin-top:100px;
+
+        }
+.barra .botao {
+            position: absolute;
+            left: 10px;
+        }
+.titulo {
+            color: white;
+            margin: 0;
+        }
