@@ -43,40 +43,36 @@
     </div>
 
 
-        <!-- Tabela com Lista de Itens -->
-        <div class="row linha-branca mt-4">
-            <div class="col">
-                <table class="table">
-                    <h2 class="text-center mb-4">Reservas Realizadas</h2>
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Livro</td>
-                        <td>Descrição</td>
-                        <td>Status</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
-                    <tr>
-                        <td>2</td>
-                        <td>Livro 2</td>
-                        <td>Descrição 2</td>
-                        <td>Status 2</td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <!-- Tabela com Lista de Itens -->
+<div class="row linha-branca mt-4">
+    <div class="col">
+        <table class="table">
+            <h2 class="text-center mb-4">Reservas Realizadas</h2>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-center">Reserva</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>titulo</td>
+                    <td>isbn</td>
+                    <td>status</td>
+                    <td class="pl-3 td-detalhes d-flex align-items-center">
+                        <a class="btn btn-secondary rounded custom-btn-detalhes">Detalhes</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 
 </div>
-<link rel="stylesheet" href=".\static\css\reservation.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}

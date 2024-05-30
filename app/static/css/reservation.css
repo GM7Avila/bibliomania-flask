@@ -14,12 +14,12 @@
 }
 
 .filtro-buttons {
-    margin-top: 10px;
-}
-.btn-secondary{
-    width: 10rem !important;
+    margin-top: 10rem;
 }
 
+.btn-group label {
+    width: 10rem !important;
+}
 
 /* Estilo para botão focado */
 .btn-group label.btn:focus {
@@ -32,4 +32,16 @@
     background-color: #007bff;
     color: #fff;
     border-color: #007bff;
+}
+.td-detalhes {
+    max-width: 1000px;
+    width: 100px;
+    white-space: nowrap;
+}
+td.td-detalhes {
+    color: white;
+
+}
+.custom-btn-detalhes {
+    margin-left:5rem;
 }
