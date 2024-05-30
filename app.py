@@ -84,15 +84,80 @@ def signup():
 
     return render_template("sign-up-template.html")
 
+@app.route("/profileatt", methods=["POST", "GET"])
+@login_required
+def profileatt():
+    return render_template("page-user-att.html",active_page='profile')
+
+
+@app.route('/profile', methods=['POST'])
+@login_required
+def update_profile():
+    if request.form['action'] == 'Atualizar':
+        if request.method == 'POST':
+            #exectuando comando de att dados
+            name = request.form['input_nome']
+            cpf = request.form['input_cpf']
+            email = request.form['input_email']
+            phonenumber = request.form['input_telefone']
+            #Validação do dados
+            if not all([name, cpf, email, phonenumber]):
+                flash("Por favor, preencha todos os campos.", "error")
+                return redirect(url_for("profileatt"))
+
+            if not validate_email(email):
+                flash("E-mail inválido.", "error")
+                return redirect(url_for("profileatt"))
+
+            if not validate_cpf(cpf):
+                flash("CPF inválido.", "error")
+                return redirect(url_for("profileatt"))
+
+            existing_email = User.query.filter_by(email=email).first()
+            existing_cpf = User.query.filter_by(cpf=cpf).first()
+
+            try:
+                current_user.name = name
+                current_user.cpf = cpf
+                current_user.email = email
+                current_user.phonenumber = phonenumber
+
+                db.session.commit()
+                flash("Usuário atualizado com sucesso!", "success")
+                return redirect(url_for("profile"))
+            except Exception as e:
+                flash("Erro ao atualizar o usuário.", "error")
+                app.logger.error(f"Erro ao atualizar usuário: {e}")
+                return redirect(url_for("profileatt"))
+
+        return render_template("pageuser.html", active_page='profile')
+        # exectuando comando de deletar
+        pass
+    elif request.form['action'] == 'Excluir Conta':
+        try:
+            db.session.delete(current_user)
+            db.session.commit()
+            logout_user()
+            flash("Usuário deletado com sucesso.", "success")
+            return redirect(url_for("login"))
+        except Exception as e:
+            flash("Erro ao deletar o usuário.", "error")
+            app.logger.error(f"Erro ao deletar usuário: {e}")
+            return redirect(url_for("profile"))
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("pageuser.html", active_page='profile')
+
 @app.route("/reservation")
 @login_required
 def reservation():
-    return render_template("reservation.html")
+    return render_template("reservation.html",active_page='reservation')
 
 @app.route("/user")
 @login_required
 def user():
-    return render_template("base.html")
+    return render_template("base.html",active_page='user')
 
 @app.route("/logout")
 @login_required
@@ -134,6 +199,3 @@ with app.app_context():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
