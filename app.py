@@ -99,53 +99,31 @@ def update_profile():
         action = request.form.get('action')
 
         if action == 'Atualizar':
-            # Executando comando de atualização de dados
             name = request.form.get('input_nome')
-            cpf = request.form.get('input_cpf')
-            email = request.form.get('input_email')
             phonenumber = request.form.get('input_telefone')
 
-            # Validação dos dados
-            if not all([name, cpf, email, phonenumber]):
-                flash("Por favor, preencha todos os campos.", "error")
-                return redirect(url_for("update_profile"))
+            success = UserController.updateUser(
+                user_id=current_user.id,
+                name=name,
+                phone=phonenumber
+            )
 
-            if not validate_email(email):
-                flash("E-mail inválido.", "error")
-                return redirect(url_for("update_profile"))
-
-            if not validate_cpf(cpf):
-                flash("CPF inválido.", "error")
-                return redirect(url_for("update_profile"))
-
-            existing_email = User.query.filter_by(email=email).first()
-            existing_cpf = User.query.filter_by(cpf=cpf).first()
-
-            try:
-                current_user.name = name
-                current_user.cpf = cpf
-                current_user.email = email
-                current_user.phonenumber = phonenumber
-
-                db.session.commit()
+            if success:
                 flash("Usuário atualizado com sucesso!", "success")
                 return redirect(url_for("profile"))
-            except Exception as e:
+            else:
                 flash("Erro ao atualizar o usuário.", "error")
-                app.logger.error(f"Erro ao atualizar usuário: {e}")
                 return redirect(url_for("update_profile"))
 
         elif action == 'Excluir Conta':
-            # Executando comando de deletar
-            try:
-                db.session.delete(current_user)
-                db.session.commit()
+            success = UserController.deleteUser(user_id=current_user.id)
+
+            if success:
                 logout_user()
-                flash("Usuário deletado com sucesso.", "success")
+                flash("Conta apagada com sucesso.", "success")
                 return redirect(url_for("login"))
-            except Exception as e:
+            else:
                 flash("Erro ao deletar o usuário.", "error")
-                app.logger.error(f"Erro ao deletar usuário: {e}")
                 return redirect(url_for("profile"))
 
     return render_template("page-user-att.html", active_page='profile')

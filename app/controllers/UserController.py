@@ -2,7 +2,9 @@ from app import db
 from ..models.User import User
 
 class UserController():
-    def createUser(self, user):
+
+    @staticmethod
+    def createUser(user):
         try:
             db.session.add(user)
             db.session.commit()
@@ -15,20 +17,19 @@ class UserController():
             print(e)
             return False
 
-
-    def readUser(self, user_id):
+    @staticmethod
+    def readUser(user_id):
         try:
             user = db.session.query(User).get(user_id)
             return user
         except Exception as e:
             return None
 
-    def updateUser(self, user_id, password=None, phone=None, name=None):
+    @staticmethod
+    def updateUser(user_id, phone=None, name=None):
         try:
-            user = db.session.query(User).get(user_id)
+            user = User.query.get(user_id)
             if user:
-                if password:
-                    user.set_password(password)
                 if phone:
                     user.phonenumber = phone
                 if name:
@@ -41,7 +42,8 @@ class UserController():
             db.session.rollback()
             return False
 
-    def deleteUser(self, user_id):
+    @staticmethod
+    def deleteUser(user_id):
         try:
             user = db.session.query(User).get(user_id)
             if user:
