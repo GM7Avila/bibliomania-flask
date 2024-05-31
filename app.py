@@ -210,7 +210,7 @@ def reservation_detail(reservation_id):
                 flash("Não é possível renovar a reserva. A reserva está atrasada ou finalizada.", "error")
         return render_template("reservation-details.html", reservation=reservation)
 
-    can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today()
+    can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
     return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
 @app.route("/user")
