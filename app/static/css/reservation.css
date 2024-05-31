@@ -1,49 +1,31 @@
-.linha-cinza {
+.top-bar {
     background-color: #f8f9fa;
     padding: 10px;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
 }
 
-
-.linha-branca {
-    background-color: #fff;
-    padding: 20px;
-    border-top: 10px solid #fff;
-    border-bottom: 1px solid #ccc;
-}
-
-.filtro-buttons {
-    margin-top: 10rem;
-}
-
-.btn-group label {
-    width: 10rem !important;
-}
-
-/* Estilo para botão focado */
-.btn-group label.btn:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    background-color: ;
-}
-
-/* Estilo para botão marcado */
-.btn-group label.btn input[type="radio"]:checked + .btn {
-    background-color: #007bff;
-    color: #fff;
-    border-color: #007bff;
-}
-.td-detalhes {
-    max-width: 1000px;
-    width: 100px;
-    white-space: nowrap;
-}
-td.td-detalhes {
+.card-header {
+    background-color: #343a40;
     color: white;
-
+    text-align: center;
 }
-.custom-btn-detalhes {
-    margin-left:4rem;
-    padding-right:30px;
-    padding-left:30px
+
+.card {
+    margin-bottom: 20px;
+}
+
+.status-box {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.renov-box {
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
 }

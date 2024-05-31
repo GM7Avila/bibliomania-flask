@@ -181,12 +181,34 @@ def reservation():
         elif filtro_selecionado == "filtroTodos":
             reservations = reservationController.getReservationsByUser(user_id=current_user.id)
 
-        return render_template("reservation.html", active_page='reservation', reservations=reservations)
+        return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
     if request.method == "GET":
         reservations = reservationController.getReservationsByUser(user_id=current_user.id)
-        return render_template("reservation.html", active_page='reservation', reservations=reservations)
+        return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
+
+@app.route("/reservation/<int:reservation_id>", methods=["GET", "POST"])
+@login_required
+def reservation_detail(reservation_id):
+    reservation = Reservation.query.get(reservation_id)
+    if reservation is None:
+        return render_template(url_for("reservation"))
+
+    if request.method == "POST":
+        if request.form.get("action") == "renew":
+            if reservation.status == "Ativa" and reservation.expirationDate >= date.today():
+                success = ReservationController.renewReservation(reservation)
+                if success:
+                    flash("Reserva renovada com sucesso!", "success")
+                else:
+                    flash("Erro ao renovar a reserva.", "error")
+            else:
+                flash("Não é possível renovar a reserva. A reserva está atrasada ou finalizada.", "error")
+        return render_template("reservation-details.html", reservation=reservation)
+
+    can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today()
+    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
 @app.route("/user")
 @login_required

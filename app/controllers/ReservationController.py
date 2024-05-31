@@ -10,7 +10,7 @@ class ReservationController:
     def renewReservation(reservation):
         try:
             #reservation = Reservation.query.get(reservation_id)
-            if reservation.renewCount > 3:
+            if reservation.renewCount > 4:
                 return False
 
             reservation.expirationDate += timedelta(days=7)
