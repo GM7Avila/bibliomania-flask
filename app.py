@@ -161,8 +161,6 @@ def update_profile():
 @login_required
 def reservation():
 
-    reservationController = ReservationController()
-
     if request.method == "POST":
         search = request.form.get("input-search")
         reservations = []
@@ -170,34 +168,39 @@ def reservation():
         filtro_selecionado = request.form.get("filtro")
 
         if filtro_selecionado == "filtroStatus":
-            reservations = reservationController.getUserReservationsByStatus(user_id=current_user.id, status=search)
+            reservations = ReservationController.getUserReservationsByStatus(user_id=current_user.id, status=search)
 
         elif filtro_selecionado == "filtroISBN":
-            reservations = reservationController.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
+            reservations = ReservationController.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
 
         elif filtro_selecionado == "filtroTitulo":
-            reservations = reservationController.getUserReservationsByBookTitle(user_id=current_user.id, title=search)
+            reservations = ReservationController.getUserReservationsByBookTitle(user_id=current_user.id, title=search)
 
         elif filtro_selecionado == "filtroTodos":
-            reservations = reservationController.getReservationsByUser(user_id=current_user.id)
+            reservations = ReservationController.getReservationsByUser(user_id=current_user.id)
 
         return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
     if request.method == "GET":
-        reservations = reservationController.getReservationsByUser(user_id=current_user.id)
+        reservations = ReservationController.getReservationsByUser(user_id=current_user.id)
         return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
+# TODO: funcionalidades do banco no controller
 
 @app.route("/reservation/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
 def reservation_detail(reservation_id):
+
     reservation = Reservation.query.get(reservation_id)
+
     if reservation is None:
         return render_template(url_for("reservation"))
 
+    ReservationController.updateStatus(reservation_id)
+
     if request.method == "POST":
         if request.form.get("action") == "renew":
-            if reservation.status == "Ativa" and reservation.expirationDate >= date.today():
+            if reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3:
                 success = ReservationController.renewReservation(reservation)
                 if success:
                     flash("Reserva renovada com sucesso!", "success")
