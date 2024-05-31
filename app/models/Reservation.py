@@ -1,6 +1,6 @@
 from app import db
 from sqlalchemy.orm import relationship
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
 class Reservation(db.Model):
 
@@ -22,11 +22,14 @@ class Reservation(db.Model):
     book = relationship("Book", back_populates="reservations")
 
     def __init__(self, user_id, book_id):
-        self.reservationDate = datetime.now().date()
-        self.expirationDate = (datetime.now() + timedelta(days=7)).date()
+        self.reservationDate = date.today()
+        self.expirationDate = date.today() + timedelta(days=7)
         self.status = "Ativa"
         self.user_id = user_id
         self.book_id = book_id
 
     def __repr__(self):
-        return f"Reservation('{self.reservationDate}', '{self.expirationDate}', '{self.devolutionDate}', '{self.status}', '{self.user_id}', '{self.book_id}')"
+        if self.devolutionDate:
+            return f"Reservation('{self.reservationDate}', '{self.expirationDate}', '{self.devolutionDate}', '{self.status}', '{self.user_id}', '{self.book_id}')"
+        else:
+            return f"Reservation('{self.reservationDate}', '{self.expirationDate}', None, '{self.status}', '{self.user_id}', '{self.book_id}')"

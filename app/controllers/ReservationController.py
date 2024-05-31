@@ -1,7 +1,6 @@
 from app import db
 from ..models.Reservation import Reservation
-import datetime
-
+from datetime import date, timedelta
 class ReservationController:
 
     """
@@ -14,7 +13,7 @@ class ReservationController:
             if reservation.renewCount > 3:
                 return False
 
-            reservation.expirationDate = datetime.date.today() + datetime.timedelta(days=7)
+            reservation.expirationDate += timedelta(days=7)
             reservation.renewCount += 1
             db.session.commit()
 
@@ -27,7 +26,7 @@ class ReservationController:
     @staticmethod
     def finishReservation(reservation):
         reservation.status = "Finalizada"
-        reservation.devolutionDate = datetime.date.today()
+        reservation.devolutionDate = date.today()
 
         book = reservation.book
         book.increaseAvailableStock()
@@ -36,7 +35,7 @@ class ReservationController:
         db.session.add(book)
         db.session.commit()
 
-        if reservation.expirationDate < datetime.date.today():
+        if reservation.expirationDate < date.today():
             return False # gerar multa
 
         return True # sem multa
