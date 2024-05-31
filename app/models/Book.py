@@ -5,7 +5,7 @@ class Book(db.Model):
 
     __tablename__ = "book"
 
-    _id = db.Column("id", db.Integer, primary_key=True)
+    id = db.Column("id", db.Integer, primary_key=True)
     isbn = db.Column("isbn", db.String(13), nullable=False, unique=True)
     title = db.Column("title", db.String(45), nullable=False)
     author = db.Column("author", db.String(45), nullable=False)
@@ -28,3 +28,14 @@ class Book(db.Model):
         self.year = year
         self.totalStock = totalStock
         self.availableStock = availableStock
+
+    def decreaseAvailableStock(self):
+        if self.availableStock > 0:
+            self.availableStock -= 1
+
+    def increaseAvailableStock(self):
+        if self.availableStock < self.totalStock:
+            self.availableStock += 1
+
+    def __repr__(self):
+        return f"<Book {self.title} by {self.author} (ISBN: {self.isbn}, Publisher: {self.publisher}, Year: {self.year}>"

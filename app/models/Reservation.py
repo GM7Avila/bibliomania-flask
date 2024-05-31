@@ -1,11 +1,12 @@
 from app import db
 from sqlalchemy.orm import relationship
+from datetime import date, timedelta
 
 class Reservation(db.Model):
 
     __tablename__ = "reservation"
 
-    _id = db.Column("id", db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     reservationDate = db.Column(db.Date, nullable=False)
     expirationDate = db.Column(db.Date, nullable=False)
     devolutionDate = db.Column(db.Date)
@@ -20,9 +21,15 @@ class Reservation(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     book = relationship("Book", back_populates="reservations")
 
-    def __init__(self, reservationDate, expirationDate, status, user_id, book_id):
-        self.reservationDate = reservationDate
-        self.expirationDate = expirationDate
-        self.status = status
+    def __init__(self, user_id, book_id):
+        self.reservationDate = date.today()
+        self.expirationDate = date.today() + timedelta(days=7)
+        self.status = "Ativa"
         self.user_id = user_id
         self.book_id = book_id
+
+    def __repr__(self):
+        if self.devolutionDate:
+            return f"Reservation('{self.reservationDate}', '{self.expirationDate}', '{self.devolutionDate}', '{self.status}', '{self.user_id}', '{self.book_id}')"
+        else:
+            return f"Reservation('{self.reservationDate}', '{self.expirationDate}', None, '{self.status}', '{self.user_id}', '{self.book_id}')"
