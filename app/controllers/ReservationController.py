@@ -62,7 +62,7 @@ class ReservationController:
 
     # busca UMA reserva pelo próprio id
     @staticmethod
-    def getReservationById(reservation_id):
+    def findReservationById(reservation_id):
         try:
             reservation = Reservation.query.get(reservation_id)
             return reservation
@@ -78,11 +78,56 @@ class ReservationController:
         except Exception as e:
             return None
 
-    # pode buscar reservas passadas com o mesmo ISBN
+    # reservas pelo ISBN (geral)
     @staticmethod
-    def getReservationsByISBN(isbn):
+    def getReservationsByBookISBN(isbn):
         try:
-            reservations = Reservation.query.filter_by(isbn=isbn).all()
+            reservations = Reservation.query.filter(Reservation.book.has(isbn=isbn)).all()
+            return reservations
+        except Exception as e:
+            return None
+
+    # reservas pelo ISBN do usuario
+    @staticmethod
+    def getUserReservationsByBookISBN(user_id, isbn):
+        try:
+            reservations = Reservation.query.filter(Reservation.user_id == user_id).filter(
+                Reservation.book.has(isbn=isbn)).all()
+            return reservations
+        except Exception as e:
+            return None
+
+    # reservas pelo titulo (geral)
+    @staticmethod
+    def getReservationsByBookTitle(title):
+        try:
+            reservations = Reservation.query.filter(Reservation.book.has(title=title)).all()
+            return reservations
+        except Exception as e:
+            return None
+    # reservas pelo titulo do usuario
+    @staticmethod
+    def getUserReservationsByBookTitle(user_id, title):
+        try:
+            reservations = Reservation.query.filter_by(user_id=user_id).filter(Reservation.book.has(title=title)).all()
+            return reservations
+        except Exception as e:
+            return None
+
+    # busca todsas as reservas de um status
+    @staticmethod
+    def getReservationsByStatus(status):
+        try:
+            reservations = Reservation.query.filter_by(status=status).all()
+            return reservations
+        except Exception as e:
+            return None
+
+    # busca todas as reservas de um usuário
+    @staticmethod
+    def getUserReservationsByStatus(user_id, status):
+        try:
+            reservations = Reservation.query.filter_by(user_id=user_id, status=status).all()
             return reservations
         except Exception as e:
             return None
@@ -91,22 +136,6 @@ class ReservationController:
     def getAllReservations():
         try:
             reservations = Reservation.query.all()
-            return reservations
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def getReservationsByBook(book_id):
-        try:
-            reservations = Reservation.query.filter_by(book_id=book_id).all()
-            return reservations
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def getReservationsByStatus(status):
-        try:
-            reservations = Reservation.query.filter_by(status=status).all()
             return reservations
         except Exception as e:
             return None

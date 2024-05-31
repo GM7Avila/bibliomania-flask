@@ -35,7 +35,7 @@
         <div class="dropdown ml-auto d-none d-lg-block">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="navbarDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bem-vindo, {{ current_user.name }}
+               Olá, {{ current_user.name.split(" ")[0] }}
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item d-flex align-items-center" href="#">
