@@ -211,7 +211,7 @@ def reservation_detail(reservation_id):
         return render_template("reservation-details.html", reservation=reservation)
 
     can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
-    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
+    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew, active_page='reservation')
 
 @app.route("/user")
 @login_required

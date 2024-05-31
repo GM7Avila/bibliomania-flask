@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="top-bar d-flex justify-content-between align-items-center">
+<div class="top-bar d-flex justify-content-between align-items-center mt-3">
     <a href="{{ url_for('reservation') }}" class="btn btn-secondary">Voltar</a>
     <span>Detalhes da Reserva #{{ reservation.id }}</span>
     <form method="POST" class="m-0">
