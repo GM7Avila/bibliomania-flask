@@ -61,7 +61,7 @@
                     <td>{{ reservation.reservationDate }}</td>
                     <td>{{ reservation.status }}</td>
                     <td class="text-center">
-                        <a href="#" class="btn btn-secondary rounded">Detalhes</a>
+                        <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}" class="btn btn-secondary rounded">Detalhes</a>
                     </td>
                 </tr>
                 {% endfor %}
