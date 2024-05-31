@@ -1,3 +1,4 @@
+
 .navbar {
   position: fixed;
   top: 0;
@@ -16,9 +17,7 @@
 .izinho > img {
     border-radius: 100%;
 }
-body {
-    padding-top: 70px; /* Ajuste conforme necessário para evitar a sobreposição da navbar */
-}
+
 .custom-background {
     background-color: #D7DDE2;
 }
@@ -78,7 +77,13 @@ body {
         }
 .barra .botao {
             position: absolute;
-            left: 10px;
+            left: 20px;
+        }
+
+
+.barra .botao2 {
+            position: absolute;
+            right: 20px;
         }
 .titulo {
             color: white;
