@@ -12,6 +12,7 @@ from app.models.Reservation import Reservation
 
 # Controllers
 from app.controllers.UserController import *
+from app.controllers.ReservationController import *
 
 user_controller = UserController()
 
@@ -156,10 +157,36 @@ def update_profile():
     return render_template("page-user-att.html", active_page='profile')
 
 
-@app.route("/reservation")
+@app.route("/reservation", methods=["POST", "GET"])
 @login_required
 def reservation():
-    return render_template("reservation.html",active_page='reservation')
+
+    reservationController = ReservationController()
+
+    if request.method == "POST":
+        search = request.form.get("input-search")
+        reservations = []
+
+        filtro_selecionado = request.form.get("filtro")
+
+        if filtro_selecionado == "filtroStatus":
+            reservations = reservationController.getUserReservationsByStatus(user_id=current_user.id, status=search)
+
+        elif filtro_selecionado == "filtroISBN":
+            reservations = reservationController.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
+
+        elif filtro_selecionado == "filtroTitulo":
+            reservations = reservationController.getUserReservationsByBookTitle(user_id=current_user.id, title=search)
+
+        elif filtro_selecionado == "filtroTodos":
+            reservations = reservationController.getReservationsByUser(user_id=current_user.id)
+
+        return render_template("reservation.html", active_page='reservation', reservations=reservations)
+
+    if request.method == "GET":
+        reservations = reservationController.getReservationsByUser(user_id=current_user.id)
+        return render_template("reservation.html", active_page='reservation', reservations=reservations)
+
 
 @app.route("/user")
 @login_required
