@@ -6,6 +6,7 @@
 
         <a href="http:/user" class="btn btn-primary botao">Voltar</a>
         <h1 class="titulo">Perfil de Usuário</h1>
+
     </div>
     <div class="card ">
         <div class="card-body border border-light">
@@ -18,7 +19,7 @@
                     <table class="table table-striped ">
                         <tbody>
                         <tr>
-                            <th scope="row " class="list-group-item">Nome:</th>
+                            <th scope="row" class="list-group-item">Nome:</th>
                             <td id="userName" class="border">{{ current_user.name }}</td>
                         </tr>
                         <tr>
@@ -43,10 +44,6 @@
             {% for category, message in messages %}
             <div class="alert alert-success alert-{{ category }}">
                 <span style="color: green; display: block; text-align: center;">{{ message }}</span>
-            <div class="alert alert-{{ category }}">
-                <span style="color: red; display: block; text-align: center;">{{ message }}</span>
-            <div class="alert alert-{{ category }}">
-                <span style="color: red; display: block; text-align: center;">{{ message }}</span>
             </div>
             {% endfor %}
             {% endif %}

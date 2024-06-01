@@ -6,10 +6,6 @@ from scripts.populate_book_table import populate_book_table
 from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
 
-# Modelos
-from app.models.User import User
-from app.models.Reservation import Reservation
-
 # Controllers
 from app.controllers.UserController import *
 from app.controllers.ReservationController import *
@@ -96,29 +92,35 @@ def signup():
 def profile():
     return render_template("pageuser.html", active_page='profile')
 
-@app.route("/profile/att/change-password", methods=["POST"])
+@app.route("/profile/att/change-password", methods=["POST", "GET"])
 @login_required
 def change_password():
-    current_password = request.form.get('current_password')
-    new_password = request.form.get('new_password')
-    confirm_password = request.form.get('confirm_password')
+    if request.method == 'POST':
+        action = request.form.get('action')
 
-    if not current_user.check_password(current_password):
-        flash("Senha atual incorreta.", "error")
-        return redirect(url_for("update_profile"))
+        current_password = request.form.get('current_password')
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
 
-    if new_password != confirm_password:
-        flash("A nova senha e a confirmação da senha não coincidem.", "erro")
-        return redirect(url_for("change_password"))
+        if not current_user.check_password(current_password):
+            flash("Senha atual incorreta.", "error")
+            return redirect(url_for("update_profile"))
 
-    success = UserController.changePassword(user_id=current_user.id, password=new_password)
+        if new_password != confirm_password:
+            flash("A nova senha e a confirmação da senha não coincidem.", "erro")
+            return redirect(url_for("change_password"))
 
-    if success:
-        flash("Senha alterada com sucesso!", "success")
-    else:
-        flash("Erro ao alterar a senha.", "error")
+        success = UserController.changePassword(user_id=current_user.id, password=new_password)
 
-    return redirect(url_for("profile"))
+        if success:
+            flash("Senha alterada com sucesso!", "success")
+        else:
+            flash("Erro ao alterar a senha.", "error")
+
+        return redirect(url_for("profile"))
+
+    return render_template("change-password.html", active_page='profile')
+
 
 @app.route("/profile/att", methods=["POST", "GET"])
 @login_required
@@ -211,7 +213,7 @@ def reservation_detail(reservation_id):
         return render_template("reservation-details.html", reservation=reservation)
 
     can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
-    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew, active_page='reservation')
+    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
 @app.route("/user")
 @login_required
