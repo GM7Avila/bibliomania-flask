@@ -5,7 +5,8 @@
     <a href="{{ url_for('reservation') }}" class="btn btn-secondary">Voltar</a>
     <span>Detalhes da Reserva #{{ reservation.id }}</span>
     <form method="POST" class="m-0">
-        <button type="submit" name="action" value="renew" class="btn btn-success" {% if not can_renew %}disabled style="background-color: gray;"{% endif %}>
+        <button type="submit" name="action" value="renew" class="btn btn-success" {% if not can_renew %}disabled
+                style="background-color: gray;" {% endif %}>
             Renovar
         </button>
     </form>
@@ -21,16 +22,19 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Título: {{ reservation.book.title }}" readonly />
+                        <input type="text" class="form-control mb-2" value="Título: {{ reservation.book.title }}"
+                               readonly/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Autor: {{ reservation.book.author }}" readonly />
+                        <input type="text" class="form-control mb-2" value="Autor: {{ reservation.book.author }}"
+                               readonly/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="ISBN: {{ reservation.book.isbn }}" readonly />
+                        <input type="text" class="form-control mb-2" value="ISBN: {{ reservation.book.isbn }}"
+                               readonly/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Ano: {{ reservation.book.year }}" readonly />
+                        <input type="text" class="form-control mb-2" value="Ano: {{ reservation.book.year }}" readonly/>
                     </div>
                 </div>
             </div>
@@ -43,15 +47,20 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control mb-3" value="Data da Reserva: {{ reservation.reservationDate }}" readonly />
+                        <input type="text" class="form-control mb-3"
+                               value="Data da Reserva: {{ reservation.reservationDate }}" readonly/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-3" value="Data de Expiração: {{ reservation.expirationDate }}" readonly />
+                        <input type="text" class="form-control mb-3"
+                               value="Data de Expiração: {{ reservation.expirationDate }}" readonly/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control mb-3" value="Data de Devolução: {% if reservation.devolutionDate %}{{ reservation.devolutionDate }}{% else %}Ainda não devolvido{% endif %}" readonly />
+                        <input type="text" class="form-control mb-3"
+                               value="Data de Devolução: {% if reservation.devolutionDate %}{{ reservation.devolutionDate }}{% else %}Ainda não devolvido{% endif %}"
+                               readonly/>
                     </div>
-                    <div class="status-box" style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' %}gray{% endif %};">
+                    <div class="status-box"
+                         style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' %}gray{% endif %};">
                         Status: {{ reservation.status }}
                     </div>
                     <div class="renov-box">

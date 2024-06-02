@@ -14,29 +14,17 @@
                         </button>
                     </div>
                 </div>
-                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
+                <div class="btn-group d-flex" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
                     <span class="filtro-label pt-4">Buscar por:</span>
-                    <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                        <label class="btn btn-secondary m-3 rounded">
+                    <div class="btn-group" role="group" aria-label="Botões de Filtro">
+                        <label class="button_filter btn btn-secondary m-3 rounded">
                             <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
                             ISBN
                         </label>
-                        <label class="btn btn-secondary m-3 rounded">
+                        <label class="button_filter btn btn-secondary m-3 rounded">
                             <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off">
                             Título
                         </label>
-                        <!-- Novo botão de filtro de status -->
-                        <div class="dropdown m-3 rounded">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Status
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Opção 1</a>
-                                <a class="dropdown-item" href="#">Opção 2</a>
-                                <a class="dropdown-item" href="#">Opção 3</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -84,7 +72,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
