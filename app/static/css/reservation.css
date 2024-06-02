@@ -48,7 +48,8 @@
 .filtro-buttons {
     margin-top: 10px;
 }
-.btn-secondary{
-    width: 10rem !important;
-
+.button_filter{
+    width: 7rem !important;
 }
+
+

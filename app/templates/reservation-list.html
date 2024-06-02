@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="container mt-8">
-    <div class="row search-header mt-5">
+<div class="container">
+    <div class="row search-header w-100">
         <div class="col-md-12">
-
             <form method="POST" action="{{ url_for('reservation') }}" id="search-form">
                 <div class="input-group rounded mt-3">
                     <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
@@ -16,21 +14,16 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
-                    <span class="filtro-label pt-4 w-100">Buscar por:</span>
-                    <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroStatus" value="filtroStatus" autocomplete="off"> Status
+                <div class="btn-group d-flex" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
+                    <span class="filtro-label pt-4">Buscar por:</span>
+                    <div class="btn-group" role="group" aria-label="Botões de Filtro">
+                        <label class="button_filter btn btn-secondary m-3 rounded">
+                            <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
+                            ISBN
                         </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
-                        </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off"> Título
-                        </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off" checked> Todos
+                        <label class="button_filter btn btn-secondary m-3 rounded">
+                            <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off">
+                            Título
                         </label>
                     </div>
                 </div>
@@ -38,43 +31,48 @@
         </div>
     </div>
 
+
     <!-- Tabela com Lista de Itens -->
-    <div class="row table-reserve mt-4">
+    <div class="row table-reserve mt-4 mb-4 w-100">
         <div class="col">
-            <table class="table">
-                <h2 class="text-center mb-4">Reservas Realizadas</h2>
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" class="text-center">Reserva</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% if reservations %}
-                {% for reservation in reservations %}
-                <tr>
-                    <td>{{ reservation.id }}</td>
-                    <td>{{ reservation.book.title }}</td>
-                    <td>{{ reservation.reservationDate }}</td>
-                    <td>{{ reservation.status }}</td>
-                    <td class="text-center">
-                        <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}" class="btn btn-secondary rounded">Detalhes</a>
-                    </td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center">Nenhuma reserva encontrada.</td>
-                </tr>
-                {% endif %}
-                </tbody>
-            </table>
+            <h2 class="text-center mb-4">Reservas Realizadas</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center">Reserva</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if reservations %}
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.book.title }}</td>
+                        <td>{{ reservation.reservationDate }}</td>
+                        <td>{{ reservation.status }}</td>
+                        <td class="text-center">
+                            <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}"
+                               class="btn btn-secondary rounded">Detalhes</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Nenhuma reserva encontrada.</td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
