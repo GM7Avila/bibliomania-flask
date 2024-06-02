@@ -9,7 +9,6 @@ class UserController():
             db.session.add(user)
             db.session.commit()
             print(user)
-            print("crie")
             return True
         except Exception as e:
             db.session.rollback()
@@ -70,3 +69,19 @@ class UserController():
         except Exception as e:
             db.session.rollback()
             return False
+
+    @staticmethod
+    def findUserByEmail(email):
+        try:
+            user = db.session.query(User).filter_by(email=email).first()
+            return user
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def findUserByCPF(cpf):
+        try:
+            user = db.session.query(User).filter_by(cpf=cpf).first()
+            return user
+        except Exception as e:
+            return None
