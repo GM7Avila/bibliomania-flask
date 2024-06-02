@@ -37,7 +37,6 @@
     border-bottom: 1px solid #ccc;
 }
 
-
 .table-reserve {
     background-color: #fff;
     padding: 20px;
@@ -47,8 +46,4 @@
 
 .filtro-buttons {
     margin-top: 10px;
-}
-.btn-secondary{
-    width: 10rem !important;
-
 }
