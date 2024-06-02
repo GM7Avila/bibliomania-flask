@@ -1,18 +1,26 @@
+from app import app
 from flask import redirect, url_for, render_template, request, flash, make_response
-from functools import wraps
-from app.utils.validations import validate_email, validate_cpf
-from app import app, db
-from scripts.populate_book_table import populate_book_table
-from datetime import datetime
 from flask_login import login_user, logout_user, login_required, current_user
+from datetime import datetime
+from functools import wraps
+
+# Utils & Scripts
+from app.utils.validations import validate_email, validate_cpf
+from scripts.populate_book_table import populate_book_table
 
 # Controllers
 from app.controllers.UserController import *
 from app.controllers.ReservationController import *
-
-user_controller = UserController()
+from app.controllers.BookController import *
 
 def redirect_if_logged_in(f):
+    """
+    Decorator function that redirects the user to the 'user' page if they are already logged in.
+
+    Description:
+        This decorator function checks if the current user is authenticated. If they are, it redirects them to the 'user' page.
+        If they are not authenticated, it calls the decorated function and adds cache control headers to the response.
+    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated:
@@ -28,16 +36,20 @@ def redirect_if_logged_in(f):
 def index():
     return redirect(url_for("login"))
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+             SIGN IN AND SIGN UP ROUTES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 @app.route("/login", methods=["POST", "GET"])
 @redirect_if_logged_in
 def login():
-    flash("")
 
     if request.method == "POST":
         email = request.form["input_email"]
         password = request.form["input_password"]
 
-        found_user = db.session.query(User).filter_by(email=email).first()
+        found_user = UserController.findUserByEmail(email)
+
         if found_user and found_user.check_password(password):
             login_user(found_user)
             return redirect(url_for("user"))
@@ -71,12 +83,12 @@ def signup():
             flash("CPF inválido.", "error")
             return redirect(url_for("signup"))
 
-        if db.session.query(User).filter_by(email=email).first() or db.session.query(User).filter_by(cpf=cpf).first():
+        if UserController.findUserByEmail(email) or UserController.findUserByCPF(cpf):
             flash("Email ou cpf já cadastrado!", "error")
             return redirect(url_for("signup"))
 
         user = User(name, email, cpf, password, user_type, phonenumber)
-        success = user_controller.createUser(user)
+        success = UserController.createUser(user)
 
         if success:
             flash("Usuário cadastrado com sucesso!", "success")
@@ -86,6 +98,21 @@ def signup():
             return redirect(url_for("signup"))
 
     return render_template("sign-up-template.html")
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                       USER ROUTES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+@app.route("/user")
+@login_required
+def user():
+    return render_template("base.html",active_page='user')
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("login"))
 
 @app.route('/profile')
 @login_required
@@ -120,7 +147,6 @@ def change_password():
         return redirect(url_for("profile"))
 
     return render_template("change-password.html", active_page='profile')
-
 
 @app.route("/profile/att", methods=["POST", "GET"])
 @login_required
@@ -159,6 +185,9 @@ def update_profile():
     return render_template("page-user-att.html", active_page='profile')
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                    RESERVATION ROUTES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 @app.route("/reservation", methods=["POST", "GET"])
 @login_required
 def reservation():
@@ -187,8 +216,6 @@ def reservation():
         reservations = ReservationController.getReservationsByUser(user_id=current_user.id)
         return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
-# TODO: funcionalidades do banco no controller
-
 @app.route("/reservation/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
 def reservation_detail(reservation_id):
@@ -215,21 +242,9 @@ def reservation_detail(reservation_id):
     can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
     return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
-@app.route("/user")
-@login_required
-def user():
-    return render_template("base.html",active_page='user')
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("login"))
-
 @app.route("/create-reservation")
 @login_required
 def create_reservation():
-    # Data atual
     current_date = datetime.now().date()
 
     # Criando uma reserva com valores fictícios
@@ -241,22 +256,24 @@ def create_reservation():
         book_id=1   # Substitua pelo ID do livro correto
     )
 
-    # Adicione a reserva ao banco de dados
     db.session.add(reservation)
     db.session.commit()
 
     return redirect(url_for("login"))
 
-"""
-ROTAS BOOK
-"""
 
-"""
-CONFIG
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                       BOOK ROUTES
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                       APP CONFIG
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 with app.app_context():
     db.create_all()
     populate_book_table()
 
 if __name__ == "__main__":
     app.run(debug=True)
+
