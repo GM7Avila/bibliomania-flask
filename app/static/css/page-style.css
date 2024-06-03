@@ -24,7 +24,11 @@ header{
     background-color: #333;
     color: #fff;
     padding: 10px;
-    z-index: 1000; /* para fazer a navbar ultrapassar o conteúdo quando aberto */
+    z-index: 1000;
+    background: rgb(115,129,143);
+    background: linear-gradient(138deg, rgba(115,129,143,1) 0%, rgba(77,86,95,1) 24%, rgba(33,37,41,1) 100%);
+    padding: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-brand > img {
@@ -60,8 +64,8 @@ header{
 
 .custom-footer{
     background-color:#73818F;
-    color:white;
-    min-height: 100px;
+    color: #d5e1ed;
+    min-height: 4rem;
     padding: 10px;
     margin-top: auto;
 }
