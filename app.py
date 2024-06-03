@@ -112,6 +112,12 @@ def acervo():
     books = Book.query.all()  # Consulta todos os livros na tabela 'book'
     return render_template("acervo.html", books=books, active_page='acervo')
 
+@app.route("/acervo/{id}", methods=["POST", "GET"])
+@login_required
+def confirm_reservation(book_id):
+    book = BookController.getBookById(book_id)
+    return render_template("/acervo.html", books=book, active_page='acervo')
+
 @app.route("/logout")
 @login_required
 def logout():
