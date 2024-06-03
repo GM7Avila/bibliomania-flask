@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container pt-5 pb-5">
+    <div class="row search-header mt-5 pt-2">
+        <div class="col-md-12">
+
+            <form method="POST" id="search-form">
+                <div class="input-group rounded mt-3">
+                    <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
+                           name="input-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary rounded-end-circle" type="submit">
+                            <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                            <span class="ml-2">Pesquisar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
+                    <span class="filtro-label pt-4 w-100">Buscar por:</span>
+                    <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroStatus" value="filtroStatus" autocomplete="off">
+                            Status
+                        </label>
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
+                            ISBN
+                        </label>
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off">
+                            Título
+                        </label>
+                        <label class="btn btn-secondary m-3 w-100 rounded">
+                            <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
+                                   checked> Todos
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    {% for book in books %}
+
+
+    <div class="card mb-5">
+        <div class="card-body">
+            <div class="row">
+                <div class="imagem col-md-3">
+                    <img src="{{ url_for('static', filename='img/book.png') }}">
+                </div>
+                <div class="col-md-9 pr-5">
+                    <table class="table table-striped ">
+
+                        <input value="Título:{{ book.title }}" class="form-control m-3" readonly/>
+                        <input value="Autor:{{ book.author }}" class="form-control m-3" readonly/>
+                        <input value="Editora:{{ book.publisher }}" class="form-control m-3" readonly/>
+                        <input value="ISBN:{{ book.isbn }}" class="form-control m-3" readonly/>
+                        <input value="Ano:{{ book.year }}" class="form-control m-3" readonly/>
+                        <div class="text-center mt-4">
+                            <a href="/profile/att" class="btn btn-success">Reservar</a>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
+
+{% endblock %}

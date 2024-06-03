@@ -3,6 +3,8 @@ from flask import redirect, url_for, render_template, request, flash, make_respo
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
 from functools import wraps
+from app.models.Book import Book
+
 
 # Utils & Scripts
 from app.utils.validations import validate_email, validate_cpf
@@ -24,7 +26,7 @@ def redirect_if_logged_in(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if current_user.is_authenticated:
-            return redirect(url_for('user'))
+            return redirect(url_for('acervo'))
         response = make_response(f(*args, **kwargs))
         response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response.headers["Pragma"] = "no-cache"
@@ -52,7 +54,7 @@ def login():
 
         if found_user and found_user.check_password(password):
             login_user(found_user)
-            return redirect(url_for("user"))
+            return redirect(url_for("acervo"))
         else:
             flash("Email ou senha inválidos!", "error")
             return redirect(url_for("login"))
@@ -103,10 +105,12 @@ def signup():
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
                        USER ROUTES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-@app.route("/user")
+
+@app.route("/acervo", methods=["POST", "GET"])
 @login_required
-def user():
-    return render_template("base.html",active_page='user')
+def acervo():
+    books = Book.query.all()  # Consulta todos os livros na tabela 'book'
+    return render_template("acervo.html", books=books, active_page='acervo')
 
 @app.route("/logout")
 @login_required
