@@ -1,6 +1,50 @@
-.imagem > img{
-    width: 250px;
+.acervo{
+    background-color: #f1f1f1;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    border-left: 1px solid #c3c3c3;
+    border-right: 1px solid #c3c3c3;
+    boder-bottom: 1px solid #c3c3c3;
+
 }
+
+.imagem{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.imagem > img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
 .card{
-border-radius:30px;
+    padding: 0px;
+    border: none;
+    border-radius:15px;
+    background-color: transparent;
+}
+
+.book-info{
+    padding-left: 75px;
+}
+
+
+.form-control{
+    background-color: #F4F4F4;
+    font-size: 15px;
+    padding-left: 20px;
+}
+
+.title-acervo {
+    color: #5c5e60;
+    font-size: 1.5rem; /* Aumenta o tamanho da fonte */
+    font-weight: bold; /* Deixa a fonte em negrito */
+    margin-bottom: 35px; /* Adiciona margem inferior */
+
 }

@@ -91,7 +91,7 @@ class BookController:
     @staticmethod
     def findBooksByTitle(title):
         try:
-            books = Book.query.filter(Book.title.ilike(f'%{title}%')).all()
+            books = Book.query.filter_by(title=title).all()
             return books
         except Exception as e:
             return None

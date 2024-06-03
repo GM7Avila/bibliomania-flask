@@ -85,3 +85,11 @@ class UserController():
             return user
         except Exception as e:
             return None
+
+    @staticmethod
+    def findUserByName(name):
+        try:
+            user = db.session.query(User).filter(User.name.like(f'%{name}%')).first()
+            return user
+        except Exception as e:
+            return None
