@@ -59,7 +59,6 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Título</th>
                         <th scope="col">ISBN</th>
                         <th scope="col">Reserva</th>
@@ -72,7 +71,6 @@
                     {% if reservations %}
                     {% for reservation in reservations %}
                     <tr>
-                        <td>{{ reservation.id }}</td>
                         <td>{{ reservation.book.title }}</td>
                         <td>{{ reservation.book.isbn }}</td>
                         <td>{{ reservation.reservationDate }}</td>

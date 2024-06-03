@@ -3,8 +3,6 @@ from flask import redirect, url_for, render_template, request, flash, make_respo
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import datetime
 from functools import wraps
-from app.models.Book import Book
-
 
 # Utils & Scripts
 from app.utils.validations import validate_email, validate_cpf
@@ -112,11 +110,26 @@ def acervo():
     books = Book.query.all()  # Consulta todos os livros na tabela 'book'
     return render_template("acervo.html", books=books, active_page='acervo')
 
-@app.route("/acervo/{id}", methods=["POST", "GET"])
+@app.route("/acervo/<int:book_id>", methods=["POST", "GET"])
 @login_required
-def confirm_reservation(book_id):
+def reservation_confirm(book_id):
     book = BookController.getBookById(book_id)
-    return render_template("/acervo.html", books=book, active_page='acervo')
+    return render_template("reservation_confirm.html", book=book, active_page='acervo')
+
+@app.route("/reservar/<int:book_id>", methods=["POST"])
+@login_required
+def reservar(book_id):
+    book = BookController.getBookById(book_id)
+    if book:
+        reservation = ReservationController.createReservation(current_user, book)
+        if reservation:
+            flash("Reserva realizada com sucesso!", "success")
+        else:
+            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
+    else:
+        flash("Livro não encontrado.", "danger")
+    return redirect(url_for("acervo"))
+
 
 @app.route("/logout")
 @login_required
