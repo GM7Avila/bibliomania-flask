@@ -49,8 +49,3 @@ footer{
     height: 16.12vh;
 }
 
-@media (max-width: 1920px) {
-    .content {
-        transform: scale(1.1);
-    }
-}

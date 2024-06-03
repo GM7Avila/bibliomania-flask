@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="container pt-5 pb-5">
-    <div class="row search-header mt-5 pt-2">
+<div class="container mb-5">
+    <div class="row search-header">
         <div class="col-md-12">
 
             <form method="POST" id="search-form">
@@ -46,7 +45,7 @@
     {% for book in books %}
 
 
-    <div class="card mb-5">
+    <div class="card mb-5 mt-5">
         <div class="card-body">
             <div class="row">
                 <div class="imagem col-md-3">
@@ -71,5 +70,5 @@
     {% endfor %}
 </div>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}
