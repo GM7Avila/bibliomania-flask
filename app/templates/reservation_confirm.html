@@ -11,7 +11,7 @@
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <form action="{{ url_for('reservar', book_id=book.id) }}" method="post">
-                {% if not can_reserve %}
+                {% if not can_reserve or book.availableStock == 0 %}
                     <button type="submit" class="btn btn-confirm" disabled>Confirmar Reserva</button>
                 {% else %}
                     <button type="submit" class="btn btn-confirm">Confirmar Reserva</button>
@@ -33,7 +33,6 @@
             <p class="mb-2">Editora: {{ book.publisher }}</p>
             <p class="mb-2">Ano: {{ book.year }}</p>
 
-            <!-- Se houver mensagens de flash, exiba-as -->
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
@@ -46,7 +45,6 @@
                 {% if book.availableStock == 0 %}
                     <a href="#" class="btn bg-unavailable disabled ml-0">Indisponível</a>
                 {% else %}
-                    <!-- O botão de reserva já foi adicionado acima como formulário -->
                 {% endif %}
             </div>
 

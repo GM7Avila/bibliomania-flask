@@ -32,6 +32,25 @@ def redirect_if_logged_in(f):
         return response
     return decorated_function
 
+def redirect_if_no_stock(f):
+    """
+    Decorator function that redirects the user to the 'acervo' page if the book has no stock.
+
+    Description:
+        This decorator function checks if the book has available stock. If it doesn't, it redirects the user to the 'acervo' page.
+        If it does, it calls the decorated function.
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        book_id = kwargs.get('book_id')
+        book = BookController.getBookById(book_id)
+        if book.availableStock == 0:
+            flash("Este livro está indisponível para reserva.", "danger")
+            return redirect(url_for('acervo'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
 @app.route('/')
 def index():
     return redirect(url_for("login"))
@@ -112,6 +131,7 @@ def acervo():
 
 @app.route("/acervo/<int:book_id>", methods=["POST", "GET"])
 @login_required
+@redirect_if_no_stock
 def reservation_confirm(book_id):
     book = BookController.getBookById(book_id)
     user_id = current_user.id
@@ -120,9 +140,10 @@ def reservation_confirm(book_id):
 
 @app.route("/reservar/<int:book_id>", methods=["POST"])
 @login_required
+@redirect_if_no_stock
 def reservar(book_id):
     book = BookController.getBookById(book_id)
-    if book:
+    if book and book.availableStock > 0:
         user_id = current_user.id
         can_reserve = ReservationController.has_active_reservations(user_id)
 
