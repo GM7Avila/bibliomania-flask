@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="header-card container">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-start">
+                <a href="http:/profile" class="btn btn-primary botao">Voltar</a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <h1 class="titulo">Reserva #{{ reservation.id }}</h1>
+            </div>
+        </div>
+        <div class="col">
+            <form method="POST" class="m-0" justify-content-end>
+        <button type="submit" name="action" value="renew" class="btn btn-success" {% if not can_renew %}disabled
+                style="background-color: gray;" {% endif %}>
+            Renovar
+        </button>
+    </form>
+        </div>
+    </div>
+</div>
+
 <div class="top-bar d-flex justify-content-between align-items-center">
     <a href="{{ url_for('reservation') }}" class="btn btn-secondary">Voltar</a>
     <span>Detalhes da Reserva #{{ reservation.id }}</span>

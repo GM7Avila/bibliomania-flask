@@ -1,7 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-    <div class="row search-header w-100">
+<div class="container card">
+    <div class="header-card container w-100">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-start">
+                    <a href="/user" class="btn btn-primary botao">Voltar</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <h1 class="titulo">Reservas</h1>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-end">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
             <form method="POST" action="{{ url_for('reservation') }}" id="search-form">
                 <div class="input-group rounded mt-3">
@@ -33,7 +52,7 @@
 
 
     <!-- Tabela com Lista de Itens -->
-    <div class="row table-reserve mt-4 mb-4 w-100">
+    <div class="row table-reserve mt-4 mb-4">
         <div class="col">
             <h2 class="text-center mb-4">Reservas Realizadas</h2>
             <div class="table-responsive">
@@ -42,7 +61,9 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Título</th>
-                        <th scope="col">Data</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Reserva</th>
+                        <th scope="col">Expiração</th>
                         <th scope="col">Status</th>
                         <th scope="col" class="text-center">Reserva</th>
                     </tr>
@@ -53,7 +74,9 @@
                     <tr>
                         <td>{{ reservation.id }}</td>
                         <td>{{ reservation.book.title }}</td>
+                        <td>{{ reservation.book.isbn }}</td>
                         <td>{{ reservation.reservationDate }}</td>
+                        <td>{{ reservation.expirationDate }}</td>
                         <td>{{ reservation.status }}</td>
                         <td class="text-center">
                             <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}"
@@ -72,7 +95,6 @@
         </div>
     </div>
 </div>
-
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
