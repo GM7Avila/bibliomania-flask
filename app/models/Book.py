@@ -37,5 +37,7 @@ class Book(db.Model):
         if self.availableStock < self.totalStock:
             self.availableStock += 1
 
+
+
     def __repr__(self):
         return f"<Book {self.title} by {self.author} (ISBN: {self.isbn}, Publisher: {self.publisher}, Year: {self.year}>"

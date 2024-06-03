@@ -1,72 +1,96 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="container mb-5">
-    <div class="row search-header">
-        <div class="col-md-12">
 
-            <form method="POST" id="search-form">
-                <div class="input-group rounded mt-3">
-                    <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
-                           name="input-search">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary rounded-end-circle" type="submit">
-                            <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
-                            <span class="ml-2">Pesquisar</span>
-                        </button>
-                    </div>
-                </div>
+<div class="row search-header">
+    <div class="col-md-12">
 
-                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
-                    <span class="filtro-label pt-4 w-100">Buscar por:</span>
-                    <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroStatus" value="filtroStatus" autocomplete="off">
-                            Status
-                        </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
-                            ISBN
-                        </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off">
-                            Título
-                        </label>
-                        <label class="btn btn-secondary m-3 w-100 rounded">
-                            <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
-                                   checked> Todos
-                        </label>
-                    </div>
+        <form method="POST" id="search-form">
+            <div class="input-group rounded mt-3">
+                <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
+                       name="input-search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary rounded-end-circle" type="submit">
+                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                        <span class="ml-2">Pesquisar</span>
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
+                <span class="filtro-label pt-4 w-100">Filtrar por:</span>
+                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
+                    <label class="btn btn-secondary m-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
+                               checked> Todos
+                    </label>
+                    <label class="btn btn-secondary m-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
+                        Título
+                    </label>
+                    <label class="btn btn-secondary m-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
+                        ISBN
+                    </label>
+                    <label class="btn btn-secondary m-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
+                        Autor
+                    </label>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
+<div class="acervo background container mb-5 pt-4 pb-1">
 
     {% for book in books %}
 
-
-    <div class="card mb-5 mt-5">
+    <div class="card mb-5">
         <div class="card-body">
             <div class="row">
                 <div class="imagem col-md-3">
-                    <img src="{{ url_for('static', filename='img/book.png') }}">
+                    <img src="{{ url_for('static', filename='img/book.jpg') }}">
                 </div>
-                <div class="col-md-9 pr-5">
-                    <table class="table table-striped ">
+                <div class="book-info col-md-9 ">
+                    <table class="table table-striped">
 
-                        <input value="Título:{{ book.title }}" class="form-control m-3" readonly/>
-                        <input value="Autor:{{ book.author }}" class="form-control m-3" readonly/>
-                        <input value="Editora:{{ book.publisher }}" class="form-control m-3" readonly/>
-                        <input value="ISBN:{{ book.isbn }}" class="form-control m-3" readonly/>
-                        <input value="Ano:{{ book.year }}" class="form-control m-3" readonly/>
-                        <div class="text-center mt-4">
-                            <a href="/profile/att" class="btn btn-success">Reservar</a>
+                        <h1 class="title-acervo mb-4">{{loop.index}}. {{ book.title }}</h1>
+                        <hr>
+                        <p class="mb-2">Autor {{ book.author }}
+                        <p/>
+                        <p class="mb-2">ISBN: {{ book.isbn }}
+                        <p/>
+                        <p class="mb-2">Editora: {{ book.publisher }}
+                        <p/>
+                        <p class="mb-2">Ano: {{ book.author }}
+                        <p/>
+
+                        <div class="row">
+                            <div class="col pl-0">
+                                <div class="d-flex justify-content-start mt-5">
+                                    {% if book.availableStock == 0 %}
+                                    <a href="#"
+                                       class="btn bg-unavailable disabled ml-0">
+                                        Indisponível
+                                    </a>
+                                    {% endif %}
+
+
+                                    {% if book.availableStock != 0 %}
+                                    <a href="/acervo/{{ book.id }}" class="btn btn-confirm">Reservar</a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
+                        <hr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+
     {% endfor %}
 </div>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">

@@ -6,7 +6,15 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/page-style.css') }}">
     <meta charset="UTF-8">
-    <title> {% block title%} {% endblock %} </title>
+    <title> Bibliomania </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Lexend', sans-serif }
+    </style>
 </head>
 <body>
 <header>
@@ -18,7 +26,7 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse bg-dark" id="navbarNavAltMarkup">
             <div class="navbar-nav mx-auto">
                 <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}" href="/profile">Perfil<span
                         class="sr-only">(current)</span></a>
@@ -52,7 +60,7 @@
     {% block content %}
     {% endblock %}
 </div>
-<footer class= "custom-footer d-flex align-items-center justify-content-center">
+<footer class="custom-footer d-flex align-items-center justify-content-center">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-12 col-12 mb-4 mb-md-0">Contato: (21) 9 9999-9999</div>
