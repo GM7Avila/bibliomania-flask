@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mb-5">
+<div class="acervo background container mb-5 rounded-lg pt-5">
     <div class="row search-header">
         <div class="col-md-12">
 
@@ -45,22 +45,30 @@
     {% for book in books %}
 
 
-    <div class="card mb-5 mt-5">
+    <div class="card mb-5 mt-5 pt-3">
         <div class="card-body">
             <div class="row">
                 <div class="imagem col-md-3">
                     <img src="{{ url_for('static', filename='img/book.png') }}">
                 </div>
-                <div class="col-md-9 pr-5">
+                <div class="col-md-9 pr-5 pl-5">
                     <table class="table table-striped ">
-
-                        <input value="Título:{{ book.title }}" class="form-control m-3" readonly/>
-                        <input value="Autor:{{ book.author }}" class="form-control m-3" readonly/>
-                        <input value="Editora:{{ book.publisher }}" class="form-control m-3" readonly/>
-                        <input value="ISBN:{{ book.isbn }}" class="form-control m-3" readonly/>
-                        <input value="Ano:{{ book.year }}" class="form-control m-3" readonly/>
-                        <div class="text-center mt-4">
-                            <a href="/profile/att" class="btn btn-success">Reservar</a>
+                        <input value="Título:{{ book.title }}" class="form-control mb-2" readonly/>
+                        <input value="Autor:{{ book.author }}" class="form-control mb-2" readonly/>
+                        <input value="Editora:{{ book.publisher }}" class="form-control mb-2" readonly/>
+                        <input value="ISBN:{{ book.isbn }}" class="form-control mb-2" readonly/>
+                        <input value="Ano:{{ book.year }}" class="form-control mb-4" readonly/>
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-flex justify-content-start">
+                                    <a href="/profile/att" class="btn btn-primary botao">Reserva</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-end">
+                                    <a href="/profile/att" class="btn btn-primary botao">Status</a>
+                                </div>
+                            </div>
                         </div>
                     </table>
                 </div>
