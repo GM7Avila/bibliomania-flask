@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<div class="acervo background container mb-5 pt-4 pb-1">
+<div class="acervo-container background container mb-5 pt-4 pb-1">
 
     {% for book in books %}
 
@@ -78,8 +78,10 @@
 
 
                                     {% if book.availableStock != 0 %}
-                                    <a href="/acervo/{{ book.id }}" class="btn btn-confirm">Reservar</a>
+                                    <a href="{{ url_for('reservation_confirm', book_id=book.id) }}"
+                                       class="btn btn-confirm">Reservar</a>
                                     {% endif %}
+
                                 </div>
                             </div>
                         </div>

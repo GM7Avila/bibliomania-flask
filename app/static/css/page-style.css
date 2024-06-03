@@ -76,21 +76,30 @@ header{
 }
 
 .btn-confirm{
-    /*width: 100%;*/
-    width: 10rem !important;
-    background-color: #3794ff; /* Azul em hexadecimal */
+    width: 12rem !important;
+    background-color: #2b7fe3; /* Azul em hexadecimal */
     color: white; /* Cor do texto */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.btn-confirm:hover {
+    background-color: #52a4ff;
+    color: white;
+}
+
 .bg-unavailable {
-    /*width: 100%;*/
     border: none;
     margin-left: 10px;
     opacity: 0.8 !important;
-    width: 10rem !important;
+    width: 12rem !important;
     background-color: #7c7d83;
     color: #ececec;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Efeito de transição */
+}
+
+.bg-unavailable:hover {
+    background-color: #66676e; /* Cinza mais escuro */
+    transform: translateY(-2px); /* Efeito de elevação */
 }
 
 .filter-button{
