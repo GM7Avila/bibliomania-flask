@@ -67,6 +67,7 @@ class ReservationController:
     @staticmethod
     def createReservation(user, book):
         try:
+            print("Tentei criar")
             if book.availableStock > 0:
                 reservation = Reservation(user.id, book.id)
                 book.decreaseAvailableStock()
@@ -77,6 +78,7 @@ class ReservationController:
                 db.session.commit()
                 return reservation
         except Exception as e:
+            print(e)
             db.session.rollback()
             return None
 

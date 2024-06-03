@@ -143,20 +143,16 @@ def reservation_confirm(book_id):
 @redirect_if_no_stock
 def reservar(book_id):
     book = BookController.getBookById(book_id)
-    if book and book.availableStock > 0:
-        user_id = current_user.id
-        can_reserve = ReservationController.has_active_reservations(user_id)
+    user_id = current_user.id
 
-        if can_reserve:
-            flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
-        else:
-            reservation = ReservationController.createReservation(user_id, book_id)
-            if reservation:
-                flash("Reserva realizada com sucesso!", "success")
-            else:
-                flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
+    if ReservationController.has_active_reservations(user_id):
+        flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
     else:
-        flash("Livro não encontrado.", "danger")
+        reservation = ReservationController.createReservation(current_user, book)
+        if reservation:
+            flash("Reserva realizada com sucesso!", "success")
+        else:
+            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
     return redirect(url_for("acervo"))
 
 
