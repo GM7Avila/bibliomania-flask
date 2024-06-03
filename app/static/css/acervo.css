@@ -1,5 +1,5 @@
 .acervo-container{
-    background-color: #f1f1f1;
+    background-color: #f6f6f6;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 
@@ -28,7 +28,7 @@
     padding: 0px;
     border: none;
     border-radius:15px;
-    background-color: #F1F1F1;
+    background-color: #f6f6f6;
 }
 
 .card-confirm{
@@ -37,7 +37,7 @@
     width: 100%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #F1F1F1;
+    background-color: #f6f6f6;
 
 }
 
