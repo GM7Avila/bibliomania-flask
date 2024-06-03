@@ -114,18 +114,26 @@ def acervo():
 @login_required
 def reservation_confirm(book_id):
     book = BookController.getBookById(book_id)
-    return render_template("reservation_confirm.html", book=book, active_page='acervo')
+    user_id = current_user.id
+    can_reserve = not ReservationController.has_active_reservations(user_id)
+    return render_template("reservation_confirm.html", book=book,can_reserve=can_reserve)
 
 @app.route("/reservar/<int:book_id>", methods=["POST"])
 @login_required
 def reservar(book_id):
     book = BookController.getBookById(book_id)
     if book:
-        reservation = ReservationController.createReservation(current_user, book)
-        if reservation:
-            flash("Reserva realizada com sucesso!", "success")
+        user_id = current_user.id
+        can_reserve = ReservationController.has_active_reservations(user_id)
+
+        if can_reserve:
+            flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
         else:
-            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
+            reservation = ReservationController.createReservation(user_id, book_id)
+            if reservation:
+                flash("Reserva realizada com sucesso!", "success")
+            else:
+                flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
     else:
         flash("Livro não encontrado.", "danger")
     return redirect(url_for("acervo"))
@@ -264,25 +272,6 @@ def reservation_detail(reservation_id):
 
     can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
     return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
-
-@app.route("/create-reservation")
-@login_required
-def create_reservation():
-    current_date = datetime.now().date()
-
-    # Criando uma reserva com valores fictícios
-    reservation = Reservation(
-        reservationDate=current_date,
-        expirationDate=current_date,
-        status="Ativa",
-        user_id=1,  # Substitua pelo ID do usuário correto
-        book_id=1   # Substitua pelo ID do livro correto
-    )
-
-    db.session.add(reservation)
-    db.session.commit()
-
-    return redirect(url_for("login"))
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""

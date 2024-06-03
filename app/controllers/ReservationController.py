@@ -173,3 +173,8 @@ class ReservationController:
         except Exception as e:
             db.session.rollback()
             return False
+
+    @staticmethod
+    def has_active_reservations(user_id):
+        active_reservations = Reservation.query.filter_by(user_id=user_id, status="Ativa").first()
+        return bool(active_reservations)

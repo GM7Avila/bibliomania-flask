@@ -11,7 +11,11 @@
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <form action="{{ url_for('reservar', book_id=book.id) }}" method="post">
-                <button type="submit" class="btn btn-confirm">Confirmar Reservar</button>
+                {% if not can_reserve %}
+                    <button type="submit" class="btn btn-confirm" disabled>Confirmar Reserva</button>
+                {% else %}
+                    <button type="submit" class="btn btn-confirm">Confirmar Reserva</button>
+                {% endif %}
             </form>
         </div>
     </div>
@@ -28,6 +32,15 @@
             <p class="mb-2">ISBN: {{ book.isbn }}</p>
             <p class="mb-2">Editora: {{ book.publisher }}</p>
             <p class="mb-2">Ano: {{ book.year }}</p>
+
+            <!-- Se houver mensagens de flash, exiba-as -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endwith %}
 
             <div class="d-flex justify-content-start mt-5">
                 {% if book.availableStock == 0 %}
