@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-card container">
+    <div class="row">
+        <div class="col d-flex justify-content-start align-items-center">
+            <a href="/acervo" class="btn btn-primary botao">Voltar</a>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center">
+            <h1 class="titulo">Atualizar Perfil</h1>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center">
+            <form action="{{ url_for('reservar', book_id=book.id) }}" method="post">
+                <button type="submit" class="btn btn-confirm">Confirmar Reservar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container card-confirm d-flex justify-content-center p-5 w-100">
+    <div class="row">
+        <div class="imagem col-md-4 d-flex">
+            <img src="{{ url_for('static', filename='img/book.jpg') }}" class="img-fluid" alt="Imagem da capa do livro {{ book.title }}">
+        </div>
+        <div class="book-info col-md-8 d-flex justify-content-center flex-column">
+            <h1 class="title-acervo mb-4">{{ book.title }}</h1>
+            <p class="mb-2">Autor: {{ book.author }}</p>
+            <p class="mb-2">ISBN: {{ book.isbn }}</p>
+            <p class="mb-2">Editora: {{ book.publisher }}</p>
+            <p class="mb-2">Ano: {{ book.year }}</p>
+
+            <div class="d-flex justify-content-start mt-5">
+                {% if book.availableStock == 0 %}
+                    <a href="#" class="btn bg-unavailable disabled ml-0">Indisponível</a>
+                {% else %}
+                    <!-- O botão de reserva já foi adicionado acima como formulário -->
+                {% endif %}
+            </div>
+
+            <div class="stock-info mt-1">
+                <p>Amostras disponíveis: {{ book.availableStock }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
+{% endblock %}
