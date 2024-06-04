@@ -5,14 +5,14 @@
 <div class="header-card container">
     <div class="row">
         <div class="col d-flex justify-content-start align-items-center">
-            <a href="/reservation" class="btn btn-primary botao">Voltar</a>
+            <a href="/reservation" class="btn btn-back botao">Voltar</a>
         </div>
         <div class="col d-flex justify-content-center align-items-center">
             <h1 class="titulo"> Reserva #{{ reservation.id }} </h1>
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <form method="POST" class="m-0">
-                <button type="submit" name="action" value="renew" class="btn btn-success" {% if not can_renew %}disabled
+                <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled
                         style="background-color: gray;" {% endif %}>
                     Renovar
                 </button>
