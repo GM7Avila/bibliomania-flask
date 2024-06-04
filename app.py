@@ -43,7 +43,7 @@ def redirect_if_no_stock(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         book_id = kwargs.get('book_id')
-        book = BookController.getBookById(book_id)
+        book = BookController.findBookById(book_id)
         if book.availableStock == 0:
             flash("Este livro está indisponível para reserva.", "danger")
             return redirect(url_for('acervo'))
@@ -213,17 +213,44 @@ def reservation():
 
         filtro_selecionado = request.form.get("filtro")
 
+        print(f"Filtro selecionado: {filtro_selecionado}")
+        print(f"Texto de busca: {search}")
+
         if filtro_selecionado == "filtroStatus":
             reservations = ReservationController.getUserReservationsByStatus(user_id=current_user.id, status=search)
+            print("1. STATUS selecionado")
+            print("- Buscando por: " + search + "...")
+            print(reservations)
+
 
         elif filtro_selecionado == "filtroISBN":
             reservations = ReservationController.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
+            print("1. ISBN selecionado")
+            print("- Buscando por: " + search + "...")
+            print(reservations)
+
 
         elif filtro_selecionado == "filtroTitulo":
-            reservations = ReservationController.getUserReservationsByBookTitle(user_id=current_user.id, title=search)
+            books = BookController.getBooksBySimilarTitle(search)
+            if books:
+                reservations = ReservationController.getUserReservationsByBooks(user_id=current_user.id, books=books)
+                print("1. TITULO selecionado")
+                print("- Buscando por: " + search + "...")
+                print(reservations)
+            else:
+                print("Nenhum livro encontrado com o título: " + search)
 
         elif filtro_selecionado == "filtroTodos":
-            reservations = ReservationController.getReservationsByUser(user_id=current_user.id)
+            print("1. ALL selecionado")
+            print("- Buscando por: " + search + "...")
+            if search:
+                books = BookController.getBooksBySimilarTitle(search)
+                reservations = ReservationController.getGlobalSearch(user_id=current_user.id, query=search, books=books)
+                print(reservations)
+
+            else:
+                reservations = ReservationController.getReservationsByUser(user_id=current_user.id)
+                print(reservations)
 
         return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
@@ -273,7 +300,7 @@ def acervo():
 @login_required
 @redirect_if_no_stock
 def reservation_confirm(book_id):
-    book = BookController.getBookById(book_id)
+    book = BookController.findBookById(book_id)
     user_id = current_user.id
     can_reserve = not ReservationController.has_active_reservations(user_id)
     return render_template("reservation-confirm.html", book=book,can_reserve=can_reserve)
@@ -282,7 +309,7 @@ def reservation_confirm(book_id):
 @login_required
 @redirect_if_no_stock
 def reservar(book_id):
-    book = BookController.getBookById(book_id)
+    book = BookController.findBookById(book_id)
     user_id = current_user.id
 
     if ReservationController.has_active_reservations(user_id):

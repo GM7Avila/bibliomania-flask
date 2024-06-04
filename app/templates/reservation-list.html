@@ -3,11 +3,18 @@
 
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
-{% for category, message in messages %}
-<div class="alert alert-{{ category }}">
-    <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+<div class="flash-message-container">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} text-center" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
+<script>
+    setTimeout(function() {
+        document.querySelector('.flash-message-container').style.display = 'none';
+    }, 5000);
+</script>
 {% endif %}
 {% endwith %}
 
@@ -35,29 +42,22 @@
                 <input type="text" class="form-control mt-0" placeholder="Digite sua pesquisa..." name="input-search">
                 <div class="input-group-append">
                     <button class="btn btn-search" type="submit">
-                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                        <img src="{{ url_for('static', filename='img/Vector.png') }}" alt="Pesquisar" style="width: 20px; height: 20px;">
                         <span class="ml-2">Pesquisar</span>
                     </button>
                 </div>
             </div>
-            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
-                 data-toggle="buttons">
+            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro" data-toggle="buttons">
                 <span class="filtro-label pt-4">Filtrar por:</span>
                 <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
-                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
-                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
-                               checked> Todos
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded active">
+                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off" checked> Todos
                     </label>
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
-                        <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
-                        Título
+                        <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off"> Título
                     </label>
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
-                    </label>
-                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
-                        <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
-                        Autor
                     </label>
                 </div>
             </div>
@@ -66,7 +66,6 @@
 </div>
 
 <div class="container card">
-    <!-- Tabela com Lista de Itens -->
     <div class="row table-reserve mb-2">
         <div class="table-responsive">
             <table class="table">
@@ -77,7 +76,7 @@
                     <th scope="col">Reserva</th>
                     <th scope="col">Expiração</th>
                     <th scope="col">Status</th>
-                    <th scope="col" class="text-center">Reserva</th>
+                    <th scope="col" class="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,8 +89,7 @@
                     <td class="align-middle">{{ reservation.expirationDate }}</td>
                     <td class="align-middle">{{ reservation.status }}</td>
                     <td class="d-flex justify-content-center align-items-center">
-                        <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}"
-                           class="btn btn-details">Detalhes</a>
+                        <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}" class="btn btn-details">Detalhes</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -105,7 +103,6 @@
         </div>
     </div>
 </div>
-
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 

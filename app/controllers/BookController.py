@@ -1,9 +1,11 @@
 from app import db
 from ..models.Book import Book
-from sqlalchemy import case
+
 
 class BookController:
 
+    # =================== CREATE UPDATE AND DELETE ===================
+    # CREATE
     @staticmethod
     def createBook(isbn, title, author, publisher, year, totalStock, availableStock):
         try:
@@ -15,35 +17,7 @@ class BookController:
             db.session.rollback()
             return None
 
-    @staticmethod
-    def getBookById(book_id):
-        try:
-            book = Book.query.get(book_id)
-            return book
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def getAllBooks():
-        try:
-            books = Book.query.all()
-            return books
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def getSortedBooksByAvailableStock():
-        try:
-            books = db.session.query(Book).order_by(
-                Book.isAvailable.desc(),
-                Book.availableStock.desc(),
-                Book.title
-            ).all()
-
-            return books
-        except Exception as e:
-            return None
-
+    # UPDATE
     @staticmethod
     def updateBook(book_id, isbn=None, title=None, author=None, publisher=None, year=None, totalStock=None,
                    availableStock=None):
@@ -73,6 +47,7 @@ class BookController:
             db.session.rollback()
             return None
 
+    # DELETE
     @staticmethod
     def deleteBook(book_id):
         try:
@@ -86,6 +61,68 @@ class BookController:
             db.session.rollback()
             return False
 
+
+    # ==================================== READ ====================================
+    """
+    Get Books: Retorna uma lista de Livros
+    """
+
+    # 1. Retorna todos os livros
+    @staticmethod
+    def getAllBooks():
+        try:
+            books = Book.query.all()
+            return books
+        except Exception as e:
+            return None
+
+    # 2. Recebe um Titulo e retorna uma lista de livros com nomes similares
+    @staticmethod
+    def getBooksBySimilarTitle(title):
+        try:
+            books = Book.query.filter(Book.title.ilike(f'%{title}%')).all()
+            return books
+        except Exception as e:
+            print(f"Erro ao buscar livros por título: {e}")
+            return None
+
+    # 3. Recebe um autor e retorna uma lista de livros
+    @staticmethod
+    def getBooksByAuthor(author):
+        try:
+            books = Book.query.filter_by(author=author).all()
+            return books
+        except Exception as e:
+            return None
+
+    # 4. Recebe um ISBN e retorna um livro
+    @staticmethod
+    def getBookByISBN(isbn):
+        try:
+            book = Book.query.filter_by(isbn=isbn).first()
+            return book
+        except Exception as e:
+            return None
+
+    # 5. Retorna livros ordenados pela disponibildiade no estoque
+    @staticmethod
+    def getSortedBooksByAvailableStock():
+        try:
+            books = db.session.query(Book).order_by(
+                Book.isAvailable.desc(),
+                Book.availableStock.desc(),
+                Book.title
+            ).all()
+
+            return books
+        except Exception as e:
+            return None
+
+    """
+    Get Books: Retorna uma lista de Livros
+    """
+
+    # 1. Recebe um ISBN e retorna um livro
     @staticmethod
     def findBookByISBN(isbn):
         try:
@@ -94,18 +131,21 @@ class BookController:
         except Exception as e:
             return None
 
+    # 2. Recebe um Titulo e retorna um livro
     @staticmethod
-    def findBooksByAuthor(author):
+    def findBookByTitle(title):
         try:
-            books = Book.query.filter_by(author=author).all()
-            return books
+            book = Book.query.filter_by(title=title).all()
+            return book
         except Exception as e:
             return None
 
+    # 3. Recebe um ID e retorna um Livro
     @staticmethod
-    def findBooksByTitle(title):
+    def findBookById(book_id):
         try:
-            books = Book.query.filter_by(title=title).all()
-            return books
+            book = Book.query.get(book_id)
+            return book
         except Exception as e:
             return None
+
