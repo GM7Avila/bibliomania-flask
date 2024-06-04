@@ -30,7 +30,7 @@
                 </div>
                 <div class="book-info col-md-8 h-100">
                     <h1 class="title-acervo mb-3">{{ book.id }}. {{ book.title }}</h1>
-                    <hr clas = "divider">
+                    <hr clas="divider">
                     <ul class="list-style mb-2">
                         <li class="mb-3 mt-4">Autor: {{ book.author }}</li>
                         <li class="mb-3">ISBN: {{ book.isbn }}</li>
@@ -41,6 +41,15 @@
             </div>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endwith %}
 </div>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
 {% endblock %}

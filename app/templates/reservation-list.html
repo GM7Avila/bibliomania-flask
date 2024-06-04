@@ -40,10 +40,10 @@
                     </button>
                 </div>
             </div>
-            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
                  data-toggle="buttons">
-                <span class="filtro-label pt-4">Filtrar por:</span>
-                <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
+                <span class="filtro-label pt-4">Filtro:</span>
+                <div class="btn-group ml-4 d-flex flex-wrap w-100" role="group" aria-label="Botões de Filtro">
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
                                checked> Todos
@@ -59,6 +59,12 @@
                         <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
                         Autor
                     </label>
+                    <select class="form-select btn btn-outline-secondary-status ml-auto mt-4 mb-3 mr-4 w-100 rounded" aria-label=".form-select filter">
+                        <option selected disabled>Status</option>
+                        <option class="text-left" value="1">Ativa</option>
+                        <option class="text-left" value="2">Inadimplente</option>
+                        <option class="text-left" value="3">Devolvido</option>
+                    </select>
                 </div>
             </div>
         </form>
@@ -108,5 +114,8 @@
 
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
 
 {% endblock %}
