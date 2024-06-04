@@ -13,6 +13,7 @@ class Book(db.Model):
     year = db.Column("year", db.String(5), nullable=False)
     totalStock = db.Column(db.Integer, nullable=False)
     availableStock = db.Column(db.Integer, nullable=False)
+    isAvailable = db.Column(db.Boolean, nullable=False, default=True)
 
     # reservation relation
     reservations = relationship("Reservation", back_populates="book")
@@ -29,6 +30,11 @@ class Book(db.Model):
         self.totalStock = totalStock
         self.availableStock = availableStock
 
+        if self.availableStock > 0:
+            self.isAvailable = True
+        else:
+            self.isAvailable = False
+
     def decreaseAvailableStock(self):
         if self.availableStock > 0:
             self.availableStock -= 1
@@ -37,7 +43,11 @@ class Book(db.Model):
         if self.availableStock < self.totalStock:
             self.availableStock += 1
 
-
+    def updateIsAvailable(self):
+        if self.availableStock > 0:
+            self.isAvailable = True
+        else:
+            self.isAvailable = False
 
     def __repr__(self):
         return f"<Book {self.title} by {self.author} (ISBN: {self.isbn}, Publisher: {self.publisher}, Year: {self.year}>"

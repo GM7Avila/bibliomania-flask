@@ -1,34 +1,42 @@
 .acervo-container{
-    background-color: #f1f1f1;
+    background-color: #f6f6f6;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 
     border-left: 1px solid #c3c3c3;
     border-right: 1px solid #c3c3c3;
     boder-bottom: 1px solid #c3c3c3;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+
+    padding-left: 0px;
+    padding-right: 0px;
+
 }
 
 .imagem{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    max-width: 300px; /* Define um tamanho máximo para o contêiner da imagem */
+    max-width: 200px;
+    max-height: 400px;
+    margin-left: 60px;
 }
 
 .imagem > img{
     object-fit: contain;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     max-width: 100%;
     max-height: 400px; /* Define uma altura máxima */
 }
 
+
 .card{
     padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
     border: none;
-    border-radius:15px;
-    background-color: #F1F1F1;
+    width: 100%;
+    background-color: #f6f6f6;
+
 }
 
 .card-confirm{
@@ -37,7 +45,7 @@
     width: 100%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #F1F1F1;
+    background-color: #f6f6f6;
 
 }
 
@@ -49,6 +57,4 @@
     color: #5c5e60;
     font-size: 1.5rem; /* Aumenta o tamanho da fonte */
     font-weight: bold; /* Deixa a fonte em negrito */
-    margin-bottom: 35px; /* Adiciona margem inferior */
-
 }

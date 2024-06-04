@@ -7,26 +7,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/page-style.css') }}">
     <meta charset="UTF-8">
     <title> Bibliomania </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Lexend', sans-serif }
-    </style>
 </head>
 <body>
 <header>
     <!-- Navbar - bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='img/b.png') }}" width="35" height="35"
+        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='img/b.png') }}" width="35" height="35"
                                               class="d-inline-block align-top" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse bg-dark" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mx-auto">
                 <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}" href="/profile">Perfil<span
                         class="sr-only">(current)</span></a>

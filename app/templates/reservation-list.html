@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+    <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
 <div class="header-card container w-100">
     <div class="row">
         <div class="col">
@@ -18,80 +28,80 @@
         </div>
     </div>
 </div>
-<div class="container card">
-
-    <div class="row">
-        <div class="col-md-12">
-            <form method="POST" action="{{ url_for('reservation') }}" id="search-form">
-                <div class="input-group rounded mt-3">
-                    <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
-                           name="input-search">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary rounded-end-circle" type="submit">
-                            <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
-                            <span class="ml-2">Pesquisar</span>
-                        </button>
-                    </div>
+<div class="row search-header">
+    <div class="col-md-12">
+        <form method="POST" id="search-form">
+            <div class="input-group rounded mt-3">
+                <input type="text" class="form-control mt-0" placeholder="Digite sua pesquisa..." name="input-search">
+                <div class="input-group-append">
+                    <button class="btn btn-search" type="submit">
+                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                        <span class="ml-2">Pesquisar</span>
+                    </button>
                 </div>
-                <div class="btn-group d-flex" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
-                    <span class="filtro-label pt-4">Buscar por:</span>
-                    <div class="btn-group" role="group" aria-label="Botões de Filtro">
-                        <label class="button_filter btn btn-secondary m-3 rounded">
-                            <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
-                            ISBN
-                        </label>
-                        <label class="button_filter btn btn-secondary m-3 rounded">
-                            <input type="radio" name="filtro" id="filtroTitulo" value="filtroTitulo" autocomplete="off">
-                            Título
-                        </label>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- Tabela com Lista de Itens -->
-    <div class="row table-reserve mt-4 mb-4">
-        <div class="col">
-            <h2 class="text-center mb-4">Reservas Realizadas</h2>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Título</th>
-                        <th scope="col">ISBN</th>
-                        <th scope="col">Reserva</th>
-                        <th scope="col">Expiração</th>
-                        <th scope="col">Status</th>
-                        <th scope="col" class="text-center">Reserva</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% if reservations %}
-                    {% for reservation in reservations %}
-                    <tr>
-                        <td>{{ reservation.id }}</td>
-                        <td>{{ reservation.book.title }}</td>
-                        <td>{{ reservation.book.isbn }}</td>
-                        <td>{{ reservation.reservationDate }}</td>
-                        <td>{{ reservation.expirationDate }}</td>
-                        <td>{{ reservation.status }}</td>
-                        <td class="text-center">
-                            <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}"
-                               class="btn btn-secondary rounded">Detalhes</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    {% else %}
-                    <tr>
-                        <td colspan="5" class="text-center">Nenhuma reserva encontrada.</td>
-                    </tr>
-                    {% endif %}
-                    </tbody>
-                </table>
             </div>
+            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+                 data-toggle="buttons">
+                <span class="filtro-label pt-4">Filtrar por:</span>
+                <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
+                               checked> Todos
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
+                        Título
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
+                        Autor
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container card">
+    <!-- Tabela com Lista de Itens -->
+    <div class="row table-reserve mb-2">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Título</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Reserva</th>
+                    <th scope="col">Expiração</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" class="text-center">Reserva</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if reservations %}
+                {% for reservation in reservations %}
+                <tr>
+                    <td class="align-middle">{{ reservation.book.title }}</td>
+                    <td class="align-middle">{{ reservation.book.isbn }}</td>
+                    <td class="align-middle">{{ reservation.reservationDate }}</td>
+                    <td class="align-middle">{{ reservation.expirationDate }}</td>
+                    <td class="align-middle">{{ reservation.status }}</td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <a href="{{ url_for('reservation_detail', reservation_id=reservation.id) }}"
+                           class="btn btn-details">Detalhes</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">Nenhuma reserva encontrada.</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

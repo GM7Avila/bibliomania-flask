@@ -2,37 +2,43 @@
 
 {% block content %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endwith %}
+
 <div class="row search-header">
     <div class="col-md-12">
-
         <form method="POST" id="search-form">
             <div class="input-group rounded mt-3">
-                <input type="text" class="form-control rounded mt-0" placeholder="Digite sua pesquisa..."
-                       name="input-search">
+                <input type="text" class="form-control mt-0" placeholder="Digite sua pesquisa..." name="input-search">
                 <div class="input-group-append">
-                    <button class="btn btn-primary rounded-end-circle" type="submit">
+                    <button class="btn btn-search" type="submit">
                         <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
                         <span class="ml-2">Pesquisar</span>
                     </button>
                 </div>
             </div>
-
-            <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro">
-                <span class="filtro-label pt-4 w-100">Filtrar por:</span>
-                <div class="btn-group ml-4" role="group" aria-label="Botões de Filtro">
-                    <label class="btn btn-secondary m-3 w-100 rounded">
+            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+                 data-toggle="buttons">
+                <span class="filtro-label pt-4">Filtrar por:</span>
+                <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
                                checked> Todos
                     </label>
-                    <label class="btn btn-secondary m-3 w-100 rounded">
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
                         Título
                     </label>
-                    <label class="btn btn-secondary m-3 w-100 rounded">
-                        <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off">
-                        ISBN
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
                     </label>
-                    <label class="btn btn-secondary m-3 w-100 rounded">
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
                         Autor
                     </label>
@@ -43,58 +49,42 @@
 </div>
 
 <div class="acervo-container background container mb-5 pt-4 pb-1">
-
     {% for book in books %}
-
-    <div class="card mb-5">
+    <div class="card mb-2">
         <div class="card-body">
-            <div class="row">
+            <div class="row align-items-start justify-content-center">
                 <div class="imagem col-md-3">
                     <img src="{{ url_for('static', filename='img/book.jpg') }}">
                 </div>
-                <div class="book-info col-md-9 ">
-                    <table class="table table-striped">
-
-                        <h1 class="title-acervo mb-4">{{loop.index}}. {{ book.title }}</h1>
-                        <hr>
-                        <p class="mb-2">Autor {{ book.author }}
-                        <p/>
-                        <p class="mb-2">ISBN: {{ book.isbn }}
-                        <p/>
-                        <p class="mb-2">Editora: {{ book.publisher }}
-                        <p/>
-                        <p class="mb-2">Ano: {{ book.author }}
-                        <p/>
-
-                        <div class="row">
-                            <div class="col pl-0">
-                                <div class="d-flex justify-content-start mt-5">
-                                    {% if book.availableStock == 0 %}
-                                    <a href="#"
-                                       class="btn bg-unavailable disabled ml-0">
-                                        Indisponível
-                                    </a>
-                                    {% endif %}
-
-
-                                    {% if book.availableStock != 0 %}
-                                    <a href="{{ url_for('reservation_confirm', book_id=book.id) }}"
-                                       class="btn btn-confirm">Reservar</a>
-                                    {% endif %}
-
-                                </div>
-                            </div>
+                <div class="book-info col-md-8 h-100">
+                    <h1 class="title-acervo mb-3">{{ loop.index }}. {{ book.title }}</h1>
+                    <hr>
+                    <ul class="list-style mb-2">
+                        <li class="mb-3">Autor: {{ book.author }}</li>
+                        <li class="mb-3">ISBN: {{ book.isbn }}</li>
+                        <li class="mb-3">Editora: {{ book.publisher }}</li>
+                        <li class="mb-4">Ano: {{ book.year }}</li>
+                    </ul>
+                    <div class="row">
+                        <div class="col">
+                            {% if book.availableStock == 0 %}
+                            <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
+                            {% endif %}
+                            {% if book.availableStock != 0 %}
+                            <a href="{{ url_for('reservation_confirm', book_id=book.id) }}" class="btn btn-confirm">Reservar</a>
+                            {% endif %}
                         </div>
-                        <hr>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <hr class = "divider">
+
     </div>
-
-
     {% endfor %}
 </div>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}

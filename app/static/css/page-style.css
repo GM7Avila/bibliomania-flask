@@ -1,18 +1,36 @@
+:root {
+    --background-color: #D7DBE1;
+    --text-color: #475060;
+
+    --gray-0: #171717;
+    --gray-1: #262626;
+    --gray-2: #404040;
+    --gray-3: #525252;
+    --gray-4: #686868;
+
+    --light-positive-color: #748F73;
+    --light-neutral-color: #6183A5;
+    --light-negative-color: #C66969;
+
+    --stroke-confirm-color: #5d985d;
+    --stroke-neutral-color: #4479c5;
+    --stroke-neutral-color-hover: #355e9a;
+    --stroke-negative-color: #cc4a4a;
+}
+
 body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #d7dbe1;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 57%, rgba(219,223,228,1) 100%);
     display: flex;
     flex-direction: column;
-}
 
-.content {
-    width: 100vw;
-    height: 100%;
-    margin-top: 60px;
-    margin-bottom: 10px;
+    font-family: 'Lexend', sans-serif;
+    color: var(--text-color);
+
 }
 
 header{
@@ -24,15 +42,24 @@ header{
     background-color: #333;
     color: #fff;
     padding: 10px;
-    z-index: 1000; /* para fazer a navbar ultrapassar o conteúdo quando aberto */
+    z-index: 1000;
+    background: rgb(115,129,143);
+    background: linear-gradient(138deg, rgba(115,129,143,1) 0%, rgba(77,86,95,1) 24%, rgba(33,37,41,1) 100%);
+    padding: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-brand > img {
     border-radius: 30%;
 }
 
-.izinho > img {
-    border-radius: 100%;
+
+
+.content {
+    width: 100vw;
+    height: 100%;
+    margin-top: 35px;
+    margin-bottom: 20px;
 }
 
 .header-card {
@@ -44,49 +71,118 @@ header{
 
 .search-header{
     width: 100%;
-    background-color: #DBDBDC;
+    background-color: #e1e1e1;
     padding: 10px;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-left: 1px solid #c3c3c3;
     border-right: 1px solid #c3c3c3;
     boder-bottom: 1px solid #c3c3c3;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
 }
 
-.row{
-    margin: 0;
-    padding: 0;
+.form-control{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: rgb(217, 223, 228) 1.5px 1.5px 3px 0px inset, rgba(255, 255, 255, 0.5) -1.5px -1.5px 3px 0.5px inset !important;
+
+}
+
+.form-control:active, .form-control:focus, .form-control:active:focus{
+    box-shadow: rgb(217, 223, 228) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset !important;
+    border: none !important;
 }
 
 .custom-footer{
     background-color:#73818F;
-    color:white;
-    min-height: 100px;
+    color: #d5e1ed;
+    min-height: 4rem;
     padding: 10px;
     margin-top: auto;
 }
 
 .titulo {
-    color: white;
+    color: #cad0da;
     margin: 0;
+    font-size: 1.8rem;
 }
+
+.divider{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ *\
+                                  BOTÕES & FILTROS
+
+\* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ */
+
+
+/* botão do filtro */
+.btn-primary{
+    border: none !important;
+    background-color: var(--gray-4);
+    width: 7rem !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
+}
+.btn-primary.active {
+    background-color: var(--gray-1) !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
+}
+.btn-primary:hover{
+    background-color: var(--gray-4) !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
+}
+
 
 .btn-secondary{
-    width: 10rem !important;
+    background-color: var(--dropdown-dark-color) !important;
+    min-width: 10rem !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
 }
+.btn-secondary:hover{
+    background-color: var(--dropdown-dark-color-hover) !important;
+}
+
 
 .btn-confirm{
-    width: 12rem !important;
-    background-color: #2b7fe3; /* Azul em hexadecimal */
+    min-width: 12rem !important;
+    background-color: var(--stroke-neutral-color);
     color: white; /* Cor do texto */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    margin-left: 8px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-
 .btn-confirm:hover {
-    background-color: #52a4ff;
     color: white;
 }
 
+/* botões área de pesquisa */
+.btn-search {
+    border: none !important;
+    width: 10rem;
+    background-color: var(--stroke-neutral-color);
+    color: white;
+    border-top-right-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+}
+.btn-search:hover, .btn-search:focus {
+    border: none !important;
+    color: #efefef;
+}
+.btn-back{
+    background-color: #616c81;
+    color: #bcbcbc;
+}
+.btn-back:hover{
+    background-color: #7f899e;
+    color: #ffffff;
+}
+
+/* botão indisponível */
 .bg-unavailable {
     border: none;
     margin-left: 10px;
@@ -95,19 +191,33 @@ header{
     background-color: #7c7d83;
     color: #ececec;
     transition: background-color 0.3s ease, transform 0.3s ease; /* Efeito de transição */
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-
 .bg-unavailable:hover {
     background-color: #66676e; /* Cinza mais escuro */
     transform: translateY(-2px); /* Efeito de elevação */
 }
 
+/* TODO refatorar */
 .filter-button{
     background-color: #4D565F; /* Cor de fundo personalizada */
     color: white; /* Cor do texto personalizada */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .filter-button:hover {
     background-color: #57606a; /* Cor de fundo personalizada */
+}
+
+/* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ *\
+                                  ZERANDO BOOTSTRAP
+
+\* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ */
+
+.row{
+    margin: 0;
+    padding: 0;
+}
+
+.izinho > img {
+    border-radius: 100%;
 }

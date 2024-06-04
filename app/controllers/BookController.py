@@ -1,5 +1,6 @@
 from app import db
 from ..models.Book import Book
+from sqlalchemy import case
 
 class BookController:
 
@@ -26,6 +27,19 @@ class BookController:
     def getAllBooks():
         try:
             books = Book.query.all()
+            return books
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def getSortedBooksByAvailableStock():
+        try:
+            books = db.session.query(Book).order_by(
+                Book.isAvailable.desc(),
+                Book.availableStock.desc(),
+                Book.title
+            ).all()
+
             return books
         except Exception as e:
             return None
