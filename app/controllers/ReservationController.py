@@ -1,6 +1,8 @@
 from app import db
 from ..models.Reservation import Reservation
 from datetime import date, timedelta
+from sqlalchemy import or_
+
 class ReservationController:
 
     """
@@ -91,12 +93,38 @@ class ReservationController:
             db.session.rollback()
             return None
 
+    @staticmethod
+    def deleteReservation(reservation_id):
+        try:
+            reservation = Reservation.query.get(reservation_id)
+            if reservation:
+                db.session.delete(reservation)
+                db.session.commit()
+                return True
+            else:
+                return False
+        except Exception as e:
+            db.session.rollback()
+            return False
+
+    """
+    FUNÇÕES DE CONSULTA
+    """
     # busca UMA reserva pelo próprio id
     @staticmethod
     def getReservationById(reservation_id):
         try:
             reservation = Reservation.query.get(reservation_id)
             return reservation
+        except Exception as e:
+            return None
+
+    # busca todas as reservas
+    @staticmethod
+    def getAllReservations():
+        try:
+            reservations = Reservation.query.all()
+            return reservations
         except Exception as e:
             return None
 
@@ -107,6 +135,35 @@ class ReservationController:
             reservations = Reservation.query.filter_by(user_id=user_id).all()
             return reservations
         except Exception as e:
+            return None
+
+    # busca global em todos os campos de reservas
+    @staticmethod
+    def getGlobalSearch(user_id, query, books):
+        try:
+            book_ids = [book.id for book in books]
+            reservations = Reservation.query.filter_by(user_id=user_id).filter(Reservation.book_id.in_(book_ids)).all()
+
+            reservations = Reservation.query.filter(
+                Reservation.user_id == user_id,
+                or_(
+                    Reservation.book.has(isbn=query),
+                    Reservation.book.has(title=query),
+                )
+            ).all()
+            return reservations
+        except Exception as e:
+            return None
+
+    # recebe um ID de livro e busca todas as reservas do usuário que possuam esse livro
+    @staticmethod
+    def getUserReservationsByBooks(user_id, books):
+        try:
+            book_ids = [book.id for book in books]
+            reservations = Reservation.query.filter_by(user_id=user_id).filter(Reservation.book_id.in_(book_ids)).all()
+            return reservations
+        except Exception as e:
+            print(f"Erro ao buscar reservas por livros: {e}")
             return None
 
     # reservas pelo ISBN (geral)
@@ -136,11 +193,14 @@ class ReservationController:
             return reservations
         except Exception as e:
             return None
+
     # reservas pelo titulo do usuario
     @staticmethod
     def getUserReservationsByBookTitle(user_id, title):
         try:
+            print(f"CONTROLLER> Buscando reservas para o usuário {user_id} com o título: {title}")
             reservations = Reservation.query.filter_by(user_id=user_id).filter(Reservation.book.has(title=title)).all()
+            print(f"CONTROLLER> Buscando reservas para o usuário {user_id} com o título: {title}")
             return reservations
         except Exception as e:
             return None
@@ -154,7 +214,7 @@ class ReservationController:
         except Exception as e:
             return None
 
-    # busca todas as reservas de um usuário
+    # busca todas as reservas de um usuário por status
     @staticmethod
     def getUserReservationsByStatus(user_id, status):
         try:
@@ -163,28 +223,9 @@ class ReservationController:
         except Exception as e:
             return None
 
-    @staticmethod
-    def getAllReservations():
-        try:
-            reservations = Reservation.query.all()
-            return reservations
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def deleteReservation(reservation_id):
-        try:
-            reservation = Reservation.query.get(reservation_id)
-            if reservation:
-                db.session.delete(reservation)
-                db.session.commit()
-                return True
-            else:
-                return False
-        except Exception as e:
-            db.session.rollback()
-            return False
-
+    """
+    FUNÇÕES ADICIONAIS
+    """
     @staticmethod
     def has_active_reservations(user_id):
         active_reservations = Reservation.query.filter_by(user_id=user_id, status="Ativa").first()
