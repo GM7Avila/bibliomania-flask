@@ -44,19 +44,23 @@ class ReservationController:
             return False
 
     @staticmethod
-    def finishReservation(reservation):
-        reservation.status = "Finalizada"
+    def finishReservation(self, reservation):
         reservation.devolutionDate = date.today()
 
+        if reservation.expirationDate < date.today():
+            reservation.status = "Atrasada"
+            return False
+
+        reservation.status = "Finalizada"
+
+        # atualiza o status do livro
         book = reservation.book
         book.increaseAvailableStock()
+        book.updateIsAvailable()
 
         db.session.add(reservation)
         db.session.add(book)
         db.session.commit()
-
-        if reservation.expirationDate < date.today():
-            return False # gerar multa
 
         return True # sem multa
 
@@ -67,24 +71,29 @@ class ReservationController:
     @staticmethod
     def createReservation(user, book):
         try:
-            print("Tentei criar")
             if book.availableStock > 0:
+
+                # faz a reserva e decrementa o valor
                 reservation = Reservation(user.id, book.id)
                 book.decreaseAvailableStock()
 
+                # atualiza o status do livro
+                book.updateIsAvailable()
+
+                # salva no banco
                 db.session.add(reservation)
                 db.session.add(book)
-
                 db.session.commit()
+
                 return reservation
+
         except Exception as e:
-            print(e)
             db.session.rollback()
             return None
 
     # busca UMA reserva pelo próprio id
     @staticmethod
-    def findReservationById(reservation_id):
+    def getReservationById(reservation_id):
         try:
             reservation = Reservation.query.get(reservation_id)
             return reservation
@@ -180,3 +189,14 @@ class ReservationController:
     def has_active_reservations(user_id):
         active_reservations = Reservation.query.filter_by(user_id=user_id, status="Ativa").first()
         return bool(active_reservations)
+
+    @staticmethod
+    def can_renew(reservation):
+        try:
+            return (
+                reservation.status == "Ativa"
+                and reservation.expirationDate >= date.today()
+                and reservation.renewCount < 3
+            )
+        except Exception as e:
+            return False

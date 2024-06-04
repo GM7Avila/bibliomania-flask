@@ -123,39 +123,6 @@ def signup():
                        USER ROUTES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-@app.route("/acervo", methods=["POST", "GET"])
-@login_required
-def acervo():
-    books = Book.query.all()  # Consulta todos os livros na tabela 'book'
-    return render_template("acervo.html", books=books, active_page='acervo')
-
-@app.route("/acervo/<int:book_id>", methods=["POST", "GET"])
-@login_required
-@redirect_if_no_stock
-def reservation_confirm(book_id):
-    book = BookController.getBookById(book_id)
-    user_id = current_user.id
-    can_reserve = not ReservationController.has_active_reservations(user_id)
-    return render_template("reservation_confirm.html", book=book,can_reserve=can_reserve)
-
-@app.route("/reservar/<int:book_id>", methods=["POST"])
-@login_required
-@redirect_if_no_stock
-def reservar(book_id):
-    book = BookController.getBookById(book_id)
-    user_id = current_user.id
-
-    if ReservationController.has_active_reservations(user_id):
-        flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
-    else:
-        reservation = ReservationController.createReservation(current_user, book)
-        if reservation:
-            flash("Reserva realizada com sucesso!", "success")
-        else:
-            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
-    return redirect(url_for("acervo"))
-
-
 @app.route("/logout")
 @login_required
 def logout():
@@ -268,7 +235,7 @@ def reservation():
 @login_required
 def reservation_detail(reservation_id):
 
-    reservation = Reservation.query.get(reservation_id)
+    reservation = ReservationController.getReservationById(reservation_id)
 
     if reservation is None:
         return render_template(url_for("reservation"))
@@ -287,13 +254,46 @@ def reservation_detail(reservation_id):
                 flash("Não é possível renovar a reserva. A reserva está atrasada ou finalizada.", "error")
         return render_template("reservation-details.html", reservation=reservation)
 
-    can_renew = reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3
+    can_renew = ReservationController.can_renew(reservation)
+
     return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
                        BOOK ROUTES
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+@app.route("/acervo", methods=["POST", "GET"])
+@login_required
+def acervo():
+
+    books = BookController.getSortedBooksByAvailableStock()
+    return render_template("acervo.html", books=books, active_page='acervo')
+
+@app.route("/acervo/<int:book_id>", methods=["POST", "GET"])
+@login_required
+@redirect_if_no_stock
+def reservation_confirm(book_id):
+    book = BookController.getBookById(book_id)
+    user_id = current_user.id
+    can_reserve = not ReservationController.has_active_reservations(user_id)
+    return render_template("reservation-confirm.html", book=book,can_reserve=can_reserve)
+
+@app.route("/reservar/<int:book_id>", methods=["POST"])
+@login_required
+@redirect_if_no_stock
+def reservar(book_id):
+    book = BookController.getBookById(book_id)
+    user_id = current_user.id
+
+    if ReservationController.has_active_reservations(user_id):
+        flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
+    else:
+        reservation = ReservationController.createReservation(current_user, book)
+        if reservation:
+            flash("Reserva realizada com sucesso!", "success")
+        else:
+            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
+    return redirect(url_for("acervo"))
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
