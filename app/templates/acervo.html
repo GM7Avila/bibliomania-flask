@@ -23,10 +23,10 @@
                     </button>
                 </div>
             </div>
-            <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
                  data-toggle="buttons">
-                <span class="filtro-label pt-4">Filtrar por:</span>
-                <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
+                <span class="filtro-label pt-4">Filtro:</span>
+                <div class="btn-group ml-4 d-flex flex-wrap w-100 mb-3" role="group" aria-label="Botões de Filtro">
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
                                checked> Todos
@@ -42,6 +42,10 @@
                         <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
                         Autor
                     </label>
+                    <div class="form-check form-switch form-check-reverse ml-auto mt-4 mr-4 rounded">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                        <label class="form-check-label" for="flexSwitchCheckReverse">Apenas Disponíveis</label>
+                    </div>
                 </div>
             </div>
         </form>
@@ -79,11 +83,12 @@
             </div>
         </div>
 
-        <hr class = "divider">
+        <hr class="divider">
 
     </div>
     {% endfor %}
 </div>
+
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">

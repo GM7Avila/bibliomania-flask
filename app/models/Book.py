@@ -14,6 +14,7 @@ class Book(db.Model):
     totalStock = db.Column(db.Integer, nullable=False)
     availableStock = db.Column(db.Integer, nullable=False)
     isAvailable = db.Column(db.Boolean, nullable=False, default=True)
+    description = db.Column(db.String(10000), nullable=False, default=True)
 
     # reservation relation
     reservations = relationship("Reservation", back_populates="book")
@@ -29,6 +30,7 @@ class Book(db.Model):
         self.year = year
         self.totalStock = totalStock
         self.availableStock = availableStock
+        self.description = self.description
 
         if self.availableStock > 0:
             self.isAvailable = True
