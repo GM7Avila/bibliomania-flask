@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from app.services.reservation_service import reservation_service
 from app.services.book_service import book_service
 
-res_bp = Blueprint("reservation", __name__, template_folder="templates")
+res_bp = Blueprint("reservation", __name__, template_folder="../templates")
 
 @res_bp.route("/reservation", methods=["POST", "GET"])
 @login_required

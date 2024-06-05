@@ -6,7 +6,7 @@ from app.utils.validations import validate_email, validate_cpf
 from app.models.user import User
 from app.services.user_service import user_service
 
-auth_bp = Blueprint("auth", __name__, template_folder="templates")
+auth_bp = Blueprint("auth", __name__, template_folder="../templates")
 
 @auth_bp.route("/login", methods=["POST", "GET"])
 def login():
