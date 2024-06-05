@@ -1,5 +1,5 @@
 from app import db
-from ..models.Book import Book
+from app.models.book import Book
 
 
 class BookController:

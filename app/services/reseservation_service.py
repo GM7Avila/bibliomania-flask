@@ -1,5 +1,5 @@
 from app import db
-from ..models.Reservation import Reservation
+from app.models.reservation import Reservation
 from datetime import date, timedelta
 from sqlalchemy import or_
 
