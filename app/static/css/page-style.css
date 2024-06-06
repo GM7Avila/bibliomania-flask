@@ -13,9 +13,11 @@
     --light-negative-color: #C66969;
 
     --stroke-confirm-color: #5d985d;
-    --stroke-neutral-color: #4479c5;
-    --stroke-neutral-color-hover: #355e9a;
+    --stroke-neutral-color: #347be3;
     --stroke-negative-color: #cc4a4a;
+
+    --bright-neutral-color: #5a9bfd;
+
 }
 
 body {
@@ -157,6 +159,7 @@ header{
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .btn-confirm:hover {
+    background-color: var(--bright-neutral-color);
     color: white;
 }
 

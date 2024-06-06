@@ -24,7 +24,13 @@ class Reservation(db.Model):
     def __init__(self, user_id, book_id):
         self.reservationDate = date.today()
         self.expirationDate = date.today() + timedelta(days=7)
-        self.status = "Ativa"
+        self.status = "Ativa" # Ativa, Atrasada, Finalizada, Espera, Cancelada
+
+        # TODO - Cancelar
+        # if Ativa nao Cancela - deve finalizar
+        # quando pega o livro espera
+        # pode cancelar se tiver em espera
+
         self.user_id = user_id
         self.book_id = book_id
 

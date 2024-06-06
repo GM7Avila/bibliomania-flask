@@ -72,7 +72,7 @@
                             <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
                             {% endif %}
                             {% if book.availableStock != 0 %}
-                            <a href="{{ url_for('book.reservation_confirm', book_id=book.id) }}" class="btn btn-confirm">Reservar</a>
+                            <a href="{{ url_for('book.reservation_confirm', token=book.id) }}" class="btn btn-confirm">Reservar</a>
                             {% endif %}
                         </div>
                     </div>
