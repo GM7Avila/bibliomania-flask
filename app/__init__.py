@@ -1,17 +1,21 @@
-from datetime import timedelta
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-app = Flask(__name__)
-app.secret_key = "secret"
-app.permanent_session_lifetime = timedelta(minutes=60)
-login_manager = LoginManager(app)
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+db = SQLAlchemy()
+login_manager = LoginManager()
 
-# SQL ALCHEMY CONFIG
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/bibliomania'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.config.Config')
 
-db = SQLAlchemy(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+
+    with app.app_context():
+        from app.controllers import register_blueprints
+        register_blueprints(app)
+        db.create_all()
+
+    return app

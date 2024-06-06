@@ -1,11 +1,12 @@
 from app import db
-from ..models.User import User
+from app.models.user import User
 
-class UserController():
+class user_service():
 
     @staticmethod
-    def createUser(user):
+    def createUser(name, email, cpf, password, user_type, phonenumber):
         try:
+            user = User(name, email, cpf, password, user_type, phonenumber)
             db.session.add(user)
             db.session.commit()
             print(user)

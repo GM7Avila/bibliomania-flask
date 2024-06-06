@@ -1,9 +1,9 @@
 from app import db
-from ..models.Reservation import Reservation
+from app.models.reservation import Reservation
 from datetime import date, timedelta
 from sqlalchemy import or_
 
-class ReservationController:
+class reservation_service():
 
     """
     FUNÇÕES DE RENOVAÇÃO E DEVOLUÇÃO

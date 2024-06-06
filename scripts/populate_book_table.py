@@ -1,7 +1,7 @@
 from app import app, db
-from app.models.Book import Book
-from app.models.Genre import Genre
-from app.models.GenreBook import GenreBook
+from app.models.book import Book
+from app.models.genre import Genre
+from app.models.genre_book import GenreBook
 from sqlalchemy.exc import IntegrityError
 
 def populate_book_table():
