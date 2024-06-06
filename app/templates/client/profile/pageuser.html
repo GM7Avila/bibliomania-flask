@@ -9,7 +9,8 @@
         <div class="card-body border border-light">
             <div class="row">
                 <div class="col-md-3 text-center">
-                    <img id="userPhoto" src=".\static\img\17004.png" class="img-fluid rounded-circle"
+                    <img id="userPhoto" src="{{ url_for('static', filename='img/17004.png') }}"
+                         class="img-fluid rounded-circle"
                          alt="Foto do Usuário">
                 </div>
                 <div class="col-md-9">
@@ -46,7 +47,7 @@
             {% endif %}
             {% endwith %}
             <div class="text-center mt-4">
-                <a href="/profile/att" class="btn btn-success">Atualizar Informações</a>
+                <a href="{{ url_for('user.update_profile') }}" class="btn btn-success">Atualizar Informações</a>
             </div>
         </div>
     </div>

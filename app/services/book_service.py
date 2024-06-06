@@ -1,7 +1,7 @@
 from app import db
 from app.models.book import Book
 
-class book_service():
+class book_service:
 
     # =================== CREATE UPDATE AND DELETE ===================
     # CREATE

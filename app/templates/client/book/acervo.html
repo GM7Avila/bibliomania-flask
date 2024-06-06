@@ -18,7 +18,8 @@
                 <input type="text" class="form-control mt-0" placeholder="Digite sua pesquisa..." name="input-search">
                 <div class="input-group-append">
                     <button class="btn btn-search" type="submit">
-                        <img src=".\static\img\Vector.png" alt="Pesquisar" style="width: 20px; height: 20px;">
+                        <img src="{{ url_for('static', filename='img/Vector.png') }}" alt="Pesquisar"
+                             style="width: 20px; height: 20px;">
                         <span class="ml-2">Pesquisar</span>
                     </button>
                 </div>
@@ -71,7 +72,7 @@
                             <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
                             {% endif %}
                             {% if book.availableStock != 0 %}
-                            <a href="{{ url_for('reservation_confirm', book_id=book.id) }}" class="btn btn-confirm">Reservar</a>
+                            <a href="{{ url_for('book.reservation_confirm', book_id=book.id) }}" class="btn btn-confirm">Reservar</a>
                             {% endif %}
                         </div>
                     </div>
@@ -79,7 +80,7 @@
             </div>
         </div>
 
-        <hr class = "divider">
+        <hr class="divider">
 
     </div>
     {% endfor %}

@@ -1,13 +1,14 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, url_for, flash
 from flask_login import login_required, current_user
+from datetime import date
 
-# Services / Models
-from app.services.reservation_service import reservation_service
-from app.services.book_service import book_service
+# Services
+from app.services import reservation_service
+from app.services import book_service
 
-res_bp = Blueprint("reservation", __name__, template_folder="../templates")
+reservation_bp = Blueprint("reservation", __name__, template_folder="../templates")
 
-@res_bp.route("/reservation", methods=["POST", "GET"])
+@reservation_bp.route("/", methods=["POST", "GET"])
 @login_required
 def reservation():
 
@@ -62,14 +63,14 @@ def reservation():
         reservations = reservation_service.getReservationsByUser(user_id=current_user.id)
         return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
-@res_bp.route("/reservation/<int:reservation_id>", methods=["GET", "POST"])
+@reservation_bp.route("/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
 def reservation_detail(reservation_id):
 
     reservation = reservation_service.getReservationById(reservation_id)
 
     if reservation is None:
-        return render_template(url_for("reservation"))
+        return render_template(url_for("reservation.list"))
 
     reservation_service.updateStatus(reservation_id)
 
@@ -89,24 +90,3 @@ def reservation_detail(reservation_id):
 
     return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
 
-@res_bp.route("/acervo/<int:book_id>", methods=["POST", "GET"])
-def reservation_confirm(book_id):
-    book = book_service.findBookById(book_id)
-    user_id = current_user.id
-    can_reserve = not reservation_service.has_active_reservations(user_id)
-    return render_template("reservation-confirm.html", book=book,can_reserve=can_reserve)
-
-@res_bp.route("/reservar/<int:book_id>", methods=["POST"])
-def reservar(book_id):
-    book = book_service.findBookById(book_id)
-    user_id = current_user.id
-
-    if reservation_service.has_active_reservations(user_id):
-        flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
-    else:
-        reservation = reservation_service.createReservation(current_user, book)
-        if reservation:
-            flash("Reserva realizada com sucesso!", "success")
-        else:
-            flash("Não foi possível realizar a reserva. Tente novamente.", "danger")
-    return redirect(url_for("acervo"))

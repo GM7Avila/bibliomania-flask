@@ -1,15 +1,19 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, logout_user, login_required, current_user
-from app.utils.validations import validate_email, validate_cpf
+from flask import Blueprint, render_template, request
+from flask_login import login_user
 
-# Services / Models
-from app.models.user import User
+# Utils
+from app.utils.validations import *
+from app.utils.decorators import *
+
+# Services
 from app.services.user_service import user_service
 
-auth_bp = Blueprint("auth", __name__, template_folder="../templates")
+auth_bp = Blueprint("auth", __name__, template_folder="../templates/auth")
 
-@auth_bp.route("/login", methods=["POST", "GET"])
+@auth_bp.route("/sign-in", methods=["POST", "GET"])
+@redirect_if_logged_in
 def login():
+    print("entrei")
     if request.method == "POST":
         email = request.form["input_email"]
         password = request.form["input_password"]
@@ -18,16 +22,16 @@ def login():
 
         if found_user and found_user.check_password(password):
             login_user(found_user)
-            return redirect(url_for("acervo"))
+            return redirect(url_for("book.acervo"))
         else:
             flash("Email ou senha inválidos!", "error")
-            return redirect(url_for("login"))
+            return redirect(url_for("auth.login"))
 
     return render_template("sign-in-template.html")
 
-@auth_bp.route("/signup", methods=["POST", "GET"])
+@auth_bp.route("/sign-up", methods=["POST", "GET"])
+@redirect_if_logged_in
 def signup():
-
     if request.method == "POST":
         name = request.form["input_nome"]
         cpf = request.form["input_cpf"]
@@ -38,28 +42,27 @@ def signup():
 
         if not all([name, cpf, email, password, phonenumber]):
             flash("Por favor, preencha todos os campos.", "error")
-            return redirect(url_for("signup"))
+            return redirect(url_for("auth.signup"))
 
         if not validate_email(email):
             flash("E-mail inválido.", "error")
-            return redirect(url_for("signup"))
+            return redirect(url_for("auth.signup"))
 
         if not validate_cpf(cpf):
             flash("CPF inválido.", "error")
-            return redirect(url_for("signup"))
+            return redirect(url_for("auth.signup"))
 
         if user_service.findUserByEmail(email) or user_service.findUserByCPF(cpf):
             flash("Email ou cpf já cadastrado!", "error")
-            return redirect(url_for("signup"))
+            return redirect(url_for("auth.signup"))
 
-        user = User(name, email, cpf, password, user_type, phonenumber)
-        success = user_service.createUser(user)
+        success = user_service.createUser(name, email, cpf, password, user_type, phonenumber)
 
         if success:
             flash("Usuário cadastrado com sucesso!", "success")
-            return redirect(url_for("login"))
+            return redirect(url_for("auth.login"))
         else:
             flash("Erro ao cadastrar o usuário.", "error")
-            return redirect(url_for("signup"))
+            return redirect(url_for("auth.signup"))
 
     return render_template("sign-up-template.html")
