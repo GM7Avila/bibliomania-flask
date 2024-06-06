@@ -4,7 +4,7 @@ from flask_login import login_required, current_user, logout_user
 # Services
 from app.services.user_service import user_service
 
-user_bp = Blueprint("user", __name__, template_folder="../templates")
+user_bp = Blueprint("user", __name__, template_folder="../templates/client/profile")
 @user_bp.route("/logout")
 @login_required
 def logout():
@@ -80,4 +80,3 @@ def update_profile():
                 return redirect(url_for("user.profile"))
 
     return render_template("page-user-att.html", active_page='profile')
-

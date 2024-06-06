@@ -10,10 +10,13 @@ from app.services.user_service import user_service
 
 auth_bp = Blueprint("auth", __name__, template_folder="../templates/auth")
 
+@auth_bp.route("/")
+def index():
+    return redirect(url_for('auth.login'))
+
 @auth_bp.route("/sign-in", methods=["POST", "GET"])
 @redirect_if_logged_in
 def login():
-    print("entrei")
     if request.method == "POST":
         email = request.form["input_email"]
         password = request.form["input_password"]

@@ -9,7 +9,7 @@ from app.utils.decorators import *
 from app.services.book_service import book_service
 from app.services.reservation_service import reservation_service
 
-book_bp = Blueprint('book', __name__, template_folder="../templates")
+book_bp = Blueprint('book', __name__, template_folder="../templates/client/book")
 
 @book_bp.route("/", methods=["POST", "GET"])
 @login_required
