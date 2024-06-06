@@ -5,9 +5,9 @@ from sqlalchemy import case
 class BookController:
 
     @staticmethod
-    def createBook(isbn, title, author, publisher, year, totalStock, availableStock, description):
+    def createBook(isbn, title, author, publisher, year, totalStock, availableStock):
         try:
-            book = Book(isbn, title, author, publisher, year, totalStock, availableStock, description)
+            book = Book(isbn, title, author, publisher, year, totalStock, availableStock)
             db.session.add(book)
             db.session.commit()
             return book
@@ -27,14 +27,6 @@ class BookController:
     def getAllBooks():
         try:
             books = Book.query.all()
-            return books
-        except Exception as e:
-            return None
-
-    @staticmethod
-    def getBookByDescription(book_description=None):
-        try:
-            books = Book.query.get(book_description)
             return books
         except Exception as e:
             return None
@@ -75,8 +67,7 @@ class BookController:
                 book.totalStock = totalStock
             if availableStock is not None:
                 book.availableStock = availableStock
-            if description is not None:
-                book.description = description
+
 
             db.session.commit()
             return book

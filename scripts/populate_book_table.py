@@ -34,7 +34,7 @@ def populate_book_table():
         {"isbn": "5780439785969", "title": "Harry Potter and the Order of the Phoenix", "author": "J. K. Rowling",
          "publisher": "Scholastic", "year": "2007", "totalStock": 20, "availableStock": 20, "genre_type": "Fantasia"},
         {"isbn": "6780545139700", "title": "Harry Potter and the Half-Blood Prince", "author": "J. K. Rowling",
-         "publisher": "Scholastic", "year": "2009", "totalStock": 18, "availableStock": 18, "genre_type": "Fantasia"}
+         "publisher": "Scholastic", "year": "2009", "totalStock": 18, "availableStock": 18, "genre_type": "Fantasia"},
     ]
 
     for book_data in books_data:
