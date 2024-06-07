@@ -6,7 +6,7 @@ from datetime import date
 from app.services import reservation_service
 from app.services import book_service
 
-reservation_bp = Blueprint("reservation", __name__, template_folder="../templates/client/reservation")
+reservation_bp = Blueprint("reservation", __name__, template_folder="../templates")
 
 @reservation_bp.route("/", methods=["POST", "GET"])
 @login_required

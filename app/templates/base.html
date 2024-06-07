@@ -18,20 +18,18 @@
 <header>
     <!-- Navbar - bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('book.acervo') }}"><img src="{{ url_for('static', filename='img/b.png') }}" width="35" height="35"
-                                              class="d-inline-block align-top" alt=""></a>
+        <a class="navbar-brand" href="{{ url_for('book.acervo') }}"><img
+                src="{{ url_for('static', filename='img/b.png') }}" width="35" height="35"
+                class="d-inline-block align-top" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav mx-auto">
-                <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}"
-                   href="{{ url_for('user.profile') }}">Perfil<span
-                        class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link m-2{% if active_page == 'acervo' %} active{% endif %}"
+                <a class="nav-item nav-link md-auto m-2{% if active_page == 'acervo' %} active{% endif %}"
                    href="{{ url_for('book.acervo') }}">Acervo<span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link m-2{% if active_page == 'reservation' %} active{% endif %}"
+                <a class="nav-item nav-link md-auto m-2{% if active_page == 'reservation' %} active{% endif %}"
                    href="{{ url_for('reservation.reservation') }}">Reservas<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link d-lg-none m-2" href="#">FAQ</a>
                 <a class="nav-item nav-link d-lg-none m-2" href="{{ url_for('user.logout') }}">Sair</a>
@@ -42,8 +40,13 @@
                     aria-haspopup="true" aria-expanded="false">
                 Olá, {{ current_user.name.split(" ")[0] }}
             </button>
-
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}"
+                   href="{{ url_for('user.profile') }}">
+                    <img
+                        src="{{ url_for('static', filename='img/17004.png') }}" width="20" height="20"
+                        class="d-inline-block align-top mr-2" alt="">Perfil<span
+                        class="sr-only"></span></a>
                 <a class="dropdown-item d-flex align-items-center" href="#"><img
                         src="{{ url_for('static', filename='img/ii.png') }}" width="20" height="20"
                         class="d-inline-block align-top mr-2" alt="">FAQ</a>

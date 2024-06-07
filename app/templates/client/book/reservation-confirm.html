@@ -25,22 +25,30 @@
     <div class="card mb-2">
         <div class="card-body">
             <div class="row align-items-start justify-content-center">
-                <div class="imagem col-md-3">
+                <div class="imagem-description col-md-3 pt-5">
                     <img src="{{ url_for('static', filename='img/book.jpg') }}">
                 </div>
                 <div class="book-info col-md-8 h-100">
                     <h1 class="title-acervo mb-3">{{ book.id }}. {{ book.title }}</h1>
-                    <hr clas="divider">
+                    <hr class="divider">
                     <ul class="list-style mb-2">
-                        <li class="mb-3 mt-4">Autor: {{ book.author }}</li>
-                        <li class="mb-3">ISBN: {{ book.isbn }}</li>
-                        <li class="mb-3">Editora: {{ book.publisher }}</li>
-                        <li class="mb-4">Ano: {{ book.year }}</li>
+                        <li class="text-description mb-3 mt-4" style="text-align: justify;">
+                            <strong>Descrição:</strong> {{ book.description }}
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endwith %}
 </div>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
 {% endblock %}

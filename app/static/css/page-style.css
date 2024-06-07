@@ -212,6 +212,7 @@ header{
                                   CUSTOM ALERTS
 
 \* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ */
+/*Estilo flash messages*/
 .custom-alert {
     margin-bottom: 20px;
     border-radius: 10px;
@@ -233,6 +234,19 @@ header{
     border-color: #f5c6cb;
     color: #721c24;
 }
+
+/* Estilo padrão do botão secondary/filtros */
+.btn-outline-secondary-status {
+    width: 10rem !important;
+}
+
+:not(.btn-outline-secondary-status:focus) + .btn-outline-secondary-status {
+    color: black;
+    background-color: #ffff;
+    border-color: black;
+}
+
+
 
 /* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ *\
                                   ZERANDO BOOTSTRAP
