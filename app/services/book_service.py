@@ -147,4 +147,3 @@ class book_service:
             return book
         except Exception as e:
             return None
-
