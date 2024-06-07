@@ -13,6 +13,7 @@ class Book(db.Model):
     year = db.Column("year", db.String(5), nullable=False)
     totalStock = db.Column(db.Integer, nullable=False)
     availableStock = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text, nullable=True)
     isAvailable = db.Column(db.Boolean, nullable=False, default=True)
 
     # reservation relation
@@ -21,7 +22,7 @@ class Book(db.Model):
     # genre book relation
     genreBook = relationship("GenreBook", back_populates="book")
 
-    def __init__(self, isbn, title, author, publisher, year, totalStock, availableStock):
+    def __init__(self, isbn, title, author, publisher, year, totalStock, availableStock, description):
         self.isbn = isbn
         self.title = title
         self.author = author
@@ -29,6 +30,7 @@ class Book(db.Model):
         self.year = year
         self.totalStock = totalStock
         self.availableStock = availableStock
+        self.description = description
 
         if self.availableStock > 0:
             self.isAvailable = True
