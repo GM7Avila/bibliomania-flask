@@ -36,6 +36,7 @@ def reservation():
 
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
+            print(reservations)
 
         elif filtro_selecionado == "filtroTitulo":
             books = book_service.getBooksBySimilarTitle(search)
