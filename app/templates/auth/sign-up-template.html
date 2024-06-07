@@ -1,4 +1,31 @@
-<div class="container-fluid h-100 ">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdb-ui-kit@6.4.0/dist/css/mdb.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sign-style.css') }}">
+</head>
+<body class="bg-blue">
+    <div class="row">
+        <div class="text-black position-relative">
+            <div class="position-absolute w-100" style="top: 10px;">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="container">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show text-center mx-auto custom-alert" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="container-fluid h-100 ">
                 <div class="row h-100 content-wrapper ">
                     <div class="col-lg-4 text-center">
                         <img src="{{ url_for('static', filename='img/booktable.jpg') }}" class="img-side" alt="Left Image">
@@ -35,7 +62,7 @@
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-custom btn-lg ps-5 pe-5 mt-3 mb-3">Cadastrar</button>
                                 </div>
-                                <h5 class="text-center">Se você já foi cadastrado, faça <a href="{{ url_for('login') }}">login</a>.</h5>
+                                <h5 class="text-center">Se você já foi cadastrado, faça <a href="{{ url_for('auth.login') }}">login</a>.</h5>
                             </form>
                         </div>
                     </div>
