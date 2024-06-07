@@ -4,9 +4,13 @@ from app.models.user import User
 class user_service():
 
     @staticmethod
-    def createUser(name, email, cpf, password, user_type, phonenumber):
+    def createUser(name, email, cpf, password, phonenumber):
         try:
-            user = User(name, email, cpf, password, user_type, phonenumber)
+
+            # Só permite criação de clientes
+            isAdmin = False
+
+            user = User(name, email, cpf, password, isAdmin, phonenumber)
             db.session.add(user)
             db.session.commit()
             print(user)

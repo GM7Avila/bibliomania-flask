@@ -15,18 +15,18 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), nullable=False, unique=True)
     cpf = db.Column(db.String(12), nullable=False, unique=True)
     password_hash = db.Column(db.Text, nullable=False)
-    user_type = db.Column(db.String(100), nullable=False)
+    isAdmin = db.Column(db.Boolean, nullable=False, default=False)
     phonenumber = db.Column(db.String(100))
 
     # reservation relation
     reservations = relationship("Reservation", back_populates="user")
 
-    def __init__(self, name, email, cpf, password, user_type, phonenumber):
+    def __init__(self, name, email, cpf, password, isAdmin, phonenumber):
         self.name = name
         self.email = email
         self.cpf = cpf
         self.set_password(password)
-        self.user_type = user_type
+        self.isAdmin = isAdmin
         self.phonenumber = phonenumber
 
     def set_password(self, password):

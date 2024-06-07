@@ -60,8 +60,8 @@
 }
 
 .imagem-description{
-    height: 450px;
-    max-width: 400px;
+    height: 100%;
+    max-width: 100%;
 }
 
 .imagem-description > img{

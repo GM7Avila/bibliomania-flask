@@ -2,11 +2,25 @@ from app import create_app, db
 from app.models.book import Book
 from app.models.genre import Genre
 from app.models.genre_book import GenreBook
+from app.models.user import User
 from sqlalchemy.exc import IntegrityError
 
 app = create_app()
 
 def initializer_book_context():
+
+    admin = User(
+        name="Admin",
+        email="admin@bibliomania",
+        cpf=11111111111,
+        password="admin",
+        isAdmin = True,
+        phonenumber = "11111111111"
+    )
+
+    db.session.add(admin)
+    db.session.commit()
+
     genres_data = [
         {"type": "Fantasia"},
         {"type": "Aventura"},

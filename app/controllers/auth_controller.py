@@ -41,7 +41,6 @@ def signup():
         email = request.form["input_email"]
         password = request.form["input_password"]
         phonenumber = request.form["input_telefone"]
-        user_type = "client"
 
         if not all([name, cpf, email, password, phonenumber]):
             flash("Por favor, preencha todos os campos.", "error")
@@ -59,7 +58,7 @@ def signup():
             flash("Email ou cpf já cadastrado!", "error")
             return redirect(url_for("auth.signup"))
 
-        success = user_service.createUser(name, email, cpf, password, user_type, phonenumber)
+        success = user_service.createUser(name, email, cpf, password, phonenumber)
 
         if success:
             flash("Usuário cadastrado com sucesso!", "success")
