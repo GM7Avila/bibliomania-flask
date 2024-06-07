@@ -93,8 +93,8 @@
                     <td class="align-middle">{{ reservation.expirationDate }}</td>
                     <td class="align-middle">{{ reservation.status }}</td>
                     <td class="d-flex justify-content-center align-items-center">
-                        <a href="{{ url_for('reservation.reservation_detail', reservation_id=reservation.id) }}"
-                           class="btn btn-details">Detalhes</a>
+                        <a href="{{ url_for('reservation.reservation_detail', token=reservation.id) }}"
+                           class="btn btn-details">Detalhes{{token}}</a>
                     </td>
                 </tr>
                 {% endfor %}

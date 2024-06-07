@@ -1,13 +1,15 @@
 from itsdangerous import URLSafeTimedSerializer
 from app.config import Config
-def enconde_book_id(book_id):
+
+def encode_id(book_id):
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
     return serializer.dumps(book_id)
 
-def decode_book_id(token):
+def decode_id(token):
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
     try:
-        book_id = serializer.loads(token)
+        book_id = serializer.loads(token, max_age=3600)  # max_age para expiração do token
         return book_id
-    except:
+    except Exception as e:
+        print(f"Erro ao decodificar book_id: {e}")
         return None

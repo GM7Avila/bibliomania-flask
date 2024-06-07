@@ -1,8 +1,9 @@
-from app import app, db
+from app import create_app, db
 from app.models.book import Book
 from app.models.genre import Genre
-from app.models.genre_book import GenreBook
 from sqlalchemy.exc import IntegrityError
+
+app = create_app()
 
 def populate_book_table():
     genres_data = [
@@ -34,7 +35,7 @@ def populate_book_table():
         {"isbn": "5780439785969", "title": "Harry Potter and the Order of the Phoenix", "author": "J. K. Rowling",
          "publisher": "Scholastic", "year": "2007", "totalStock": 20, "availableStock": 20, "genre_type": "Fantasia"},
         {"isbn": "6780545139700", "title": "Harry Potter and the Half-Blood Prince", "author": "J. K. Rowling",
-         "publisher": "Scholastic", "year": "2009", "totalStock": 18, "availableStock": 18, "genre_type": "Fantasia"}
+         "publisher": "Scholastic", "year": "2009", "totalStock": 18, "availableStock": 18, "genre_type": "Fantasia"},
     ]
 
     for book_data in books_data:
@@ -49,6 +50,7 @@ def populate_book_table():
                 db.session.rollback()
 
     db.session.commit()
+
 
 if __name__ == "__main__":
     with app.app_context():
