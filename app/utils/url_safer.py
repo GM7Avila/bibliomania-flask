@@ -1,9 +1,9 @@
 from itsdangerous import URLSafeTimedSerializer
 from app.config import Config
 
-def encode_id(book_id):
+def encode_id(id):
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
-    return serializer.dumps(book_id)
+    return serializer.dumps(id)
 
 def decode_id(token):
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
