@@ -1,6 +1,10 @@
-from flask import Blueprint, render_template, request, url_for, flash
+from flask import Blueprint, render_template,redirect, request, url_for, flash
 from flask_login import login_required, current_user
 from datetime import date
+
+# Utils
+from app.utils.url_safer import *
+from app.utils.mapper import *
 
 # Services
 from app.services import reservation_service
@@ -11,71 +15,60 @@ reservation_bp = Blueprint("reservation", __name__, template_folder="../template
 @reservation_bp.route("/", methods=["POST", "GET"])
 @login_required
 def reservation():
+    reservations = []
+    temp_reservations = []
 
     if request.method == "POST":
         search = request.form.get("input-search")
-        reservations = []
 
         filtro_selecionado = request.form.get("filtro")
 
         filtro_status = request.form.get("filtro-status")
 
-        print(f"Filtro selecionado: {filtro_selecionado}")
-        print(f"Texto de busca: {search}")
-
-
         if filtro_status == "Ativa":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         if filtro_status == "Finalizada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         if filtro_status == "Atrasada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
-            print("1. ISBN selecionado")
-            print("- Buscando por: " + search + "...")
-            print(reservations)
-
 
         elif filtro_selecionado == "filtroTitulo":
             books = book_service.getBooksBySimilarTitle(search)
             if books:
                 reservations = reservation_service.getUserReservationsByBooks(user_id=current_user.id, books=books)
-                print("1. TITULO selecionado")
-                print("- Buscando por: " + search + "...")
-                print(reservations)
-            else:
-                print("Nenhum livro encontrado com o título: " + search)
 
         elif filtro_selecionado == "filtroTodos":
-            print("1. ALL selecionado")
-            print("- Buscando por: " + search + "...")
             if search:
-                books = book_service.getBooksBySimilarTitle(search)
-                reservations = reservation_service.getGlobalSearch(user_id=current_user.id, query=search, books=books)
-                print(reservations)
-
+                reservations = reservation_service.getGlobalSearch(user_id=current_user.id, query=search)
             else:
                 reservations = reservation_service.getReservationsByUser(user_id=current_user.id)
-                print(reservations)
-
-        return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
     if request.method == "GET":
         reservations = reservation_service.getReservationsByUser(user_id=current_user.id)
-        return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
 
-@reservation_bp.route("/<int:reservation_id>", methods=["GET", "POST"])
+    for reservation in reservations:
+        temp_reservations.append(reservationMapper(reservation))
+
+    return render_template("reservation-list.html", active_page='reservation', reservations=temp_reservations)
+
+
+@reservation_bp.route("/r=<token>", methods=["GET", "POST"])
 @login_required
-def reservation_detail(reservation_id):
+def reservation_detail(token):
+
+    reservation_id = decode_id(token)
+
+    print(reservation_id)
 
     reservation = reservation_service.getReservationById(reservation_id)
 
     if reservation is None:
-        return render_template(url_for("reservation.list"))
+        return redirect(url_for("reservation.reservation"))
 
     reservation_service.updateStatus(reservation_id)
 

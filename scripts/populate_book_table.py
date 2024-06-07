@@ -1,7 +1,6 @@
 from app import create_app, db
 from app.models.book import Book
 from app.models.genre import Genre
-from app.models.genre_book import GenreBook
 from sqlalchemy.exc import IntegrityError
 
 app = create_app()

@@ -6,7 +6,7 @@ class Reservation(db.Model):
 
     __tablename__ = "reservation"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column("id", db.Integer, primary_key=True)
     reservationDate = db.Column(db.Date, nullable=False)
     expirationDate = db.Column(db.Date, nullable=False)
     devolutionDate = db.Column(db.Date)
@@ -24,7 +24,7 @@ class Reservation(db.Model):
     def __init__(self, user_id, book_id):
         self.reservationDate = date.today()
         self.expirationDate = date.today() + timedelta(days=7)
-        self.status = "Ativa"
+        self.status = "Ativa" # Ativa, Atrasada, Finalizada, Espera, Cancelada
         self.user_id = user_id
         self.book_id = book_id
 

@@ -139,11 +139,8 @@ class reservation_service():
 
     # busca global em todos os campos de reservas
     @staticmethod
-    def getGlobalSearch(user_id, query, books):
+    def getGlobalSearch(user_id, query):
         try:
-            book_ids = [book.id for book in books]
-            reservations = Reservation.query.filter_by(user_id=user_id).filter(Reservation.book_id.in_(book_ids)).all()
-
             reservations = Reservation.query.filter(
                 Reservation.user_id == user_id,
                 or_(

@@ -14,7 +14,7 @@
                 {% if not can_reserve or book.availableStock == 0 %}
                 <button type="submit" class="btn btn-confirm" disabled>Confirmar</button>
                 {% else %}
-                <button type="submit" class="btn btn-confirm">Confirmar Reserva</button>
+                <button type="submit" class="btn btn-confirm">Confirmar</button>
                 {% endif %}
             </form>
         </div>
@@ -29,8 +29,10 @@
                     <img src="{{ url_for('static', filename='img/book.jpg') }}">
                 </div>
                 <div class="book-info col-md-8 h-100">
-                    <h1 class="title-acervo mb-3">{{ book.id }}. {{ book.title }}</h1>
-                    <hr class="divider">
+
+                    <h1 class="title-acervo mb-3">{{ book.title }}</h1>
+                    <hr clas="divider">
+
                     <ul class="list-style mb-2">
                         <li class="text-description mb-3 mt-4" style="text-align: justify;">
                             <strong>Descrição:</strong> {{ book.description }}
