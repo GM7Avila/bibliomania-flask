@@ -25,18 +25,15 @@ def reservation():
 
         filtro_status = request.form.get("filtro-status")
 
-        print(f"Filtro selecionado: {filtro_selecionado}")
-        print(f"Texto de busca: {search}")
-
         if filtro_status == "Ativa":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         if filtro_status == "Finalizada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         if filtro_status == "Atrasada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
 
@@ -47,9 +44,7 @@ def reservation():
 
         elif filtro_selecionado == "filtroTodos":
             if search:
-                books = book_service.getBooksBySimilarTitle(search)
                 reservations = reservation_service.getGlobalSearch(user_id=current_user.id, query=search)
-
             else:
                 reservations = reservation_service.getReservationsByUser(user_id=current_user.id)
 
@@ -59,10 +54,10 @@ def reservation():
     for reservation in reservations:
         temp_reservations.append(reservationMapper(reservation))
 
-    return render_template("reservation-list.html", active_page='reservation', reservations= temp_reservations)
+    return render_template("reservation-list.html", active_page='reservation', reservations=temp_reservations)
 
 
-@reservation_bp.route("/reserva=<token>", methods=["GET", "POST"])
+@reservation_bp.route("/r=<token>", methods=["GET", "POST"])
 @login_required
 def reservation_detail(token):
 
