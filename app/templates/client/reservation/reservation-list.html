@@ -64,13 +64,13 @@
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
                     </label>
-                    <select id="filter-select" name="filtro-seletor"
+                    <select id="filter-select" name="filtro-status"
                             class="form-select btn btn-outline-secondary-status ml-auto mt-4 mb-3 mr-4 w-100 rounded"
                             aria-label=".form-select filter-select">
                         <option selected disabled>Status</option>
-                        <option class="text-left" value="1">Ativa</option>
-                        <option class="text-left" value="2">Inadimplente</option>
-                        <option class="text-left" value="3">Devolvido</option>
+                        <option class="text-left" value="Ativa">Ativa</option>
+                        <option class="text-left" value="Finalizada">Finalizada</option>
+                        <option class="text-left" value="Atrasada">Atrasada</option>
                     </select>
                 </div>
             </div>
@@ -117,5 +117,6 @@
         </div>
     </div>
 </div>
+<script src="{{ url_for('static', filename='js/filter_submit.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}

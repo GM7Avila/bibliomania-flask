@@ -6,7 +6,7 @@ from datetime import date
 from app.services import reservation_service
 from app.services import book_service
 
-reservation_bp = Blueprint("reservation", __name__, template_folder="../templates")
+reservation_bp = Blueprint("reservation", __name__, template_folder="../templates/client/reservation")
 
 @reservation_bp.route("/", methods=["POST", "GET"])
 @login_required
@@ -18,16 +18,21 @@ def reservation():
 
         filtro_selecionado = request.form.get("filtro")
 
+        filtro_status = request.form.get("filtro-status")
+
         print(f"Filtro selecionado: {filtro_selecionado}")
         print(f"Texto de busca: {search}")
 
-        if filtro_selecionado == "filtroStatus":
-            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=search)
-            print("1. STATUS selecionado")
-            print("- Buscando por: " + search + "...")
-            print(reservations)
 
-
+        if filtro_status == "Ativa":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+        if filtro_status == "Finalizada":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+        if filtro_status == "Atrasada":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
             print("1. ISBN selecionado")
