@@ -56,11 +56,9 @@
         <form action="{{ url_for('user.update_profile') }}" method="post">
             <p>Nome: </p>
             <p><input type="text" class="form-control" name="input_nome" value="{{current_user.name}}"/></p>
-
             <p>Telefone (com DDD): </p>
             <p><input type="text" class="form-control" name="input_telefone" value="{{current_user.phonenumber}}"
                       pattern="[0-9]{11}" title="Informe um telefone válido (11 dígitos)"/></p>
-
             <input type="submit" class="btn btn-success" value="Atualizar" name="action"/>
             <input type="submit" class="btn btn-danger" value="Excluir Conta" name="action"/>
 
