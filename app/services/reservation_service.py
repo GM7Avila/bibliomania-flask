@@ -205,7 +205,7 @@ class reservation_service():
         except Exception as e:
             return None
 
-    # busca todsas as reservas de um status
+    # busca todas as reservas de um status
     @staticmethod
     def getReservationsByStatus(status):
         try:

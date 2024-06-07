@@ -18,16 +18,21 @@ def reservation():
 
         filtro_selecionado = request.form.get("filtro")
 
+        filtro_status = request.form.get("filtro-status")
+
         print(f"Filtro selecionado: {filtro_selecionado}")
         print(f"Texto de busca: {search}")
 
-        if filtro_selecionado == "filtroStatus":
-            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=search)
-            print("1. STATUS selecionado")
-            print("- Buscando por: " + search + "...")
-            print(reservations)
 
-
+        if filtro_status == "Ativa":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+        if filtro_status == "Finalizada":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
+        if filtro_status == "Atrasada":
+            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
+            return render_template("reservation-list.html", active_page='reservation', reservations=reservations)
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getUserReservationsByBookISBN(user_id=current_user.id, isbn=search)
             print("1. ISBN selecionado")
