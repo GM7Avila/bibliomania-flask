@@ -14,12 +14,43 @@
         </div>
         <div class="col">
             <div class="d-flex justify-content-end">
-                <a class="btn btn-confirm botao2" href="{{ url_for('user.change_password') }}">Alterar Senha</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-confirm" data-toggle="modal" data-target="#exampleModal">
+                    Alterar Senha
+                </button>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alterar Senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="change-password-form" action="{{ url_for('user.change_password') }}" method="post">
+                <div class="modal-body">
+                    <p>Senha Atual: </p>
+                    <p><input type="password" class="form-control" name="current_password" required/></p>
 
+                    <p>Nova Senha: </p>
+                    <p><input type="password" class="form-control" name="new_password" required/></p>
+
+                    <p>Confirmar Nova Senha: </p>
+                    <p><input type="password" class="form-control" name="confirm_password" required/></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-back" data-dismiss="modal">Fechar</button>
+                    <input type="submit" id="confirm-password" class="btn btn-success" value="Alterar Senha"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="card">
     <div class="card-body border border-light">
         <form action="{{ url_for('user.update_profile') }}" method="post">
@@ -36,6 +67,14 @@
         </form>
     </div>
 </div>
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-danger alert-{{ category }} mt-2">
+    <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 </div>
 {% endblock %}

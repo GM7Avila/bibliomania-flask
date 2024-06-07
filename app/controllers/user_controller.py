@@ -43,7 +43,7 @@ def change_password():
 
         return redirect(url_for("user.profile"))
 
-    return render_template("change-password.html", active_page='profile')
+    return render_template("page-user-att.html", active_page='profile')
 
 @user_bp.route("/editar", methods=["POST", "GET"])
 @login_required

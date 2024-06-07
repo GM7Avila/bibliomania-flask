@@ -38,8 +38,6 @@ def reservation():
             print("1. ISBN selecionado")
             print("- Buscando por: " + search + "...")
             print(reservations)
-
-
         elif filtro_selecionado == "filtroTitulo":
             books = book_service.getBooksBySimilarTitle(search)
             if books:
