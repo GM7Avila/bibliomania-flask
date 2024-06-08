@@ -22,16 +22,9 @@ def reservation():
         search = request.form.get("input-search")
 
         filtro_selecionado = request.form.get("filtro")
-
         filtro_status = request.form.get("filtro-status")
 
-        if filtro_status == "Ativa":
-            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-
-        elif filtro_status == "Finalizada":
-            reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
-
-        elif filtro_status == "Atrasada":
+        if filtro_status in ["Ativa", "Finalizada", "Atrasada"]:
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
 
         elif filtro_selecionado == "filtroISBN":
