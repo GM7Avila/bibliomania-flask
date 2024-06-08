@@ -11,7 +11,7 @@ def initializer_book_context():
 
     admin = User(
         name="Admin",
-        email="admin@bibliomania",
+        email="admin@bibliomania.com",
         cpf=11111111111,
         password="admin",
         isAdmin = True,
