@@ -28,10 +28,10 @@ def reservation():
         if filtro_status == "Ativa":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
 
-        if filtro_status == "Finalizada":
+        elif filtro_status == "Finalizada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
 
-        if filtro_status == "Atrasada":
+        elif filtro_status == "Atrasada":
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
 
         elif filtro_selecionado == "filtroISBN":
