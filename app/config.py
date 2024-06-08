@@ -6,7 +6,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     ADMIN_ROUTES = ['/admin/acervo/', '/admin/perfil/', '/admin/reservas/']
-
     USER_ROUTES = ['/acervo/', '/perfil/', '/reservas/']
-
-    PUBLIC_ROUTES = ['/sign-in', '/sign-up', '/']
+    PUBLIC_ROUTES = ['/static/', '/css/', '/js/', '/images/']
+    PUBLIC_AUTH_ROUTES = ['/sign-in', '/sign-up']
