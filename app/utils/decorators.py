@@ -28,3 +28,13 @@ def redirect_if_no_stock(f):
             return redirect(url_for('book.list_books'))
         return f(*args, **kwargs)
     return decorated_function
+
+
+# def admin_only(f):
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         if not current_user.isAdmin:
+#             flash("Apenas administradores podem acessar esta página.", "danger")
+#             return redirect(url_for('book.acervo'))
+#         return f(*args, **kwargs)
+#     return decorated_function

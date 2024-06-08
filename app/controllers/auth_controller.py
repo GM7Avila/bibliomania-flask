@@ -25,7 +25,12 @@ def login():
 
         if found_user and found_user.check_password(password):
             login_user(found_user)
+
+            if found_user.isAdmin:
+                return redirect(url_for("admin_book.acervo"))
+
             return redirect(url_for("book.acervo"))
+
         else:
             flash("Email ou senha inválidos!", "error")
             return redirect(url_for("auth.login"))
