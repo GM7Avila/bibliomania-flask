@@ -9,3 +9,4 @@ class Config:
 
     USER_ROUTES = ['/acervo/', '/perfil/', '/reservas/']
 
+    PUBLIC_ROUTES = ['/sign-in', '/sign-up', '/']

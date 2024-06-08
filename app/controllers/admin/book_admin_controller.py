@@ -11,7 +11,6 @@ admin_book_bp = Blueprint('admin_book', __name__, template_folder="../../templat
 
 # Retorna todos os livros com o id hasheado
 @admin_book_bp.route("/", methods=["POST", "GET"])
-@admin_only
 def acervo():
     books = book_service.getSortedBooksByAvailableStock()
     temp_books = []
