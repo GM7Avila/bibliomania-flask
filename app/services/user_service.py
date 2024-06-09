@@ -1,6 +1,7 @@
 from app import db
 from app.models.user import User
 
+
 class user_service():
 
     @staticmethod
@@ -98,3 +99,12 @@ class user_service():
             return user
         except Exception as e:
             return None
+
+    @staticmethod
+    def getAllUser():
+        try:
+            users = db.session.query(User).all()
+            return users
+        except Exception as e:
+                return None
+

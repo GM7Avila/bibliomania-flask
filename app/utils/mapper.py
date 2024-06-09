@@ -27,3 +27,16 @@ def reservationMapper(reservation):
         }
 
         return temp_reservation
+
+def userMapper(user):
+    temp_user = {
+        "id": encode_id(user.id),
+        "name": user.name,
+        "email": user.email,
+        "cpf": user.cpf,
+        "password_hash": user.password_hash,
+        "isAdmin": user.isAdmin,
+        "phonenumber": user.phonenumber
+    }
+
+    return temp_user

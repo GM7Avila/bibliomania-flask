@@ -1,13 +1,91 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1> Admin - Acervo </h1>
-</body>
-</html>
+{% extends "adm.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endwith %}
+
+<div class="row search-header">
+    <div class="col-md-12">
+        <form method="POST" id="search-form">
+            <div class="input-group rounded mt-3">
+                <input type="text" class="form-control mt-0" placeholder="Digite sua pesquisa..." name="input-search">
+                <div class="input-group-append">
+                    <button class="btn btn-search" type="submit">
+                        <img src="{{ url_for('static', filename='img/Vector.png') }}" alt="Pesquisar"
+                             style="width: 20px; height: 20px;">
+                        <span class="ml-2">Pesquisar</span>
+                    </button>
+                </div>
+            </div>
+            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+                 data-toggle="buttons">
+                  <span class="filtro-label pt-4">Filtro:</span>
+                <div class="btn-group ml-4 d-flex flex-wrap w-100 mb-3" role="group" aria-label="Botões de Filtro">
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
+                               checked> Todos
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
+                        Título
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroISBN" value="filtroISBN" autocomplete="off"> ISBN
+                    </label>
+                    <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroTitulo" value="filtroAutor" autocomplete="off">
+                        Autor
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="acervo-container background container mb-5 pt-4 pb-1">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>ISBN</th>
+                    <th>Editora</th>
+                    <th>Ano</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>
+                        {% if book.availableStock == 0 %}
+                        <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
+                        {% else %}
+                        <a href="" class="btn btn-confirm">Reservar</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
+{% endblock %}
