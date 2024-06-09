@@ -1,0 +1,104 @@
+{% extends "adm.html" %}
+
+{% block content %}
+<div class="content container">
+    {% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-danger alert-{{ category }} mt-2">
+    <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}
+
+    <div class="header-card container">
+        <div class="row">
+
+            <div class="col d-flex  ml-auto text-right"><h1 class="titulo">Painel de
+                Leitores</h1></div>
+            <div class="col d-flex justify-content-end align-items-center">
+                <button type="button" class="btn btn-confirm">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row search-header">
+        <div class="col-md-12">
+            <form method="POST" id="search-form">
+                <div class="input-group rounded mt-3"><input type="text" class="form-control mt-0"
+                                                             placeholder="Digite sua pesquisa..."
+                                                             name="input-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-search" type="submit"><img
+                                src="{{ url_for('static', filename='img/Vector.png') }}" alt="Pesquisar"
+                                style="width: 20px; height: 20px;"> <span class="ml-2">Pesquisar</span></button>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-toggle ml-4" role="group" aria-label="Botões de Filtro"
+                     id="botoesFiltro" data-toggle="buttons">
+                    <span class="filtro-label pt-4">Filtrar por:</span>
+                    <div class="btn-group ml-4 d-flex flex-wrap" role="group" aria-label="Botões de Filtro">
+                        <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded active">
+                            <input type="radio"
+                                   name="filtro"
+                                   id="filtroTodos"
+                                   value="filtroTodos"
+                                   autocomplete="off"
+                                   checked> Todos
+                        </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio"
+                               name="filtro"
+                               id="filtronome"
+                               value="filtroTitulo"
+                               autocomplete="off">
+                        Nome </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroCPF" value="filtroISBN" autocomplete="off"> CPF
+                    </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio"
+                               name="filtro"
+                               id="filtroemail"
+                               value="filtroISBN"
+                               autocomplete="off">
+                        E-mail </label></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container card">
+        <div class="row table-reserve mb-2">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if users %}
+                    {% for user in users %}
+                    <tr>
+                        <td class="align-middle">{{ user.name }}</td>
+                        <td class="align-middle">{{ user.email }}</td>
+                        <td class="align-middle">{{ user.cpf }}</td>
+                        <td class="align-middle">{{ user.phonenumber }}</td>
+                        <td>
+                            <a href="" class="btn btn-confirm">Editar</a>
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,7 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user
-
-# Utils
-from app.utils.validations import *
-from app.utils.decorators import *
-
-# Services
+from app.utils.validations import validate_email, validate_cpf
+from app.utils.decorators import redirect_if_logged_in
 from app.services.user_service import user_service
 
 auth_bp = Blueprint("auth", __name__, template_folder="../templates/auth")
@@ -20,7 +16,6 @@ def login():
     if request.method == "POST":
         email = request.form["input_email"]
         password = request.form["input_password"]
-
         found_user = user_service.findUserByEmail(email)
 
         if found_user and found_user.check_password(password):

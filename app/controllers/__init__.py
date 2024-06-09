@@ -1,7 +1,5 @@
 def register_blueprints(app):
-
     from app.controllers.auth_controller import auth_bp
-
     from app.controllers.user.book_controller import book_bp
     from app.controllers.user.user_controller import user_bp
     from app.controllers.user.reservation_controller import reservation_bp

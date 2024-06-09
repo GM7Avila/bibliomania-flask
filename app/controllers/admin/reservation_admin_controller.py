@@ -10,10 +10,10 @@ from app.utils.mapper import *
 from app.services import reservation_service
 from app.services import book_service
 
-admin_reservation_bp = Blueprint("admin_reservation", __name__, template_folder="../../templates/client/reservation")
+admin_reservation_bp = Blueprint("admin_reservation", __name__, template_folder="../../templates/admin/reservation")
+
 
 @admin_reservation_bp.route("/", methods=["POST", "GET"])
-@login_required
-def reservation():
-    return render_template("reservation-list.html", active_page='reservation', reservations='reservations')
+def reservation_adm():
+    return render_template("reservation-adm.html", active_page='reservation', reservations='reservations')
 
