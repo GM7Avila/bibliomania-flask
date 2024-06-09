@@ -68,7 +68,7 @@ def reservation_detail(token):
 
     if request.method == "POST":
         if request.form.get("action") == "renew":
-            if reservation.status == "Ativa" and reservation.expirationDate >= date.today() and reservation.renewCount < 3:
+            if reservation_service.can_renew(reservation):
                 success = reservation_service.renewReservation(reservation)
                 if success:
                     flash("Reserva renovada com sucesso!", "success")

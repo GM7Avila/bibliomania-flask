@@ -10,15 +10,24 @@
             <h1 class="titulo"> Reserva #{{ reservation.id }} </h1>
         </div>
         <div class="col d-flex justify-content-end align-items-center">
-            <form method="POST" class="m-0">
-                <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled
-                        style="background-color: gray;" {% endif %}>
-                    Renovar
-                </button>
-            </form>
+            {% if reservation.status == "Em Espera" %}
+                <form method="POST" class="m-0">
+                    <button type="submit" name="action" value="cancel" class="btn btn-cancel">
+                        Cancelar Reserva
+                    </button>
+                </form>
+            {% else %}
+                <form method="POST" class="m-0">
+                    <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled
+                            style="background-color: gray;" {% endif %}>
+                        Renovar
+                    </button>
+                </form>
+            {% endif %}
         </div>
     </div>
 </div>
+
 
 <div class="container reservation-details-card p-3">
     <div class="row">
@@ -68,12 +77,16 @@
                                readonly/>
                     </div>
                     <div class="status-box"
-                         style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' %}gray{% endif %};">
+                         style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Em Espera' %}orange{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' %}gray{% endif %};">
                         Status: {{ reservation.status }}
                     </div>
+
+                    {% if reservation.status != 'Em Espera' %}
                     <div class="renov-box">
-                        Renovações: {{ reservation.renewCount }}/3
+                        Renovações: {{ reservation.renewCount }}
                     </div>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
