@@ -46,12 +46,8 @@ class reservation_service():
             return False
 
     @staticmethod
-    def finishReservation(self, reservation):
+    def finishReservation(reservation):
         reservation.devolutionDate = date.today()
-
-        if reservation.expirationDate < date.today():
-            reservation.status = "Atrasada"
-            return False
 
         reservation.status = "Finalizada"
 
@@ -63,6 +59,9 @@ class reservation_service():
         db.session.add(reservation)
         db.session.add(book)
         db.session.commit()
+
+        if reservation.expirationDate < date.today():
+            return False
 
         return True # sem multa
 
@@ -224,8 +223,14 @@ class reservation_service():
     FUNÇÕES ADICIONAIS
     """
     @staticmethod
-    def has_active_reservations(user_id):
-        active_reservations = Reservation.query.filter_by(user_id=user_id, status="Ativa").first()
+    def has_open_reservations(user_id):
+        from sqlalchemy import or_
+
+        active_reservations = Reservation.query.filter_by(user_id=user_id).filter(
+            or_(Reservation.status == "Ativa",
+                Reservation.status == "Espera", # TODO - adicionar status em espera
+                Reservation.status == "Atrasada")).first()
+
         return bool(active_reservations)
 
     @staticmethod
