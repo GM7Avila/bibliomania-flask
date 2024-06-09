@@ -224,8 +224,14 @@ class reservation_service():
     FUNÇÕES ADICIONAIS
     """
     @staticmethod
-    def has_active_reservations(user_id):
-        active_reservations = Reservation.query.filter_by(user_id=user_id, status="Ativa").first()
+    def has_open_reservations(user_id):
+        from sqlalchemy import or_
+
+        active_reservations = Reservation.query.filter_by(user_id=user_id).filter(
+            or_(Reservation.status == "Ativa",
+                Reservation.status == "Espera", # TODO - adicionar status em espera
+                Reservation.status == "Atrasada")).first()
+
         return bool(active_reservations)
 
     @staticmethod

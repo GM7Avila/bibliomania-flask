@@ -44,7 +44,7 @@ def reservation_confirm(token):
         return redirect(url_for("book.acervo"))
 
     user_id = current_user.id
-    can_reserve = not reservation_service.has_active_reservations(user_id)
+    can_reserve = not reservation_service.has_open_reservations(user_id)
     return render_template("reservation-confirm.html", book=book, can_reserve=can_reserve)
 
 
@@ -53,8 +53,8 @@ def reservation_confirm(token):
 def reservar(book_id):
     book = book_service.findBookById(book_id)
 
-    if reservation_service.has_active_reservations(current_user.id):
-        flash("Você já possui reservas ativas. Não é possível fazer uma nova reserva.", "danger")
+    if reservation_service.has_open_reservations(current_user.id):
+        flash("Você já possui reservas abertas. Não é possível fazer uma nova reserva.", "danger")
     else:
         reservation = reservation_service.createReservation(current_user, book)
         if reservation:
