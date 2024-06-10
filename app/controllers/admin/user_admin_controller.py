@@ -27,11 +27,11 @@ def profile_adm():
         filtro_selecionado = request.form.get("filtro")
 
         if filtro_selecionado == "filtroNome":
-           users = user_service.findUserByName(search)
+            users = [user for user in users if user.name == search]
         elif filtro_selecionado == "filtroCPF":
-            users = user_service.findUserByCPF(search)
+            users = [user for user in users if user.cpf == search]
         elif filtro_selecionado == "filtroEmail":
-            users = user_service.findUserByEmail(search)
+            users = [user for user in users if user.email == search]
 
     for user in users:
         temp_users.append(userMapper(user))
