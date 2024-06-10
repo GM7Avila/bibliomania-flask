@@ -83,7 +83,7 @@
                         <td class="align-middle">{{ user.cpf }}</td>
                         <td class="align-middle">{{ user.phonenumber }}</td>
                         <td>
-                            <a href="" class="btn btn-secondary">Editar</a>
+                            <a href="{{ url_for('admin_user.user_edit', token=user.id) }}" class="btn btn-secondary">Editar</a>
 
 
                         </td>

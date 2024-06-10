@@ -77,6 +77,6 @@ def update_profile():
                 return redirect(url_for("user.login"))
             else:
                 flash("Erro ao deletar o usuário.", "error")
-                return redirect(url_for("user.profile"))
+                return redirect(url_for("auth.profile"))
 
     return render_template("page-user-att.html", active_page='profile')

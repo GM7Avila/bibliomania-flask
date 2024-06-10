@@ -24,10 +24,10 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav mx-auto">
+        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+            <div class="navbar-nav  ">
                 <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}"
-                   href="{{ url_for('admin_user.profile_adm') }}">Users<span class="sr-only">(current)</span></a> <a
+                   href="{{ url_for('admin_user.profile_adm') }}">Users<span class=" sr-only">(current)</span></a> <a
                     class="nav-item nav-link m-2{% if active_page == 'acervo' %} active{% endif %}"
                     href="{{ url_for('admin_book.acervo') }}">Acervo<span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link m-2{% if active_page == 'reservation' %} active{% endif %}"
