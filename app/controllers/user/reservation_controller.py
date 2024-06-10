@@ -76,6 +76,12 @@ def reservation_detail(token):
                     flash("Erro ao renovar a reserva.", "error")
             else:
                 flash("Não é possível renovar a reserva. A reserva está atrasada ou finalizada.", "error")
+        if request.form.get("action") == "cancel":
+            success = reservation_service.updateReservationStatus(reservation, "Cancelada")
+            if success:
+                flash("Reserva cancelada com sucesso!", "success")
+            else:
+                flash("Erro ao cancelar a reserva.", "error")
         return render_template("reservation-details.html", reservation=reservation)
 
     can_renew = reservation_service.can_renew(reservation)

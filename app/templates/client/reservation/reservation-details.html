@@ -11,18 +11,20 @@
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             {% if reservation.status == "Em Espera" %}
-                <form method="POST" class="m-0">
-                    <button type="submit" name="action" value="cancel" class="btn btn-cancel">
-                        Cancelar Reserva
-                    </button>
-                </form>
-            {% else %}
-                <form method="POST" class="m-0">
-                    <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled
-                            style="background-color: gray;" {% endif %}>
-                        Renovar
-                    </button>
-                </form>
+            <form method="POST" class="m-0">
+                <button type="submit" name="action" value="cancel" class="btn btn-cancel">
+                    Cancelar Reserva
+                </button>
+            </form>
+            {% elif reservation.status != "Cancelada" %}
+            <form method="POST" class="m-0">
+                <button type="submit" name="action" value="renew" class="btn btn-confirm"
+                        {% if not can_renew %}disabled
+                        style="background-color: gray;"
+                        {% endif %}>
+                    Renovar
+                </button>
+            </form>
             {% endif %}
         </div>
     </div>
@@ -73,15 +75,18 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control mb-3"
-                               value="Data de Devolução: {% if reservation.devolutionDate %}{{ reservation.devolutionDate }}{% else %}Ainda não devolvido{% endif %}"
+                               value="Data de Devolução:
+                               {% if reservation.devolutionDate %}{{ reservation.devolutionDate }}
+                               {% elif reservation.status == 'Cancelada' %}
+                               {% else %}Ainda não devolvido{% endif %}"
                                readonly/>
                     </div>
                     <div class="status-box"
-                         style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Em Espera' %}orange{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' %}gray{% endif %};">
+                         style="background-color: {% if reservation.status == 'Ativa' %}green{% elif reservation.status == 'Em Espera' %}orange{% elif reservation.status == 'Atrasada' %}red{% elif reservation.status == 'Finalizada' or reservation.status == 'Cancelada' %}gray{% endif %};">
                         Status: {{ reservation.status }}
                     </div>
 
-                    {% if reservation.status != 'Em Espera' %}
+                    {% if reservation.status != 'Cancelada' and reservation.status != 'Em espera' %}
                     <div class="renov-box">
                         Renovações: {{ reservation.renewCount }}
                     </div>
