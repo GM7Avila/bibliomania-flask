@@ -18,8 +18,12 @@ def logout():
 
 @admin_user_bp.route('/', methods=["POST", "GET"])
 def profile_adm():
+
     users = user_service.getAllUser()
-    temp_users = [userMapper(user) for user in users] if users else []
+    temp_users = []
+
+    for user in users:
+        temp_users.append(userMapper(user))
     return render_template("pageuser-admin.html",users=temp_users, active_page='profile')
 
 
