@@ -2,7 +2,7 @@
     --background-color: #D7DBE1;
     --text-color: #475060;
 
-    --row-divider-color: #ff0000; /* ou qualquer cor que você desejar */
+    --btn-search-dark: #1c1e27;
 
     --color-0: #7985f6;
     --color-1: #7985f6;
@@ -41,6 +41,13 @@ header{
     height: 70px;
 }
 
+.btn-header{
+    color: white !important;
+    background-color: #343A40;
+    min-width: 10rem !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
+}
+
 .navbar {
     height: 100%;
     background-color: #333;
@@ -70,7 +77,7 @@ header{
 .card{
     color: #dfdfdf;
     background-color: #343A40;
-
+    padding: 0px;
 }
 
 .header-card {
@@ -147,18 +154,21 @@ header{
 
 
 .btn-secondary{
-    background-color: var(--dropdown-dark-color) !important;
-    min-width: 10rem !important;
+    border: none !important;
+    background-color: var(--light-positive-color);
+    width: 7rem !important;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
 }
 .btn-secondary:hover{
-    background-color: var(--dropdown-dark-color-hover) !important;
+    transition: 0.5s;
+    background-color: var(--stroke-confirm-color) !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
 }
-
 
 .btn-confirm{
     min-width: 12rem !important;
-    background-color: var(--stroke-neutral-color) !important;
+    background-color: var(--stroke-confirm-color) !important;
     color: white; /* Cor do texto */
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     margin-left: 8px;
@@ -173,7 +183,7 @@ header{
 .btn-search {
     border: none !important;
     width: 10rem;
-    background-color: var(--stroke-neutral-color);
+    background-color: var(--color-3);
     color: white;
     border-top-right-radius: 15px !important;
     border-bottom-right-radius: 15px !important;
@@ -191,13 +201,13 @@ header{
     color: #ffffff;
 }
 
+
 /* botão indisponível */
 .bg-unavailable {
     border: none;
     margin-left: 10px;
-    opacity: 0.8 !important;
     width: 12rem !important;
-    background-color: #7c7d83;
+    background-color: #999ba1;
     color: #ececec;
     transition: background-color 0.3s ease, transform 0.3s ease; /* Efeito de transição */
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;

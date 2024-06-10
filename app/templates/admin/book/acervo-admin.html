@@ -10,7 +10,11 @@
 </div>
 {% endfor %}
 {% endwith %}
-
+<div class="header-card container">
+    <div class="row">
+        <div class="col d-flex  ml-auto text-right"><h1 class="titulo">Acervo</h1></div>
+    </div>
+</div>
 <div class="row search-header">
     <div class="col-md-12">
         <form method="POST" id="search-form">
@@ -24,9 +28,10 @@
                     </button>
                 </div>
             </div>
-            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro"
+                 id="botoesFiltro"
                  data-toggle="buttons">
-                  <span class="filtro-label pt-4">Filtro:</span>
+                <span class="filtro-label pt-4">Filtro:</span>
                 <div class="btn-group ml-4 d-flex flex-wrap w-100 mb-3" role="group" aria-label="Botões de Filtro">
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded active">
                         <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
@@ -48,41 +53,40 @@
         </form>
     </div>
 </div>
-
 <div class="acervo-container container mb-5 pb-1">
     <div class="table-responsive">
         <table class="table table-striped table-dark table-bordered">
             <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>ISBN</th>
-                    <th>Editora</th>
-                    <th>Ano</th>
-                    <th>Amostras</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th></th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Editora</th>
+                <th>Ano</th>
+                <th>Amostras</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                {% for book in books %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.author }}</td>
-                    <td>{{ book.isbn }}</td>
-                    <td>{{ book.publisher }}</td>
-                    <td>{{ book.year }}</td>
-                    <td>{{ book.availableStock }} / {{ book.totalStock }}</td>
-                    <td>
-                        {% if book.availableStock == 0 %}
-                        <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
-                        {% else %}
-                        <a href="" class="btn btn-confirm">Reservar</a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
+            {% for book in books %}
+            <tr {% if book.availableStock == 0 %} style="opacity: 0.3" {% endif %}>
+                <td>{{ loop.index }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.year }}</td>
+                <td>{{ book.availableStock }} / {{ book.totalStock }}</td>
+                <td>
+                    {% if book.availableStock == 0 %}
+                    <a href="#" class="btn btn-secondary disabled" style="opacity: 1 !important;">Reservar</a>
+                    {% else %}
+                    <a href="" class="btn btn-secondary">Reservar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
