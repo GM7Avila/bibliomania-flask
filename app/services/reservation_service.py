@@ -248,6 +248,7 @@ class reservation_service():
         active_reservations = Reservation.query.filter_by(user_id=user_id).filter(
             or_(Reservation.status == "Ativa",
                 Reservation.status == "Em Espera",
+                Reservation.status == "Espera",
                 Reservation.status == "Atrasada")).first()
 
         return bool(active_reservations)
