@@ -80,25 +80,25 @@ class user_service():
     def findUserByEmail(email):
         try:
             user = db.session.query(User).filter_by(email=email).first()
-            return user
+            return [user] if user else []  # Retorna uma lista contendo o usuário ou uma lista vazia
         except Exception as e:
-            return None
+            return []
 
     @staticmethod
     def findUserByCPF(cpf):
         try:
             user = db.session.query(User).filter_by(cpf=cpf).first()
-            return user
+            return [user] if user else []  # Retorna uma lista contendo o usuário ou uma lista vazia
         except Exception as e:
-            return None
+            return []
 
     @staticmethod
     def findUserByName(name):
         try:
-            user = db.session.query(User).filter(User.name.like(f'%{name}%')).first()
-            return user
+            users = db.session.query(User).filter(User.name.like(f'%{name}%')).all()
+            return users
         except Exception as e:
-            return None
+            return []
 
     @staticmethod
     def getAllUser():
@@ -106,5 +106,4 @@ class user_service():
             users = db.session.query(User).filter(User.email != 'admin@bibliomania').all()
             return users
         except Exception as e:
-                return None
-
+            return []

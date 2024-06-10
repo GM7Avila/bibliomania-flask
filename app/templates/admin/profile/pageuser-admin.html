@@ -3,12 +3,12 @@
 {% block content %}
 <div class="content container">
     {% if messages %}
-{% for category, message in messages %}
-<div class="alert alert-danger alert-{{ category }} mt-2">
-    <span style="color: red; display: block; text-align: center;">{{ message }}</span>
-</div>
-{% endfor %}
-{% endif %}
+    {% for category, message in messages %}
+    <div class="alert alert-danger alert-{{ category }} mt-2">
+        <span style="color: red; display: block; text-align: center;">{{ message }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
 
     <div class="header-card container">
         <div class="row">
@@ -45,16 +45,17 @@
                         </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio"
                                name="filtro"
-                               id="filtronome"
-                               value="filtroTitulo"
+                               id="filtroNome"
+                               value="filtroNome"
                                autocomplete="off">
-                        Nome </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
-                        <input type="radio" name="filtro" id="filtroCPF" value="filtroISBN" autocomplete="off"> CPF
+                        Nome
+                    </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
+                        <input type="radio" name="filtro" id="filtroCPF" value="filtroCPF" autocomplete="off"> CPF
                     </label> <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio"
                                name="filtro"
-                               id="filtroemail"
-                               value="filtroISBN"
+                               id="filtroEmail"
+                               value="filtroEmail"
                                autocomplete="off">
                         E-mail </label></div>
                 </div>
