@@ -48,6 +48,8 @@ def reservation():
     for reservation in reservations:
         temp_reservations.append(reservationMapper(reservation))
 
+    print(temp_reservations)
+
     return render_template("reservation-list.html", active_page='reservation', reservations=temp_reservations)
 
 

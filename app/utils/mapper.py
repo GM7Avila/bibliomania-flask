@@ -20,6 +20,7 @@ def reservationMapper(reservation):
             "id": encode_id(reservation.id),
             "status": reservation.status,
             "expirationDate": reservation.expirationDate,
+            "reservationDate": reservation.reservationDate,
             "renewCount": reservation.renewCount,
             "devolutionDate": reservation.devolutionDate,
             "book": reservation.book,
