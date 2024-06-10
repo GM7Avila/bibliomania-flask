@@ -1,11 +1,9 @@
 .acervo-container{
-    background-color: #f6f6f6;
+    background-color: #212529;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    border: none !important;
 
-    border-left: 1px solid #c3c3c3;
-    border-right: 1px solid #c3c3c3;
-    boder-bottom: 1px solid #c3c3c3;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 
     padding-left: 0px;
@@ -27,7 +25,6 @@
     max-width: 100%;
     max-height: 400px; /* Define uma altura máxima */
 }
-
 
 .card{
     padding: 0px;

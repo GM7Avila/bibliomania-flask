@@ -72,6 +72,13 @@ class reservation_service():
 
         return True # sem multa
 
+    @staticmethod
+    def confirmReservation(self, reservation):
+        if reservation.status == "Em Espera":
+            self.updateReservationStatus(reservation, "Ativa")
+            return True
+
+        return False
 
     # ADMIN - cancelar
     @staticmethod
