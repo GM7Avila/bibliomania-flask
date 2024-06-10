@@ -17,6 +17,7 @@
     --stroke-negative-color: #cc4a4a;
 
     --bright-neutral-color: #5a9bfd;
+    --bright-negative-color: #ff5d5d;
 
 }
 
@@ -162,6 +163,20 @@ header{
     background-color: var(--bright-neutral-color);
     color: white;
 }
+
+.btn-cancel{
+    min-width: 12rem !important;
+    background-color: var(--stroke-negative-color);
+    color: white; /* Cor do texto */
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    margin-left: 8px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.btn-cancel:hover {
+    background-color: var(--bright-negative-color);
+    color: white;
+}
+
 
 /* botões área de pesquisa */
 .btn-search {
