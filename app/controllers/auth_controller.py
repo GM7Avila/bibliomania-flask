@@ -36,6 +36,7 @@ def login():
 @redirect_if_logged_in
 def signup():
     if request.method == "POST":
+
         name = request.form["input_nome"]
         cpf = request.form["input_cpf"]
         email = request.form["input_email"]

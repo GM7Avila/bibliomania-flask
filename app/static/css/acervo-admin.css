@@ -15,6 +15,9 @@
     max-width: 200px;
     max-height: 400px;
     margin-left: 60px;
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
 }
 
 .imagem > img{
@@ -24,6 +27,9 @@
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     max-width: 100%;
     max-height: 400px; /* Define uma altura máxima */
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
 }
 
 .card{
@@ -59,9 +65,15 @@
 .imagem-description{
     height: 100%;
     max-width: 100%;
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
 }
 
 .imagem-description > img{
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
     object-fit: contain;
     width: auto;
     height: 450px;

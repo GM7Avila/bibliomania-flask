@@ -44,11 +44,11 @@
                 <a class="nav-item nav-link m-2{% if active_page == 'profile' %} active{% endif %}"
                    href="{{ url_for('user.profile') }}">
                     <img
-                        src="{{ url_for('static', filename='img/ii.png') }}" width="20" height="20"
+                        src="{{ url_for('static', filename='img/user.png') }}" width="20" height="20"
                         class="d-inline-block align-top mr-2" alt="">Perfil<span
                         class="sr-only"></span></a>
                 <a class="dropdown-item d-flex align-items-center" href="#"><img
-                        src="{{ url_for('static', filename='img/logout.png') }}" width="20" height="20"
+                        src="{{ url_for('static', filename='img/interrogation.png') }}" width="20" height="20"
                         class="d-inline-block align-top mr-2" alt="">FAQ</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item d-flex align-items-center" href="{{ url_for('user.logout') }}"><img
