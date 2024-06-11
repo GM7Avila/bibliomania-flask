@@ -1,0 +1,63 @@
+{% extends "adm.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="header-card container">
+        <div class="row">
+
+            <div class="col d-flex justify-content-start ">
+                <a href="{{ url_for('admin_user.profile_adm') }}" class="btn btn-back">Voltar</a>
+            </div>
+            <div class="col d-flex   justify-content-end"><h1 class="titulo">Painel de
+                Cadastro</h1></div>
+        </div>
+    </div>
+    <div class=" row search-header justify-content-center align-items-center">
+        <div class="col-md-10 mt-3">
+            <div class="form-container">
+                <form action="#" method="post">
+                    <div class="mb-3">
+                        <label for="input_nome" class="form-label">Nome</label>
+                        <input type="text" id="input_nome" name="input_nome" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input_cpf" class="form-label">CPF</label>
+                        <input type="text" id="input_cpf" name="input_cpf" pattern="[0-9]*" maxlength="11" title="Informe apenas números (11 dígitos)" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input_email" class="form-label">Email</label>
+                        <input type="email" id="input_email" name="input_email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input_password" class="form-label">Password</label>
+                        <input type="password" id="input_password" name="input_password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input_telefone" class="form-label">Telefone (com DDD)</label>
+                        <input type="text" id="input_telefone" name="input_telefone" pattern="[0-9]{11}" title="Informe um telefone válido (11 dígitos)" class="form-control" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-confirm btn-lg mt-3 mb-3">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
