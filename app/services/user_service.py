@@ -78,7 +78,7 @@ class user_service:
 
                 # Excluir todas as reservas finalizadas (se houver)
                 reservations_to_delete = Reservation.query.filter_by(user_id=user_id).all()
-                for reservation in reservations_to_deleteg:
+                for reservation in reservations_to_delete:
                     db.session.delete(reservation)
 
                 # Excluir o usuário fora do loop de reservas
