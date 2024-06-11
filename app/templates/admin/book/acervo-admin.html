@@ -58,7 +58,7 @@
         <table class="table table-striped table-dark table-bordered">
             <thead class="thead-dark">
             <tr>
-                <th></th>
+                <th>#</th>
                 <th>Título</th>
                 <th>Autor</th>
                 <th>ISBN</th>
@@ -71,14 +71,27 @@
             <tbody>
             {% for book in books %}
             <tr {% if book.availableStock == 0 %} style="opacity: 0.3" {% endif %}>
-                <td>{{ loop.index }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.isbn }}</td>
-                <td>{{ book.publisher }}</td>
-                <td>{{ book.year }}</td>
-                <td>{{ book.availableStock }} / {{ book.totalStock }}</td>
-                <td>
+                <td class="align-middle">{{ loop.index }}</td>
+                <td class="align-middle">{{ book.title }}</td>
+                <td class="align-middle">{{ book.author }}</td>
+                <td class="align-middle">{{ book.isbn }}</td>
+                <td class="align-middle">{{ book.publisher }}</td>
+                <td class="align-middle">{{ book.year }}</td>
+                <td class="align-middle">
+                    {% set proportion = book.availableStock / book.totalStock %}
+                    <span
+                        {% if proportion >= 1/2 %}
+                            style="color: #ccffbf;"
+                        {% elif book.availableStock == 0 %}
+                            style="color: #fff;"
+                        {% else %}
+                            style="color: #fff799;"
+                        {% endif %}
+                    >
+                        {{ book.availableStock }} / {{ book.totalStock }}
+                    </span>
+                </td>
+                <td class="align-middle">
                     {% if book.availableStock == 0 %}
                     <a href="#" class="btn btn-secondary disabled" style="opacity: 1 !important;">Reservar</a>
                     {% else %}

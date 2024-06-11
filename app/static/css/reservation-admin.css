@@ -2,61 +2,13 @@
 
 .form-select.btn-outline-secondary-status {
     color: #fff !important;
-    background-color: #6169A1 !important;
-    border-color: #656dc5 !important;
+    background-color: #212529 !important;
+    border-color: #cdcdcd !important;
 }
 
 .form-select.btn-outline-secondary-status option {
-    background-color: #343A40; /* Cor de fundo dos itens */
-    color: #fff; /* Cor do texto dos itens */
-}
-
-.status-tag {
-    display: inline-block;
-    width: 90px;
-    height: 25px;
-    line-height: 25px;
-    text-align: center;
-    padding: 0;
-    border-radius: 12px;
-    font-size: 0.875em;
-    border: 1px solid;
-}
-
-.status-cancelada {
-    color: #aeb6bc;
-    background-color: #3e464c;
-    border-color: #848485;
-    box-shadow: 0 0 1px #b8b8b8, 0 0 1px #b8b8b8, 0 0 1px #b8b8b8;
-}
-
-.status-em-espera {
-    background-color: #b8822e;
-    border-color: #ffb84d;
-    box-shadow: 0 0 1px #ffb84d, 0 0 2px #ffb84d, 0 0 3px #ffb84d;
-    text-shadow: 0 0 1px #ffb84d;
-}
-
-.status-ativa {
-    background-color: #4eaf64;
-    border-color: #4dff88;
-    box-shadow: 0 0 1px #4dff88, 0 0 1px #4dff88, 0 0 1px #4dff88;
-    text-shadow: 0 0 1px #4dff88;
-}
-
-.status-finalizada {
-    background-color: #6c757d;
-    border-color: #b8b8b8;
-    box-shadow: 0 0 1px #b8b8b8, 0 0 1px #b8b8b8, 0 0 1px #b8b8b8;
-    text-shadow: 0 0 1px #b8b8b8;
-}
-
-.status-atrasada {
-    color: #ff9f9f;
-    background-color: #5e2a2a;
-    border-color: #ff4d4d;
-    box-shadow: 0 0 1px #ff4d4d, 0 0 1px #ff4d4d, 0 0 1px #ff4d4d;
-    text-shadow: 0 0 1px #ff4d4d;
+    background-color: #343A40;
+    color: #e4f5fd;
 }
 
 .card-header {
