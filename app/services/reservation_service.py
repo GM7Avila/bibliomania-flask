@@ -8,6 +8,16 @@ class reservation_service():
     """
     FUNÇÕES DE RENOVAÇÃO E DEVOLUÇÃO
     """
+    @staticmethod
+    def get_status_priority(status):
+        status_priority = {
+            "Em Espera": 1,
+            "Ativa": 2,
+            "Atrasada": 3,
+            "Finalizada": 4,
+            "Cancelada": 5
+        }
+        return status_priority.get(status, 99)
 
     # SISTEMA
     @staticmethod
@@ -21,10 +31,8 @@ class reservation_service():
                 return False
             elif reservation.devolutionDate is not None:
                 reservation.status = "Finalizada"
-            # Se a data da reserva já tiver passado
             elif reservation.expirationDate < date.today():
                 reservation.status = "Atrasada"
-            # Se tiver data de devolução
             else:
                 reservation.status = "Ativa"
 
@@ -38,7 +46,6 @@ class reservation_service():
     @staticmethod
     def renewReservation(reservation):
         try:
-            #reservation = Reservation.query.get(reservation_id)
             if reservation.renewCount >= 4:
                 return False
 
@@ -151,6 +158,7 @@ class reservation_service():
     def getAllReservations():
         try:
             reservations = Reservation.query.all()
+            reservations.sort(key=lambda x: reservation_service.get_status_priority(x.status))
             return reservations
         except Exception as e:
             return None
@@ -160,6 +168,7 @@ class reservation_service():
     def getReservationsByUser(user_id):
         try:
             reservations = Reservation.query.filter_by(user_id=user_id).all()
+            reservations.sort(key=lambda x: reservation_service.get_status_priority(x.status))
             return reservations
         except Exception as e:
             return None
@@ -175,6 +184,7 @@ class reservation_service():
                     Reservation.book.has(title=query),
                 )
             ).all()
+            reservations.sort(key=lambda x: reservation_service.get_status_priority(x.status))
             return reservations
         except Exception as e:
             return None
@@ -232,6 +242,7 @@ class reservation_service():
     def getReservationsByStatus(status):
         try:
             reservations = Reservation.query.filter_by(status=status).all()
+            reservations.sort(key=lambda x: reservation_service.get_status_priority(x.status))
             return reservations
         except Exception as e:
             return None
@@ -250,7 +261,6 @@ class reservation_service():
     """
     @staticmethod
     def has_open_reservations(user_id):
-        from sqlalchemy import or_
 
         active_reservations = Reservation.query.filter_by(user_id=user_id).filter(
             or_(Reservation.status == "Ativa",
