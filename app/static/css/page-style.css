@@ -50,6 +50,7 @@ header{
     background: linear-gradient(138deg, rgba(115,129,143,1) 0%, rgba(77,86,95,1) 24%, rgba(33,37,41,1) 100%);
     padding: 10px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+
 }
 
 .navbar-brand > img {
@@ -115,13 +116,10 @@ header{
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
-
 /* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ *\
                                   BOTÕES & FILTROS
 
 \* ´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´´ */
-
-
 /* botão do filtro */
 .btn-primary{
     border: none !important;
