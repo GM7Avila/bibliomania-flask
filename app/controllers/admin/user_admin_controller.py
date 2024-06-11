@@ -32,7 +32,6 @@ def profile_adm():
             users = [user for user in users if user.cpf == search]
         elif filtro_selecionado == "filtroEmail":
             users = [user for user in users if user.email == search]
-
     for user in users:
         temp_users.append(userMapper(user))
     return render_template("pageuser-admin.html", users=temp_users, active_page='profile')
