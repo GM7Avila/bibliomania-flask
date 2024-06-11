@@ -78,13 +78,13 @@
             <tbody>
             {% for reservation in reservations %}
             <tr class="{% if reservation.status == 'Cancelada' %}row-cancelada{% endif %}">
-                <td>{{ loop.index }}</td>
-                <td>{{ reservation.book.title }}</td>
-                <td>{{ reservation.book.isbn }}</td>
-                <td>{{ reservation.user.name }}</td>
-                <td>{{ reservation.user.cpf }}</td>
-                <td>{{ reservation.user.phonenumber }}</td>
-                <td>
+                <td class="align-middle">{{ loop.index }}</td>
+                <td class="align-middle">{{ reservation.book.title }}</td>
+                <td class="align-middle">{{ reservation.book.isbn }}</td>
+                <td class="align-middle">{{ reservation.user.name }}</td>
+                <td class="align-middle">{{ reservation.user.cpf }}</td>
+                <td class="align-middle">{{ reservation.user.phonenumber }}</td>
+                <td class="align-middle">
                     {% if reservation.status == 'Cancelada' %}
                     <span class="status-tag status-cancelada">{{ reservation.status }}</span>
                     {% elif reservation.status == 'Em Espera' %}
@@ -99,8 +99,10 @@
                     <span class="status-tag">{{ reservation.status }}</span>
                     {% endif %}
                 </td>
-                <td>
-                    <a href="#" class="btn btn-secondary">Detalhes</a>
+                <td class="align-middle text-right">
+                    <a href="#" class="btn btn-table" title="Ver detalhes da Reserva">
+                        <i class="fa-solid fa-eye" style="font-size:15px"></i>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
@@ -111,5 +113,6 @@
 
 <script src="{{ url_for('static', filename='js/filter-submit.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation-admin.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 {% endblock %}

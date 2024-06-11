@@ -7,7 +7,7 @@ from app.utils.mapper import userMapper
 from app.utils.url_safer import *
 
 # Services
-from app.services.user_service import user_service
+from app.services import user_service, reservation_service
 
 admin_user_bp = Blueprint("admin_user", __name__, template_folder="../../templates/admin/profile")
 
@@ -34,9 +34,14 @@ def profile_adm():
             users = [user for user in users if user.cpf == search]
         elif filtro_selecionado == "filtroEmail":
             users = [user for user in users if user.email == search]
+
     for user in users:
-        temp_users.append(userMapper(user))
+        user_data = userMapper(user)
+        user_data['inadimplente'] = reservation_service.has_open_reservations(user.id)
+        temp_users.append(user_data)
+
     return render_template("pageuser-admin.html", users=temp_users, active_page='profile')
+
 @admin_user_bp.route("/u=<token>", methods=["GET", "POST"])
 @login_required
 def user_edit(token):

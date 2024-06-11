@@ -15,7 +15,7 @@
             <div class="col d-flex  ml-auto text-right"><h1 class="titulo">Painel de
                 Leitores</h1></div>
             <div class="col d-flex justify-content-end align-items-center">
-                <a href="{{ url_for('admin_user.register') }}" class="btn btn-confirm">Cadastrar</a>
+                <a href="{{ url_for('admin_user.register') }}" class="btn btn-confirm" title="Cadastrar um novo leitor">Cadastrar</a>
             </div>
         </div>
     </div>
@@ -83,12 +83,20 @@
                         <td class="align-middle">{{ user.email }}</td>
                         <td class="align-middle">{{ user.cpf }}</td>
                         <td class="align-middle">{{ user.phonenumber }}</td>
-                        <td>
-                            <a href="{{ url_for('admin_user.user_edit', token=user.id) }}" class="btn btn-secondary">Editar</a>
-
-
+                        <td class="align-middle">
+                            {% if user.inadimplente %}
+                            <span class="status-tag status-em-espera" title="Usuário com reservas pendentes."> Inadimplente </span>
+                            {% else %}
+                            <span class="status-tag status-ativa" title="Autorizado a realizar novas reservas."> Adimplente </span>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            <a href="{{ url_for('admin_user.user_edit', token=user.id) }}" title="Editar usuário">
+                                <i class='fas fa-edit table-icon' style='font-size:20px'></i>
+                            </a>
                         </td>
                     </tr>
+
                     {% endfor %}
                     {% else %}
                     <tr>
@@ -101,4 +109,8 @@
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 {% endblock %}
