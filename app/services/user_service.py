@@ -104,7 +104,7 @@ class user_service():
     @staticmethod
     def getAllUser():
         try:
-            users = db.session.query(User).filter(User.email != 'admin@bibliomania').all()
+            users = db.session.query(User).all()
             return users
         except Exception as e:
             return None
