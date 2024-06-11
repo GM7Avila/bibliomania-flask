@@ -64,11 +64,10 @@ header{
 }
 
 .container{
-    max-width: 70rem;
+    max-width: 75rem;
 }
 
 .content {
-    width: 100vw;
     height: 100%;
     margin-top: 35px;
     margin-bottom: 20px;
