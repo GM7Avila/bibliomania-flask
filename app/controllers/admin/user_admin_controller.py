@@ -17,13 +17,26 @@ def logout():
     logout_user()
     return redirect(url_for("auth.login"))
 
+@login_required
 @admin_user_bp.route('/', methods=["POST", "GET"])
 def profile_adm():
+
     users = user_service.getAllUser()
-    temp_users = [userMapper(user) for user in users] if users else []
+    temp_users = []
+
+    if request.method == "POST":
+        search = request.form.get("input-search")
+        filtro_selecionado = request.form.get("filtro")
+
+        if filtro_selecionado == "filtroNome":
+            users = [user for user in users if user.name == search]
+        elif filtro_selecionado == "filtroCPF":
+            users = [user for user in users if user.cpf == search]
+        elif filtro_selecionado == "filtroEmail":
+            users = [user for user in users if user.email == search]
+    for user in users:
+        temp_users.append(userMapper(user))
     return render_template("pageuser-admin.html", users=temp_users, active_page='profile')
-
-
 @admin_user_bp.route("/u=<token>", methods=["GET", "POST"])
 @login_required
 def user_edit(token):
