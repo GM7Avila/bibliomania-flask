@@ -74,9 +74,9 @@ def update_profile():
             if success:
                 logout_user()
                 flash("Conta apagada com sucesso.", "success")
-                return redirect(url_for("user.login"))
+                return redirect(url_for("auth.login"))
             else:
                 flash("Erro ao deletar o usuário.", "error")
-                return redirect(url_for("auth.profile"))
+                return redirect(url_for("user.profile"))
 
     return render_template("page-user-att.html", active_page='profile')
