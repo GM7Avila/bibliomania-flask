@@ -1,17 +1,16 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-from flask_login import login_required, current_user
-from datetime import date
+from flask_login import current_user
 
 # Utils
-from app.utils.url_safer import *
 from app.utils.mapper import *
+from app.utils.url_safer import *
 
 # Services
 from app.services import reservation_service
-from app.services import book_service
 from app.services import user_service
 
 admin_reservation_bp = Blueprint("admin_reservation", __name__, template_folder="../../templates/admin/reservation")
+
 
 @admin_reservation_bp.route("/", methods=["POST", "GET"])
 def reservation_adm():
@@ -48,3 +47,42 @@ def reservation_adm():
     print(temp_reservations)
 
     return render_template("reservation-adm.html", active_page='reservation', reservations=temp_reservations)
+
+@admin_reservation_bp.route("/r=<token>", methods=["POST", "GET"])
+def reservation_details(token):
+    reservation_id = decode_id(token)
+
+    reservation = reservation_service.getReservationById(reservation_id)
+
+    if reservation is None:
+        return redirect(url_for("admin_reservation.reservation_adm"))
+
+    reservation_service.updateStatus(reservation_id)
+
+    if request.method == "POST":
+        if request.form.get("action") == "cancel" and reservation.status == "Em Espera":
+            success = reservation_service.updateReservationStatus(reservation, "Cancelada")
+            if success:
+                flash("Reserva cancelada com sucesso!", "success")
+            else:
+                flash("Erro ao cancelar a reserva.", "error")
+
+        if request.form.get("action") == "active" and reservation.status == "Em Espera":
+            success = reservation_service.updateReservationStatus(reservation, "Ativa")
+            if success:
+                flash("Reserva ativa com sucesso!", "success")
+            else:
+                flash("Erro ao ativar a reserva.", "error")
+
+        if request.form.get("action") == "renew" and reservation_service.can_renew(reservation):
+            success = reservation_service.renewReservation(reservation)
+            if success:
+                flash("Reserva renovada com sucesso!", "success")
+            else:
+                flash("Erro ao renovar a reserva.", "error")
+
+        return render_template("reservation-details.html", reservation=reservation)
+
+    can_renew = reservation_service.can_renew(reservation)
+
+    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
