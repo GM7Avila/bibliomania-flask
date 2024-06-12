@@ -48,3 +48,7 @@ def reservation_adm():
     print(temp_reservations)
 
     return render_template("reservation-adm.html", active_page='reservation', reservations=temp_reservations)
+
+@admin_reservation_bp.route("/confirm")
+def reservation_confirm():
+    return render_template("adm-reservation-confirm.html")
