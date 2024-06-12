@@ -1,17 +1,12 @@
-
+/* Estilos gerais */
 .logo-container {
     display: flex;
     align-items: center;
+    padding-bottom: 45px;
 }
-.logo2-container {
-    display: flex;
-    align-items: center;
-}
+
 .logo-container img {
-    height: 2em;
-}
-.logo2-container img {
-    height: 2em;
+    height: 4em;
 }
 
 .row {
@@ -19,30 +14,11 @@
     justify-content: center;
 }
 
-.form-container {
-    margin-left: 13rem; /* Ajuste conforme necessário */
-    margin-top: 50px;
-    width: 40rem;
-    padding-bottom: 70px !important;
-    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
-    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
-    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
-}
-
-.container {
-    background-repeat: no-repeat;
-    background-size: cover; /* ou outra propriedade de tamanho conforme necessário */
-    /* outras propriedades de background como repeat, position, etc. */
-}
 .logo {
     background: rgb(27,45,49);
     background: linear-gradient(0deg, rgba(27,45,49,1) 8%, rgba(64,82,107,1) 62%, rgba(107,126,175,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.bg-blue {
-    background-color: #eff4f3;
 }
 
 .btn {
@@ -69,25 +45,40 @@
 }
 
 body, html {
-    height: 100vh; /* instead of height: 100% */
+    height: 100vh;
     margin: 0;
+    background-color: #eff4f3;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
 .form-container {
-    max-width: 100%; /* updated to relative unit */
     background: white;
-    padding: 2%; /* updated to relative unit */
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    max-width: 70rem;
+    width: 30%;
+    max-height: 80rem;
+    height: 75%;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    margin-left: 13em;
+    margin-top: 7em;
+    padding-bottom: 70px !important;
 }
 
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    padding: 2%; /* updated to relative unit */
-}
+/*.content-wrapper {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*}*/
+
 .table-icon {
     transition: 0.5s;
     width: 20px;
@@ -102,7 +93,7 @@ body, html {
     color: #e0ddff !important;
 }
 
-.btn-table{
+.btn-table {
     border: none;
     background-color: var(--light-neutral-color);
     height: 3rem;
@@ -114,35 +105,67 @@ body, html {
     color: white;
 }
 
-.btn-table:hover{
+.btn-table:hover {
     background-color: var(--bright-neutral-color);
     color: white;
 }
-@media (max-width: 992px) {
-    .content-wrapper {
-        flex-direction: column;
+
+/* Media queries */
+@media (max-width: 1200px) {
+    .form-container {
+        width: 50%;
+        height: 60%;
+        margin-left: 8em;
+        margin-top: 5em;
     }
-    .img-side {
-        margin-bottom: 20px;
-        margin-top: 20px;
+
+    .logo-container img {
+        height: 3em;
     }
 }
 
-/* Additional media queries for smaller screens */
+@media (max-width: 992px) {
+    .form-container {
+        width: 60%;
+        height: 50%;
+        margin-left: 5em;
+        margin-top: 4em;
+    }
+
+    .logo-container img {
+        height: 2.5em;
+    }
+}
+
 @media (max-width: 768px) {
     .form-container {
-        max-width: 90%;
+        width: 80%;
+        height: auto;
+        margin-left: 2em;
+        margin-top: 2em;
+        padding: 3%;
     }
-    .content-wrapper {
-        padding: 1%;
+
+    .logo-container img {
+        height: 2em;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .form-container {
-        max-width: 95%;
+        width: 90%;
+        height: auto;
+        margin-left: 1em;
+        margin-top: 1em;
+        padding: 2%;
     }
-    .content-wrapper {
-        padding: 0.5%;
+
+    .logo-container img {
+        height: 1.5em;
+    }
+
+    .btn {
+        font-size: 0.9em;
+        padding: 0.5em;
     }
 }

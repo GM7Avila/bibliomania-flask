@@ -13,8 +13,8 @@
 <div class="container-fluid"
      style="background-image: url('{{ url_for('static', filename='img/background-web.svg') }}'); background-repeat: no-repeat; background-position: top right;">
     <div class="row d-flex">
-        <div class="col">
-            <div class="w-100">
+        <div class="col" style="height: 100vh;">
+            <div>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                 <div class="container">
@@ -32,25 +32,24 @@
             <!-- Logo and form -->
             <div class="form-container">
                 <div class="logo">
-                    <div class="logo-container w-100 fa-2x pt-5 mt-xl-4 justify-content-center align-items-center">
+                    <div class="logo-container w-100 justify-content-center align-items-center">
                         <img src="{{ url_for('static', filename='img/logomarca.png') }}" alt="Logo">
                     </div>
                 </div>
-                <div class="d-flex align-items-center w-100 px-5 mt-5 pt-2 pt-xl-0 mt-xl-n5">
-                    <form id="loginForm" class="mb-5 w-100" style="width: 23rem;" method="POST"
+                <div class="d-flex align-items-center justify-content-center">
+                    <form id="loginForm" method="POST"
                           action="{{ url_for('auth.login') }}" id="loginForm">
-                        <h3 class="fw-normal mb-5 pb-3 text-center text-muted" style="letter-spacing: 1px;">Log-in</h3>
-                        <div data-mdb-input-init class="form-outline mb-4 text-center">
+                        <div data-mdb-input-init class="form-outline">
                             <label class="form-label justify-content-center text-muted" for="input_email">
                                 E-mail</label>
                             <input type="email" id="input_email" name="input_email"
                                    class="form-control form-control-lg"
                                    required/>
                         </div>
-                        <div class="text-center">
+                        <div class="">
                             <label class="form-label text-muted" for="input_password">Senha</label>
                         </div>
-                        <div class="input-group form-outline mb-4 text-center position-relative">
+                        <div class="input-group form-outline mb-4 position-relative">
                             <input type="password" id="input_password" name="input_password"
                                    class="form-control form-control-lg" required>
                             <!-- Ícone de alternância de visibilidade fora da barra de entrada -->
