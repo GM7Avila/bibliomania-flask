@@ -1,0 +1,41 @@
+{% extends "adm.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="header-card container">
+        <div class="row">
+            <div class="col d-flex justify-content-start ">
+                <a href="{{ url_for('admin_user.profile_adm') }}" class="btn btn-back">Voltar</a>
+            </div>
+            <div class="col d-flex   justify-content-center">
+                <h1 class="titulo">Detalhes da Reserva</h1>
+            </div>
+        </div>
+    </div>
+    <div class=" row search-header justify-content-center align-items-center">
+        <div class="col-md-10 mt-3">
+            <div class="form-container">
+                <form action="#" method="post">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
