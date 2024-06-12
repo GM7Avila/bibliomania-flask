@@ -11,7 +11,6 @@ from app.services import user_service
 
 admin_reservation_bp = Blueprint("admin_reservation", __name__, template_folder="../../templates/admin/reservation")
 
-
 @admin_reservation_bp.route("/", methods=["POST", "GET"])
 def reservation_adm():
     reservations = []
@@ -81,8 +80,8 @@ def reservation_details(token):
             else:
                 flash("Erro ao renovar a reserva.", "error")
 
-        return render_template("reservation-details.html", reservation=reservation)
+        return render_template("adm-reservation-confirm.html", reservation=reservation)
 
     can_renew = reservation_service.can_renew(reservation)
 
-    return render_template("reservation-details.html", reservation=reservation, can_renew=can_renew)
+    return render_template("adm-reservation-confirm.html", reservation=reservation, can_renew=can_renew)
