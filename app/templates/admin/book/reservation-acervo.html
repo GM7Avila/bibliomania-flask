@@ -1,0 +1,54 @@
+{% extends "adm.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endwith %}
+<div class="header-card container mx-auto"  style="max-width:50em;">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-start">
+                <a href="{{ url_for('admin_book.acervo') }}" class="btn btn-back botao">Voltar</a>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <h1 class="titulo">Reservar</h1>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end"></div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-5">
+        <h2>Digite os Dados do Cliente</h2>
+    </div>
+</div>
+
+<div class="card mx-auto"  style="max-width:50em;">
+    <div class="card-body mb-0">
+        <form action="" method="post">
+            <div class="pt-3">
+                <p>E-mail</p>
+                <p><input type="email" class="form-control" name="input_email" value="" required/></p>
+            </div>
+            <div class="pt-2">
+                <p>Senha</p>
+                <p><input type="password" class="form-control" name="input_password" value="" title="Informe a senha" required/></p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success mt-5" data-toggle="modal" data-target="#exampleModal">
+                    Reservar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

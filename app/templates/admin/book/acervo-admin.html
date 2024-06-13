@@ -95,7 +95,7 @@
                     {% if book.availableStock == 0 %}
                     <a href="#" class="btn btn-secondary disabled" style="opacity: 1 !important;">Reservar</a>
                     {% else %}
-                    <a href="" class="btn btn-secondary">Reservar</a>
+                    <a href="{{ url_for('admin_book.reservation_acervo', token=book.id) }}" class="btn btn-secondary">Reservar</a>
                     {% endif %}
                 </td>
             </tr>

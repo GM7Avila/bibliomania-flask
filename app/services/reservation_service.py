@@ -103,7 +103,7 @@ class reservation_service():
     @staticmethod
     def createReservation(user, book):
         try:
-            if book.availableStock > 0:
+            if book.availableStock > 0 and not reservation_service.has_open_reservations(user.id):
 
                 # faz a reserva e decrementa o valor
                 reservation = Reservation(user.id, book.id)

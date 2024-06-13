@@ -8,6 +8,7 @@ from app.utils.mapper import bookMapper
 
 # Services
 from app.services.book_service import book_service
+from app.services.user_service import user_service
 from app.services.reservation_service import reservation_service
 
 
@@ -41,3 +42,29 @@ def acervo():
         temp_books.append(bookMapper(book))
 
     return render_template("acervo-admin.html", books=temp_books, active_page='acervo')
+
+
+@admin_book_bp.route("/book=<token>", methods=["POST", "GET"])
+def reservation_acervo(token):
+    book_id = decode_id(token)
+
+    if request.method == "POST":
+        email = request.form.get('input_email')
+        password = request.form.get('input_password')
+
+        found_user = user_service.findUserByEmail(email)
+
+        if found_user and found_user.check_password(password):
+            if reservation_service.has_open_reservations(found_user.id):
+                flash("O Usuário já realizou uma reserva!", "error")
+            else:
+                book = book_service.findBookById(book_id)
+                reservation_service.createReservation(found_user, book)
+                flash("Reserva realizada com sucesso!", "success")
+        else:
+            flash("Email ou senha inválidos!", "error")
+
+        return redirect(url_for("admin_book.reservation_acervo", token=token))
+
+    return render_template("reservation-acervo.html", active_page='acervo')
+
