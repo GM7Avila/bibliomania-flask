@@ -35,7 +35,7 @@
                         <img src="{{ url_for('static', filename='img/logomarca.png') }}" alt="Logo">
                     </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center pt-3">
                     <form id="loginForm" method="POST"
                           action="{{ url_for('auth.login') }}" id="loginForm">
                         <div data-mdb-input-init class="form-outline">
@@ -45,7 +45,7 @@
                                    class="form-control form-control-lg"
                                    required/>
                         </div>
-                        <div class="">
+                        <div class="pt-4">
                             <label class="form-label text-muted" for="input_password">Senha</label>
                         </div>
                         <div class="input-group form-outline mb-4 position-relative">
@@ -60,7 +60,7 @@
                         </div>
                         <p class="small pt-3 mb-2 pb-lg-2 text-center mt-2"><a class="text-muted" href="#!">Esqueceu
                             a senha?</a></p>
-                        <div class="d-grid mb-5">
+                        <div class="d-grid mb-5 pt-3">
                             <button id="loginButton" data-mdb-button-init data-mdb-ripple-init
                                     class="btn btn-info btn-lg mt-3" style="padding-bottom: 12px;"
                                     type="submit">
@@ -69,7 +69,7 @@
                                       class="visually-hidden spinner-border spinner-border-sm"></span>
                             </button>
                         </div>
-                        <p class="text-center mb-0">Não possui uma conta? <a href="{{ url_for('auth.signup') }}"
+                        <p class="text-center mb-0 pt-3">Não possui uma conta? <a href="{{ url_for('auth.signup') }}"
                                                                              class="link-info">Registre-se aqui!</a></p>
                     </form>
                 </div>
