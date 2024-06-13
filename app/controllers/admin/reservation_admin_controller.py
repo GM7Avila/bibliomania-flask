@@ -4,6 +4,7 @@ from flask_login import current_user
 # Utils
 from app.utils.mapper import bookMapper, reservationMapper, userMapper
 from app.utils.url_safer import encode_id, decode_id
+from app.utils.format_mask import format_cpf
 
 # Services
 from app.services import reservation_service, user_service
@@ -25,7 +26,10 @@ def reservation_adm():
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getReservationsByBookISBN(isbn=search)
         elif filtro_selecionado == "filtroCPF":
-            user = user_service.findUserByCPF(cpf=search)
+            # Remove non-numeric characters from search term
+            search_digits = ''.join(filter(str.isdigit, search))
+            print("CPF para busca (apenas dígitos):", search_digits)
+            user = user_service.findUserByCPF(search_digits)
             if user:
                 reservations = reservation_service.getReservationsByUser(user_id=user.id)
         elif filtro_selecionado == "filtroTodos":

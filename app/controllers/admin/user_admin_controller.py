@@ -3,6 +3,7 @@ from flask_login import login_required, logout_user
 from app.utils.validations import validate_email, validate_cpf
 
 from app.utils.decorators import *
+from app.utils.format_mask import *
 from app.utils.mapper import userMapper
 from app.utils.url_safer import *
 
@@ -31,7 +32,7 @@ def profile_adm():
         if filtro_selecionado == "filtroNome":
             users = [user for user in users if user.name == search]
         elif filtro_selecionado == "filtroCPF":
-            users = [user for user in users if user.cpf == search]
+            users = [user for user in users if user.cpf == search or format_cpf(user.cpf) == search]
         elif filtro_selecionado == "filtroEmail":
             users = [user for user in users if user.email == search]
 
