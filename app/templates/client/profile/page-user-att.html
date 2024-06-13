@@ -14,10 +14,6 @@
         </div>
         <div class="col">
             <div class="d-flex justify-content-end">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-confirm" data-toggle="modal" data-target="#exampleModal">
-                    Alterar Senha
-                </button>
             </div>
         </div>
     </div>
@@ -45,25 +41,43 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-back" data-dismiss="modal">Fechar</button>
-                    <input type="submit" id="confirm-password" class="btn btn-success" value="Alterar Senha"/>
+                    <input type="submit" id="confirm-password" class="btn btn-confirm text-center" value="Confirmar"/>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <div class="card">
-    <div class="card-body border border-light">
+    <div class="card-body border border-light mb-0">
         <form action="{{ url_for('user.update_profile') }}" method="post">
-            <p>Nome: </p>
-            <p><input type="text" class="form-control" name="input_nome" value="{{current_user.name}}"/></p>
-            <p>Telefone (com DDD): </p>
-            <p><input type="text" class="form-control" name="input_telefone" value="{{current_user.phonenumber}}"
-                      pattern="[0-9]{11}" title="Informe um telefone válido (11 dígitos)"/></p>
-            <input type="submit" class="btn btn-success" value="Atualizar" name="action"/>
-            <input type="submit" class="btn btn-danger" value="Excluir Conta" name="action"/>
-
-        </form>
+            <div class="pt-3">
+                <p>Nome: </p>
+                <p><input type="text" class="form-control" name="input_nome" value="{{current_user.name}}"/></p>
+            </div>
+            <div class="pt-2">
+                <p>Telefone (com DDD):</p>
+                <p><input type="text" class="form-control" name="input_telefone" value="{{current_user.phonenumber}}"
+                          pattern="[0-9]{11}" title="Informe um telefone válido (11 dígitos)"/></p>
+            </div>
+            <div class="">
+                <div class="row">
+                    <input type="submit" class="btn btn-success mt-5 mr-3" value="Atualizar" name="action"/>
+                    <button type="button" class="btn btn-success mt-5 ml-4" data-toggle="modal"
+                            data-target="#exampleModal">
+                        Alterar Senha
+                    </button>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" class="btn btn-danger mt-5" value="Excluir Conta" name="action"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
+    <!-- Button trigger modal -->
+
+    </form>
+</div>
 </div>
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
