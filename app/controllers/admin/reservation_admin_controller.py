@@ -26,7 +26,6 @@ def reservation_adm():
         elif filtro_selecionado == "filtroISBN":
             reservations = reservation_service.getReservationsByBookISBN(isbn=search)
         elif filtro_selecionado == "filtroCPF":
-            # Remove non-numeric characters from search term
             search_digits = ''.join(filter(str.isdigit, search))
             print("CPF para busca (apenas dígitos):", search_digits)
             user = user_service.findUserByCPF(search_digits)
@@ -58,7 +57,7 @@ def reservation_details(token):
 
     if request.method == "POST":
         if request.form.get("action") == "cancel" and reservation.status == "Em Espera":
-            success = reservation_service.updateReservationStatus(reservation, "Cancelada")
+            success = reservation_service.cancelReservation(reservation)
             if success:
                 flash("Reserva cancelada com sucesso!", "success")
             else:

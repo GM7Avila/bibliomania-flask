@@ -76,7 +76,21 @@ class reservation_service():
         if reservation.expirationDate < date.today():
             return False
 
-        return True  # Sem multa
+        return True
+
+    @staticmethod
+    def cancelReservation(reservation):
+
+        reservation.status = "Cancelada"
+        book = reservation.book
+
+        book.increaseAvailableStock()
+        book.updateIsAvailable()
+
+        db.session.add(book)
+        db.session.commit()
+
+        return True
 
     @staticmethod
     def confirmReservation(self, reservation):
