@@ -126,15 +126,15 @@
                             </div>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-6 text-center mt-3 mb-3">
                                 {% if reservation.status != 'Finalizada' and reservation.status != 'Cancelada' %}
-                                <button type="submit" class="btn btn-danger" name="action" value="cancel">Cancelar
+                                <button type="submit" class="btn btn-danger mr-4" name="action" value="cancel">Cancelar
                                 </button>
                                 {% endif %}
                                 {% if reservation.status == 'Ativa' %}
-                                <button type="submit" class="btn btn-primary" name="action" value="renew">Renovar
+                                <button type="submit" class="btn btn-primary ml-4" name="action" value="renew">Renovar
                                 </button>
-                                <button type="submit" class="btn btn-primary" name="action" value="finalize">Finalizar
+                                <button type="submit" class="btn btn-success ml-4" name="action" value="finalize">Finalizar
                                 </button>
                                 {% endif %}
                                 {% if reservation.status == 'Em Espera' %}
