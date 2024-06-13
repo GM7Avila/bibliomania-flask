@@ -64,7 +64,7 @@ header{
 }
 
 .container{
-    max-width: 75rem;
+    max-width: 85rem;
 }
 
 .content {
@@ -77,6 +77,9 @@ header{
     color: #dfdfdf;
     background-color: #343A40;
     padding: 0px;
+    min-height: 100%;
+    width:100%;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px, rgba(4, 4, 4, 0.3) 0px 3.5px 6px -1.5px, rgba(18, 18, 18, 0.2) 0px -1.5px 0px inset;
 }
 
 .card-header {
@@ -356,6 +359,7 @@ header{
 .row{
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 
 .izinho > img {

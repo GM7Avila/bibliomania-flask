@@ -61,12 +61,11 @@ class reservation_service():
 
     # ADMIN
     @staticmethod
-    def finishReservation(self, reservation):
+    def finishReservation(reservation):
         reservation.devolutionDate = date.today()
 
-        self.updateReservationStatus(reservation, "Finalizada")
+        reservation.status = "Finalizada"
 
-        # atualiza o status do livro
         book = reservation.book
         book.increaseAvailableStock()
         book.updateIsAvailable()
@@ -77,7 +76,7 @@ class reservation_service():
         if reservation.expirationDate < date.today():
             return False
 
-        return True # sem multa
+        return True  # Sem multa
 
     @staticmethod
     def confirmReservation(self, reservation):

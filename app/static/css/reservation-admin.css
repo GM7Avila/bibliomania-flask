@@ -1,4 +1,11 @@
-
+.status-box {
+    background-color: var(--confirm-secondary-color);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
 .form-select.btn-outline-secondary-status {
     color: #fff !important;
