@@ -52,7 +52,7 @@ body, html {
     background-size: cover;
 
 }
-
+/* form login */
 .form-container {
     background: white;
     padding-left: 2%;
@@ -72,6 +72,26 @@ body, html {
     margin-top: 7em;
     padding-bottom: 70px !important;
 }
+/* form registro */
+.form-container-register {
+    background: white;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    max-width: 70rem;
+    width: 30%;
+    max-height: 80rem;
+    height: 75%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    -moz-box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    box-shadow: 0px 7px 26px 1px rgba(0,0,0,0.32) !important;
+    margin-top: 6em;
+    padding-bottom: 70px !important;
+}
+
+
 
 /*.content-wrapper {*/
 /*    display: flex;*/
