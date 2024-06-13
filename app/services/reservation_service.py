@@ -90,8 +90,6 @@ class reservation_service():
         db.session.add(book)
         db.session.commit()
 
-        return True
-
     @staticmethod
     def confirmReservation(self, reservation):
         if reservation.status == "Em Espera":

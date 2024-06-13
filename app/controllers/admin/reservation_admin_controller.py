@@ -57,11 +57,9 @@ def reservation_details(token):
 
     if request.method == "POST":
         if request.form.get("action") == "cancel" and reservation.status == "Em Espera":
-            success = reservation_service.cancelReservation(reservation)
-            if success:
-                flash("Reserva cancelada com sucesso!", "success")
-            else:
-                flash("Erro ao cancelar a reserva.", "error")
+            reservation_service.cancelReservation(reservation)
+
+            flash("Reserva cancelada com sucesso!", "success")
 
         if request.form.get("action") == "active" and reservation.status == "Em Espera":
             success = reservation_service.updateReservationStatus(reservation, "Ativa")
