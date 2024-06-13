@@ -20,19 +20,130 @@
     </div>
     <div class="header-card container">
         <div class="row">
-            <div class="col d-flex justify-content-start ">
-                <a href="{{ url_for('admin_user.profile_adm') }}" class="btn btn-back">Voltar</a>
+            <div class="col d-flex justify-content-start">
+                <a href="{{ url_for('admin_reservation.reservation_adm') }}" class="btn btn-back">Voltar</a>
             </div>
-            <div class="col d-flex   justify-content-center">
+            <div class="col d-flex justify-content-center">
                 <h1 class="titulo">Detalhes da Reserva</h1>
             </div>
         </div>
     </div>
-    <div class=" row search-header justify-content-center align-items-center">
-        <div class="col-md-10 mt-3">
+    <div class="row search-header justify-content-center align-items-center">
+        <div class="col-md-10 mt-2">
             <div class="form-container">
                 <form action="#" method="post">
-
+                    <div class="container reservation-details-card p-3">
+                        <div class="row">
+                            <!-- Card do Usuário -->
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Leitor
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="Nome: {{ reservation.user.name }}" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="CPF: {{ reservation.user.cpf }}" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="Telefone: {{ reservation.user.phonenumber }}"
+                                                   readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="E-mail: {{ reservation.user.email }}" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card dos Detalhes da Reserva -->
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Detalhes da Reserva
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-3"
+                                                   value="Data da Reserva: {{ reservation.reservationDate }}"
+                                                   readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-3"
+                                                   value="Data de Expiração: {{ reservation.expirationDate }}"
+                                                   readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-3"
+                                                   value="Data de Devolução: {% if reservation.devolutionDate %}{{ reservation.devolutionDate }}{% elif reservation.status != 'Cancelada' %}Ainda não devolvido{% endif %}"
+                                                   readonly/>
+                                        </div>
+                                        <div class="status-box mb-2" style="background-color:
+                                            {% if reservation.status == 'Ativa' %}green
+                                            {% elif reservation.status == 'Em Espera' %}orange
+                                            {% elif reservation.status == 'Atrasada' %}red
+                                            {% elif reservation.status == 'Finalizada' or reservation.status == 'Cancelada' %}gray
+                                            {% endif %};">
+                                            <p>Status: {{ reservation.status }}</p>
+                                        </div>
+                                        <div class="renov-box">
+                                            <p>Renovações: {{ reservation.renewCount }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3 w-100 mb-2">
+                            <div class="col-md-12">
+                                <div class="card livro-card">
+                                    <div class="card-header">
+                                        Livro Reservado
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="Título: {{ reservation.book.title }}" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="Autor: {{ reservation.book.author }}" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="ISBN: {{ reservation.book.isbn }}" readonly/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control mb-2"
+                                                   value="Ano: {{ reservation.book.year }}" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center mt-3 mb-3">
+                                {% if reservation.status != 'Finalizada' and reservation.status != 'Cancelada' %}
+                                <button type="submit" class="btn btn-danger mr-4" name="action" value="cancel">Cancelar
+                                </button>
+                                {% endif %}
+                                {% if reservation.status == 'Ativa' %}
+                                <button type="submit" class="btn btn-primary ml-4" name="action" value="renew">Renovar
+                                </button>
+                                <button type="submit" class="btn btn-success ml-4" name="action" value="finalize">Finalizar
+                                </button>
+                                {% endif %}
+                                {% if reservation.status == 'Em Espera' %}
+                                <button type="submit" class="btn btn-success" name="action" value="active">Ativar
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,4 +1,5 @@
 from app.utils.url_safer import encode_id
+from app.utils.format_mask import *
 
 def bookMapper(book):
     temp_book = {
@@ -16,6 +17,9 @@ def bookMapper(book):
     return temp_book
 
 def reservationMapper(reservation):
+
+        user_mapper = userMapper(reservation.user)
+
         temp_reservation = {
             "id": encode_id(reservation.id),
             "status": reservation.status,
@@ -24,20 +28,24 @@ def reservationMapper(reservation):
             "renewCount": reservation.renewCount,
             "devolutionDate": reservation.devolutionDate,
             "book": reservation.book,
-            "user": reservation.user
+            "user": user_mapper
         }
 
         return temp_reservation
 
 def userMapper(user):
+
+    phone_mask = format_phone_number(user.phonenumber)
+    cpf_mask = format_cpf(user.cpf)
+
     temp_user = {
         "id": encode_id(user.id),
         "name": user.name,
         "email": user.email,
-        "cpf": user.cpf,
+        "cpf": cpf_mask,
         "password_hash": user.password_hash,
         "isAdmin": user.isAdmin,
-        "phonenumber": user.phonenumber
+        "phonenumber": phone_mask
     }
 
     return temp_user

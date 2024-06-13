@@ -100,7 +100,7 @@
                     {% endif %}
                 </td>
                 <td class="align-middle text-right">
-                    <a class="btn btn-table" href="{{ url_for('admin_reservation.reservation_confirm')}}"
+                    <a class="btn btn-table" href="{{ url_for('admin_reservation.reservation_details', token=reservation.id) }}"
                        title="Ver detalhes da Reserva">
                         <i class="fa-solid fa-eye" style="font-size:15px"></i>
                     </a>
