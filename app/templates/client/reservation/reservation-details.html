@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="header-card container">
+<div class="header-card container w-100 rounded">
     <div class="row">
         <div class="col d-flex justify-content-start align-items-center">
             <a href="{{ url_for('reservation.reservation') }}" class="btn btn-back botao">Voltar</a>
@@ -18,45 +18,17 @@
             </form>
             {% elif reservation.status != "Cancelada" %}
             <form method="POST" class="m-0">
-                <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled style="background-color: gray;"  {% endif %}>
+                <button type="submit" name="action" value="renew" class="btn btn-confirm" {% if not can_renew %}disabled
+                        style="background-color: gray;" {% endif %}>
                     Renovar
                 </button>
             </form>
             {% endif %}
         </div>
     </div>
-</div>
-
-
-<div class="container reservation-details-card p-3">
-    <div class="row">
-        <!-- Card do Livro Reservado -->
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    Livro Reservado
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Título: {{ reservation.book.title }}"
-                               readonly/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Autor: {{ reservation.book.author }}"
-                               readonly/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="ISBN: {{ reservation.book.isbn }}"
-                               readonly/>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control mb-2" value="Ano: {{ reservation.book.year }}" readonly/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Card dos Detalhes da Reserva -->
-        <div class="col-md-6">
+    <!-- Card dos Detalhes da Reserva -->
+    <div>
+        <div class="pt-3">
             <div class="card">
                 <div class="card-header">
                     Detalhes da Reserva
@@ -89,7 +61,33 @@
                 </div>
             </div>
         </div>
+        <!-- Card do Livro Reservado -->
+        <div class="pt-2">
+            <div class="card">
+                <div class="card-header">
+                    Livro Reservado
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" value="Título: {{ reservation.book.title }}"
+                               readonly/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" value="Autor: {{ reservation.book.author }}"
+                               readonly/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" value="ISBN: {{ reservation.book.isbn }}"
+                               readonly/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" value="Ano: {{ reservation.book.year }}" readonly/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 
