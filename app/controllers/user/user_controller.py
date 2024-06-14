@@ -4,6 +4,9 @@ from flask_login import login_required, current_user, logout_user
 # Services
 from app.services.user_service import user_service
 
+from app.utils.url_safer import *
+from app.utils.mapper import userMapper
+
 user_bp = Blueprint("user", __name__, template_folder="../../templates/client/profile")
 @user_bp.route("/logout")
 @login_required
@@ -14,7 +17,9 @@ def logout():
 @user_bp.route('/')
 @login_required
 def profile():
-    return render_template("pageuser.html", active_page='profile')
+    user = user_service.getUserById(current_user.id)
+    user = userMapper(user)
+    return render_template("pageuser.html", active_page='profile', user=user)
 
 @user_bp.route("/alterar-senha", methods=["POST", "GET"])
 @login_required
