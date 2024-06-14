@@ -66,5 +66,5 @@ def reservation_acervo(token):
 
         return redirect(url_for("admin_book.reservation_acervo", token=token))
 
-    return render_template("reservation-acervo.html", active_page='acervo')
+    return render_template("reservation-acervo.html", active_page='acervo', book=book_service.findBookById(book_id))
 

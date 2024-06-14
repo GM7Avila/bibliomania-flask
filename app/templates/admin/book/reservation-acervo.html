@@ -10,7 +10,7 @@
 </div>
 {% endfor %}
 {% endwith %}
-<div class="header-card container mx-auto"  style="max-width:50em;">
+<div class="header-card container mx-auto" style="max-width:60em;">
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-start">
@@ -21,17 +21,19 @@
             <div class="d-flex justify-content-center">
                 <h1 class="titulo">Reservar</h1>
             </div>
+
         </div>
         <div class="col">
             <div class="d-flex justify-content-end"></div>
         </div>
     </div>
-    <div class="row d-flex justify-content-center mt-5">
+    <div class="row d-flex justify-content-center align-items-center flex-column mt-5">
+        <p class="pb-4 mt-2" style="text-align :center">{{ book.title }}</p>
         <h2>Digite os Dados do Cliente</h2>
     </div>
 </div>
 
-<div class="card mx-auto"  style="max-width:50em;">
+<div class="card mx-auto" style="max-width:60em;">
     <div class="card-body mb-0">
         <form action="" method="post">
             <div class="pt-3">
@@ -40,7 +42,8 @@
             </div>
             <div class="pt-2">
                 <p>Senha</p>
-                <p><input type="password" class="form-control" name="input_password" value="" title="Informe a senha" required/></p>
+                <p><input type="password" class="form-control" name="input_password" value="" title="Informe a senha"
+                          required/></p>
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-success mt-5" data-toggle="modal" data-target="#exampleModal">
