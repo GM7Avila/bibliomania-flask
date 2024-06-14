@@ -24,7 +24,7 @@ def reservation():
         filtro_selecionado = request.form.get("filtro")
         filtro_status = request.form.get("filtro-status")
 
-        if filtro_status in ["Ativa", "Finalizada", "Atrasada"]:
+        if filtro_status in ["Ativa", "Finalizada", "Atrasada","Em Espera","Cancelada"]:
             reservations = reservation_service.getUserReservationsByStatus(user_id=current_user.id, status=filtro_status)
 
         elif filtro_selecionado == "filtroISBN":
