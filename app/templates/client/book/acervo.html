@@ -75,6 +75,14 @@
                         <li class="mb-3">ISBN: {{ book.isbn }}</li>
                         <li class="mb-3">Editora: {{ book.publisher }}</li>
                         <li class="mb-4">Ano: {{ book.year }}</li>
+                        <li class="mb-4"><strong>Gênero</strong>
+                        {% for genre_book in genre_book_list %}
+                        {% if decode_id(book.id) == genre_book.book.id %}
+                        - {{ genre_book.genre.genre_type }}
+                        {% endif %}
+                        {% endfor %}
+                        </li>
+
                     </ul>
                     <div class="row">
                         <div class="col">

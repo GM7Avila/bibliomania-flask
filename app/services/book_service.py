@@ -113,6 +113,14 @@ class book_service:
         except Exception as e:
             return None
 
+    @staticmethod
+    def getAllGenreBooks():
+        try:
+            genre_books = GenreBook.query.all()
+            return genre_books
+        except Exception as e:
+            return None
+
     # 4. Recebe um ISBN e retorna um livro
     @staticmethod
     def getBookByISBN(isbn):

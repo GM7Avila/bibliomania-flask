@@ -47,11 +47,13 @@ def acervo():
     temp_books = [bookMapper(book) for book in books]
 
     genre_list = book_service.getAllGenres()
-    print(genre_list)
-    for genre in genre_list:
-        print(genre)
-        print(genre.genre_type)
-    return render_template("acervo.html", books=temp_books, active_page='acervo', genre_list=genre_list)
+    genre_book_list = book_service.getAllGenreBooks()
+
+    print(genre_book_list)
+    for genre_book in genre_book_list:
+        print(genre_book.genre.genre_type)
+
+    return render_template("acervo.html", books=temp_books, active_page='acervo', genre_list=genre_list, genre_book_list=genre_book_list, decode_id=decode_id)
 
 
 @book_bp.route("/livro-<token>", methods=["POST", "GET"])
