@@ -25,12 +25,14 @@
                     </button>
                 </div>
             </div>
-           <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro" id="botoesFiltro"
+            <div class="btn-group btn-group-toggle ml-4 w-100" role="group" aria-label="Botões de Filtro"
+                 id="botoesFiltro"
                  data-toggle="buttons">
-                  <span class="filtro-label pt-4">Filtro:</span>
+                <span class="filtro-label pt-4">Filtro:</span>
                 <div class="btn-group ml-4 d-flex flex-wrap w-100 mb-3" role="group" aria-label="Botões de Filtro">
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded active">
-                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off" checked> Todos
+                        <input type="radio" name="filtro" id="filtroTodos" value="filtroTodos" autocomplete="off"
+                               checked> Todos
                     </label>
                     <label class="btn btn-primary mt-4 mb-3 mr-3 w-100 rounded">
                         <input type="radio" name="filtro" id="filtroStatus" value="filtroTitulo" autocomplete="off">
@@ -43,6 +45,14 @@
                         <input type="radio" name="filtro" id="filtroTitular" value="filtroAutor" autocomplete="off">
                         Autor
                     </label>
+                    <select id="filter-select" name="filtro_genero"
+                            class="form-select btn btn-outline-secondary-status ml-auto mt-4 mb-3 mr-4 w-100 rounded"
+                            aria-label=".form-select filter-select">
+                        <option selected disabled>Gênero</option>
+                        {% for genre in genre_list %}
+                        <option class="text-left" value="{{ genre.id }}">{{ genre.genre_type }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
         </form>
@@ -65,13 +75,20 @@
                         <li class="mb-3">ISBN: {{ book.isbn }}</li>
                         <li class="mb-3">Editora: {{ book.publisher }}</li>
                         <li class="mb-4">Ano: {{ book.year }}</li>
+                        <li class="mb-4"><strong>Gênero</strong>
+                        {% for genre_book in genre_book_list %}
+                        {% if decode_id(book.id) == genre_book.book.id %}
+                        - {{ genre_book.genre.genre_type }}
+                        {% endif %}
+                        {% endfor %}
+                        </li>
+
                     </ul>
                     <div class="row">
                         <div class="col">
                             {% if book.availableStock == 0 %}
                             <a href="#" class="btn bg-unavailable disabled">Indisponível</a>
-                            {% endif %}
-                            {% if book.availableStock != 0 %}
+                            {% else %}
                             <a href="{{ url_for('book.reservation_confirm', token=book.id) }}"
                                class="btn btn-confirm">Reservar</a>
                             {% endif %}
@@ -84,6 +101,7 @@
     </div>
     {% endfor %}
 </div>
+<script src="{{ url_for('static', filename='js/filter-submit.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/acervo.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reservation.css') }}">
 {% endblock %}
