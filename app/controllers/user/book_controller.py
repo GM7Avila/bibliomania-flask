@@ -11,7 +11,6 @@ from app.utils.url_safer import *
 
 book_bp = Blueprint('book', __name__, template_folder="../../templates/client/book")
 
-
 # Retorna todos os livros com o id hasheado
 @book_bp.route("/", methods=["POST", "GET"])
 @login_required
@@ -19,31 +18,40 @@ def acervo():
     if request.method == "POST":
         search = request.form.get("input-search")
         filtro_selecionado = request.form.get("filtro")
+        filtro_genero_id = request.form.get("filtro_genero")
 
-        if filtro_selecionado == "filtroTitulo":
+        if filtro_genero_id:
+            books = book_service.getBooksByGenreId(filtro_genero_id)
+        elif filtro_selecionado == "filtroTitulo":
             books = book_service.getBooksBySimilarTitle(search)
+
         elif filtro_selecionado == "filtroISBN":
-            isbn = request.form.get("input-search")  # Obtendo o valor do ISBN do formulário
-            book = book_service.getBookByISBN(isbn)  # Passando apenas o valor do ISBN
-            books = [book] if book else []  # Se o livro for encontrado, coloque-o em uma lista; caso contrário, use uma lista vazia
+            isbn = request.form.get("input-search")
+
+            book = book_service.getBookByISBN(isbn)
+            books = [book] if book else []
+
         elif filtro_selecionado == "filtroTodos":
             books = book_service.getAllBooks()
+
         elif filtro_selecionado == "filtroAutor":
             books = book_service.getBooksByAuthor(author=search)
+
         else:
-            # Se nenhum filtro válido for selecionado, renderize a página com uma lista vazia de livros
             books = []
             flash("Nenhum livro encontrado.", "danger")
 
     else:
-        # Se não houver uma solicitação POST, isso significa que é uma solicitação GET.
-        # Nesse caso, simplesmente obtenha todos os livros sem filtrar.
         books = book_service.getSortedBooksByAvailableStock()
 
-    # Mapeie os livros para o formato desejado antes de passá-los para o template
     temp_books = [bookMapper(book) for book in books]
 
-    return render_template("acervo.html", books=temp_books, active_page='acervo')
+    genre_list = book_service.getAllGenres()
+    print(genre_list)
+    for genre in genre_list:
+        print(genre)
+        print(genre.genre_type)
+    return render_template("acervo.html", books=temp_books, active_page='acervo', genre_list=genre_list)
 
 
 @book_bp.route("/livro-<token>", methods=["POST", "GET"])

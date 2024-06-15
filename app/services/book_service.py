@@ -1,5 +1,7 @@
 from app import db
 from app.models.book import Book
+from app.models.genre_book import GenreBook
+from app.models.genre import Genre
 
 class book_service:
 
@@ -91,6 +93,23 @@ class book_service:
         try:
             books = Book.query.filter_by(author=author).all()
             return books
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def getBooksByGenreId(genre_id):
+        try:
+            genre_books = GenreBook.query.filter_by(genre_id=genre_id).all()
+            books = [genre_book.book for genre_book in genre_books]
+            return books
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def getAllGenres():
+        try:
+            genres = Genre.query.all()
+            return genres
         except Exception as e:
             return None
 
