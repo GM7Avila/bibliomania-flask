@@ -22,12 +22,12 @@ def initializer_book_context():
     db.session.commit()
 
     genres_data = [
-        {"type": "Fantasia"},
-        {"type": "Aventura"},
-        {"type": "Romance"},
-        {"type": "Ficção Científica"},
-        {"type": "Mistério"},
-        {"type": "Suspense"}
+        {"genre_type": "Fantasia"},
+        {"genre_type": "Aventura"},
+        {"genre_type": "Romance"},
+        {"genre_type": "Ficção Científica"},
+        {"genre_type": "Mistério"},
+        {"genre_type": "Suspense"}
     ]
 
     for genre_data in genres_data:
@@ -109,7 +109,7 @@ def initializer_book_context():
 
     for book_data in books_data:
         genre_type = book_data.pop("genre_type")
-        genre = Genre.query.filter_by(type=genre_type).first()
+        genre = Genre.query.filter_by(genre_type=genre_type).first()
         if genre:
             book = Book(**book_data)
             db.session.add(book)
