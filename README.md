@@ -7,7 +7,7 @@
 - Docker
 - Bootstrap
 
-### SGBD SQL
+### Banco de Dados - SQL
 - MySQL
 
 ### Requisitos (pacotes)
