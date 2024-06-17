@@ -18,10 +18,14 @@
 - O container do banco foi mapeado para a porta 3333 do localhost;
 - Para criação do container do banco de dados MySQL:
 
-
+## Inicialize os Containers:
+1. Construir Imagens Docker
 ```bash
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3333:3306 -d mysql
+docker-compose build
 ```
 
-
+2. Inicialize o Container
+```bash
+docker-compose up
+```
 
