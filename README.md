@@ -1,31 +1,29 @@
-# Bibliomania Project
-- Sistema Web de apoio à biblioteca desenvolvido em Flask
+# 📖 Bibliomania Project 
+- Library Web System developed with Flask
 
-## 🛠️ Tecnologias utilizadas
+## Technologies Used
 - Flask
 - SQLAlchemy
-- Docker
-- Bootstrap
-
-### Banco de Dados - SQL
 - MySQL
+- Docker
 
-### Requisitos (pacotes)
-- Instale os pacotes listados em `requirements.txt`
-- Tenha o Docker instalado
+## Setting Up the Development Environment
+To get started with the Bibliomania project, follow these steps to build and run the application using Docker:
 
-### Utilização do Docker no Banco de Dados
-- O container do banco foi mapeado para a porta 3333 do localhost;
-- Para criação do container do banco de dados MySQL:
-
-## Inicialize os Containers:
-1. Construir Imagens Docker
+### 1. Build the Project:
+- Use the provided Dockerfile to build the project:
 ```bash
-docker-compose build
+docker compose build
 ```
 
-2. Inicialize o Container
+### 2. Compose the Environment:
+- Start the environment with Docker Compose:
+
 ```bash
-docker-compose up
+docker compose up -d
 ```
 
+This will initialize a container for the MySQL database locally and launch the Flask application. The -d flag runs the containers in detached mode, allowing you to continue using the terminal for other tasks.
+
+### Accessing the Application
+Once the environment is up and running, you can access the Flask application by navigating to http://localhost in your web browser.
