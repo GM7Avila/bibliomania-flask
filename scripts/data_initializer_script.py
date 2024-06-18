@@ -14,18 +14,140 @@ from sqlalchemy.exc import IntegrityError
 app = create_app()
 
 def initializer_book_context():
-
     admin = User(
         name="Admin",
         email="admin@bibliomania",
         cpf=11111111111,
         password="admin",
-        isAdmin = True,
-        phonenumber = "11111111111"
+        isAdmin=True,
+        phonenumber="11111111111"
     )
 
     db.session.add(admin)
     db.session.commit()
+
+    users_data = [
+        {
+            "name": "Guilherme Avila",
+            "email": "guilherme@gmail.com",
+            "cpf": 12133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "24998232712"
+        },
+        {
+            "name": "Lucia Pereira",
+            "email": "lucia_pereira@gmail.com",
+            "cpf": 81133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21878232712"
+        },
+        {
+            "name": "Ana Clara de Souza",
+            "email": "ana_clara@hotmail.com",
+            "cpf": 91133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21878232712"
+        },
+        {
+            "name": "Luiz Eduardo França",
+            "email": "luiz_eduardo@gmail.com",
+            "cpf": 71123456352,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21978832719"
+        },
+        {
+            "name": "Fernanda Oliveira",
+            "email": "fernanda.oliveira@example.com",
+            "cpf": 52133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21998877665"
+        },
+        {
+            "name": "Rafael Silva",
+            "email": "rafael.silva@example.com",
+            "cpf": 62133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21887766554"
+        },
+        {
+            "name": "Marina Santos",
+            "email": "marina.santos@example.com",
+            "cpf": 72133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21336655443"
+        },
+        {
+            "name": "Pedro Almeida",
+            "email": "pedro.almeida@example.com",
+            "cpf": 82133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21995544332"
+        },
+        {
+            "name": "Carolina Pereira",
+            "email": "carolina.pereira@example.com",
+            "cpf": 92133456321,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21443322111"
+        },
+        {
+            "name": "José Santos",
+            "email": "jose.santos@example.com",
+            "cpf": 10213345632,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21994433221"
+        },
+        {
+            "name": "Juliana Souza",
+            "email": "juliana.souza@example.com",
+            "cpf": 11213445633,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21882211344"
+        },
+        {
+            "name": "Marcos Lima",
+            "email": "marcos.lima@example.com",
+            "cpf": 12213545634,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21776655455"
+        },
+        {
+            "name": "Aline Oliveira",
+            "email": "aline.oliveira@example.com",
+            "cpf": 13213645635,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21334455666"
+        },
+        {
+            "name": "Carlos Silva",
+            "email": "carlos.silva@example.com",
+            "cpf": 14213745636,
+            "password": "senha",
+            "isAdmin": False,
+            "phonenumber": "21998877665"
+        }
+    ]
+
+    for user_data in users_data:
+        user = User(**user_data)
+        db.session.add(user)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            db.session.rollback()  # Reverte a transação para que possamos continuar
 
     genres_data = [
         {"genre_type": "Fantasia"},
