@@ -1,5 +1,6 @@
 import sys
 import os
+import uuid
 
 # Adiciona o path do projeto para o sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -14,17 +15,19 @@ from sqlalchemy.exc import IntegrityError
 app = create_app()
 
 def initializer_book_context():
-    admin = User(
-        name="Admin",
-        email="admin@bibliomania",
-        cpf=11111111111,
-        password="admin",
-        isAdmin=True,
-        phonenumber="11111111111"
-    )
-
-    db.session.add(admin)
-    db.session.commit()
+    # Verifica se o admin já existe
+    admin = User.query.filter_by(email="admin@bibliomania").first()
+    if not admin:
+        admin = User(
+            name="Admin",
+            email="admin@bibliomania",
+            cpf=11111111111,
+            password="admin",
+            isAdmin=True,
+            phonenumber="11111111111"
+        )
+        db.session.add(admin)
+        db.session.commit()
 
     users_data = [
         {
@@ -142,12 +145,14 @@ def initializer_book_context():
     ]
 
     for user_data in users_data:
-        user = User(**user_data)
-        db.session.add(user)
-        try:
-            db.session.commit()
-        except IntegrityError:
-            db.session.rollback()  # Reverte a transação para que possamos continuar
+        user = User.query.filter_by(email=user_data["email"]).first()
+        if not user:
+            user = User(**user_data)
+            db.session.add(user)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
 
     genres_data = [
         {"genre_type": "Fantasia"},
@@ -159,12 +164,14 @@ def initializer_book_context():
     ]
 
     for genre_data in genres_data:
-        genre = Genre(**genre_data)
-        db.session.add(genre)
-        try:
-            db.session.commit()
-        except IntegrityError:
-            db.session.rollback()  # Reverte a transação para que possamos continuar
+        genre = Genre.query.filter_by(genre_type=genre_data["genre_type"]).first()
+        if not genre:
+            genre = Genre(**genre_data)
+            db.session.add(genre)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
 
     books_data = [
         {
@@ -220,10 +227,10 @@ def initializer_book_context():
             "totalStock": 20,
             "availableStock": 20,
             "genre_type": "Fantasia",
-            "description": "As Voldemort's return becomes undeniable, Harry Potter finds himself isolated and discredited by the Ministry of Magic. Alongside his friends, he forms Dumbledore's Army to teach defense against the dark arts. With the Order of the Phoenix working in the shadows, Harry faces painful losses and grows as a leader in his fight against the forces of evil."
+            "description": "As Voldemort's return becomes undeniable, Harry Potter finds himself isolated and discredited by the wizarding community. Forming 'Dumbledore's Army,' Harry and his friends prepare for the inevitable war while facing off against the authoritarian new headmistress, Dolores Umbridge. This year brings new trials, losses, and the unyielding fight for justice and truth."
         },
         {
-            "isbn": "6780545139700",
+            "isbn": "6780439372594",
             "title": "Harry Potter and the Half-Blood Prince",
             "author": "J. K. Rowling",
             "publisher": "Scholastic",
@@ -231,55 +238,38 @@ def initializer_book_context():
             "totalStock": 18,
             "availableStock": 18,
             "genre_type": "Fantasia",
-            "description": "As Voldemort tightens his grip on both the wizarding and Muggle worlds, Harry and Dumbledore work to uncover the dark secrets of the Dark Lord's past. In his sixth year at Hogwarts, Harry discovers a mysterious book belonging to the Half-Blood Prince, leading to more questions and discoveries about his ultimate enemy."
+            "description": "With the wizarding world at war, Harry Potter's sixth year at Hogwarts is marked by danger and discovery. Guided by Dumbledore, Harry learns about Voldemort's past and the secret to defeating him. The Half-Blood Prince's mysterious textbook reveals new spells and potions, adding to the tension as friendships are tested and loyalties are questioned."
         }
     ]
 
     for book_data in books_data:
-        genre_type = book_data.pop("genre_type")
-        genre = Genre.query.filter_by(genre_type=genre_type).first()
-        if genre:
-            book = Book(**book_data)
+        book = Book.query.filter_by(isbn=book_data["isbn"]).first()
+        if not book:
+            book = Book(
+                isbn=book_data["isbn"],
+                title=book_data["title"],
+                author=book_data["author"],
+                publisher=book_data["publisher"],
+                year=book_data["year"],
+                totalStock=book_data["totalStock"],
+                availableStock=book_data["availableStock"],
+                description=book_data["description"]
+            )
             db.session.add(book)
-            try:
-                db.session.commit()
-            except IntegrityError:
-                db.session.rollback()
-
-    genre_book_data = [
-        {"genre_book_id": 1, "book_id": 1, "genre_id": 1},
-        {"genre_book_id": 2, "book_id": 1, "genre_id": 2},
-        {"genre_book_id": 3, "book_id": 1, "genre_id": 5},
-        {"genre_book_id": 4, "book_id": 2, "genre_id": 1},
-        {"genre_book_id": 5, "book_id": 2, "genre_id": 2},
-        {"genre_book_id": 6, "book_id": 2, "genre_id": 5},
-        {"genre_book_id": 7, "book_id": 2, "genre_id": 7},
-        {"genre_book_id": 8, "book_id": 3, "genre_id": 5},
-        {"genre_book_id": 9, "book_id": 3, "genre_id": 6},
-        {"genre_book_id": 10, "book_id": 3, "genre_id": 1},
-        {"genre_book_id": 11, "book_id": 3, "genre_id": 2},
-        {"genre_book_id": 12, "book_id": 4, "genre_id": 1},
-        {"genre_book_id": 13, "book_id": 4, "genre_id": 7},
-        {"genre_book_id": 14, "book_id": 5, "genre_id": 3},
-        {"genre_book_id": 15, "book_id": 5, "genre_id": 6},
-        {"genre_book_id": 16, "book_id": 6, "genre_id": 1},
-        {"genre_book_id": 17, "book_id": 6, "genre_id": 5},
-        {"genre_book_id": 18, "book_id": 6, "genre_id": 3},
-        {"genre_book_id": 19, "book_id": 6, "genre_id": 4}
-    ]
-
-    for data in genre_book_data:
-        genre_book = GenreBook(**data)
-        db.session.add(genre_book)
-        try:
             db.session.commit()
-        except IntegrityError:
-            db.session.rollback()
 
-    db.session.commit()
+            for genre_type in book_data["genres"]:
+                genre = Genre.query.filter_by(genre_type=genre_type).first()
+                if genre:
+                    genre_book = GenreBook(
+                        genre_id=genre.id,
+                        book_id=book.id,
+                        genre_book_id=uuid.uuid4().hex
+                    )
+                    db.session.add(genre_book)
+                    db.session.commit()
 
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()
         initializer_book_context()
